@@ -8,7 +8,7 @@ public class MainClass {
 		System.out.println("test");
 		System.out.println("Push Test");
 		System.out.println("WHAAAAT");
-		String a = "Why is this happening";
+		String a = "Nope";
 	}
 
 }
