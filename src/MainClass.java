@@ -7,6 +7,8 @@ public class MainClass {
 		System.out.println("Test Print"); //I added this (Jack), Was able to run it after I pulled so it's fixed on my end?
 		System.out.println("test");
 		System.out.println("Push Test");
+		System.out.println("WHAAAAT");
+		String a = "Why is this happening";
 	}
 
 }
