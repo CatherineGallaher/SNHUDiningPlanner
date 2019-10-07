@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Owner/Documents/GitHub/BudgetApp/bin/htmlunit-2.36.0-OSGi.jar"/>
+	<classpathentry kind="lib" path="src/htmlunit-2.36.0-OSGi.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
