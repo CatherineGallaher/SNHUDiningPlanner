@@ -5,15 +5,15 @@ import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
-public class PullFromSite {
-	public void pullTest()
+public class SNHULogOn {
+	public void logOn()
 	{
 		WebClient webClient = new WebClient();
 	    try {
 	        HtmlPage page = (HtmlPage) webClient.getPage("https://get.cbord.com/snhu/full/login.php");
 	        HtmlForm form = page.getFormByName("login_form");
-	        form.getInputByName("username").setValueAttribute(""); 
-	        HtmlInput passWordInput = form.getInputByName("");
+	        form.getInputByName("username").setValueAttribute("blah"); 
+	        HtmlInput passWordInput = form.getInputByName("password");
 	        //passWordInput.removeAttribute("disabled");
 	        passWordInput.setValueAttribute("myPassword"); 
 
