@@ -12,8 +12,8 @@ public class PullFromSite {
 	    try {
 	        HtmlPage page = (HtmlPage) webClient.getPage("https://get.cbord.com/snhu/full/login.php");
 	        HtmlForm form = page.getFormByName("login_form");
-	        form.getInputByName("username").setValueAttribute(""); 
-	        HtmlInput passWordInput = form.getInputByName("");
+	        form.getInputByName("username").setValueAttribute("catherine.gallaher@snhu.edu"); 
+	        HtmlInput passWordInput = form.getInputByName("Yohoho");
 	        //passWordInput.removeAttribute("disabled");
 	        passWordInput.setValueAttribute("myPassword"); 
 

@@ -9,6 +9,9 @@ public class MainClass {
 		System.out.println("Push Test");
 		System.out.println("WHAAAAT");
 		String a = "Nope";
+		System.out.println(a);
+		PullFromSite testA = new PullFromSite();
+		testA.pullTest();
 	}
 
 }
