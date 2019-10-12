@@ -10,6 +10,9 @@ public class Prediction {
 	private int breakfastStart, breakfastEnd, lunchStart, lunchEnd, dinnerStart, dinnerEnd;
 	private double[] mealTypeAverage = {4};
 	private double[] monthAverage;
+	private double spentPerDay;
+	private int daysOffCampus;
+	private double estAmountLeft;
 	
 	public Prediction(int userID)
 	{
@@ -63,7 +66,7 @@ public class Prediction {
 		return newTime;
 	}
 	
-	public void predictionSettings(String startDate, String endDate, int breakfastStart, int breakfastEnd, int lunchStart, int lunchEnd, int dinnerStart, int dinnerEnd)
+	public void predictionSettings(String startDate, String endDate, int daysOffCampus, int breakfastStart, int breakfastEnd, int lunchStart, int lunchEnd, int dinnerStart, int dinnerEnd)
 	{
 		
 		this.startMonth = parseMonth(startDate);
@@ -74,6 +77,7 @@ public class Prediction {
 		this.lunchEnd = lunchEnd;
 		this.dinnerStart = dinnerStart;
 		this.dinnerEnd = dinnerEnd;
+		this.daysOffCampus = daysOffCampus;
 	}
 	
 	public void calcMealTypeAverage()
@@ -124,6 +128,37 @@ public class Prediction {
 		
 		
 		this.monthAverage = monthAverage;
+	}
+	
+	public void calcSpentPerDay()
+	{
+		
+	}
+	
+	public void calcEstAmountLeft()
+	{
+		//get amount left from database
+		//return currentAmount - ((endDate.parseDate() - currentDate)*getSpentPerDay())
+	}
+	
+	public double[] getMealTypeAverage()
+	{
+		return mealTypeAverage;
+	}
+	
+	public double[] getMonthAverage()
+	{
+		return monthAverage;
+	}
+	
+	public double getSpentPerDay()
+	{
+		return spentPerDay;
+	}
+	
+	public double getEstAmountLeft()
+	{
+		return estAmountLeft;
 	}
 
 }
