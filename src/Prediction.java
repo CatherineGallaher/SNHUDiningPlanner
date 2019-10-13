@@ -16,7 +16,6 @@ public class Prediction {
 	
 	public Prediction(int userID)
 	{
-		
 		this.userID = userID;
 		populateMonths();
 	}
@@ -67,8 +66,7 @@ public class Prediction {
 	}
 	
 	public void predictionSettings(String startDate, String endDate, int daysOffCampus, int breakfastStart, int breakfastEnd, int lunchStart, int lunchEnd, int dinnerStart, int dinnerEnd)
-	{
-		
+	{		
 		this.startMonth = parseMonth(startDate);
 		this.endMonth = parseMonth(endDate);
 		this.breakfastStart = breakfastStart;
@@ -93,7 +91,7 @@ public class Prediction {
 		double snackAmount = 0;
 
 		/*	for(all the table)
-		    transactionTime = parseTime(readTime)
+		    transactionTime = parseTime(readDate)
 		  	if(transactionTime >= breakfastStart && transactionTime <= breakfastEnd)
 		 	{
 		 		numBreakfast++;
