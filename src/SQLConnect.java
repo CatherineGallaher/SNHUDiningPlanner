@@ -19,12 +19,14 @@ public class SQLConnect {
 			}
 			*/
 			
-			String instanceConnectionName = "budgetappsqlservertry2:us-central1:budgetapp2";
+			String instanceConnectionName = "budgetapp2";
 			String databaseName = "BudgetApp";
 
 			String IP_of_instance = "35.226.216.86";
 			String username = "Septri";
 			String password = "septri258";
+			
+			//String testURL = "jdbc:mysql://35.226.216.86:budgetapp2?user=Septri";
 
 			String jdbcUrl = String.format("jdbc:mysql://%s/%s?cloudSqlInstance=%s" + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false",
 			IP_of_instance, databaseName, instanceConnectionName);
