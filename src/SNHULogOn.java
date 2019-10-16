@@ -12,10 +12,10 @@ public class SNHULogOn {
 	    try {
 	        HtmlPage page = (HtmlPage) webClient.getPage("https://get.cbord.com/snhu/full/login.php");
 	        HtmlForm form = page.getFormByName("login_form");
-	        form.getInputByName("username").setValueAttribute("blah"); 
+	        form.getInputByName("username").setValueAttribute("catherine.gallaher@snhu.edu"); 
 	        HtmlInput passWordInput = form.getInputByName("password");
 	        //passWordInput.removeAttribute("disabled");
-	        passWordInput.setValueAttribute("myPassword"); 
+	        passWordInput.setValueAttribute(""); 
 
 	        page = form.getInputByValue("Login").dblClick();
 
