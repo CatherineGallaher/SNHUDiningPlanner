@@ -1,8 +1,11 @@
 import java.sql.*;
 
 public class SQLConnect {
+	public SQLConnect()
+	{
 	
-	public static void connect()
+	}
+	public void connect()
 	{
 		try
 		{
