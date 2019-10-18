@@ -4,8 +4,8 @@ public class MainClass {
 		System.out.println("Hello World, here we go again");
 		//SNHULogOn a = new SNHULogOn();
 		//a.logOn();
-		//SQLConnect con = new SQLConnect();
-		//con.connect();
+		SQLConnect con = new SQLConnect();
+		con.connect();
 		String encryptThis = "Hello World";
 		PasswordEncryption encryp = new PasswordEncryption();
 		String encrypted = encryp.encryptionAES(encryptThis);
