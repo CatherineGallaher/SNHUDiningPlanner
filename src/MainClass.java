@@ -14,8 +14,8 @@ public class MainClass {
 		System.out.println(encrypted);
 		System.out.println(decrypted);
 		
-		ReadWriteSQL test = new ReadWriteSQL();
-		test.createConnection();
+		//ReadWriteSQL test = new ReadWriteSQL();
+		//test.createConnection();
 
 		System.out.println("This is a test for the umpteenth time");
 	}

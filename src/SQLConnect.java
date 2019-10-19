@@ -40,7 +40,7 @@ public class SQLConnect {
 			ResultSet res = stat.executeQuery("Select * from users;");
 			while(res.next())
 			{
-				System.out.println(res.getInt(1) + " " + res.getString(2) + " " + res.getString(3));
+				System.out.println(res.getString(1) + " " + res.getString(2) + " " + res.getString(3));
 			}
 			
 			connection.close();
