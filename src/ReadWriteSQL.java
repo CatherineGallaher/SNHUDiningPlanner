@@ -17,8 +17,7 @@ public class ReadWriteSQL {
 		try{  
 			Class.forName("com.mysql.cj.jdbc.Driver");  
 			con=DriverManager.getConnection(  
-			"jdbc:mysql://localhost:3306/budgetappdemo","root","parterre-classic-compile-pole");  
-			//here sonoo is database name, root is username and password  
+			"jdbc:mysql://localhost:3306/budgetappdemo","root","parterre-classic-compile-pole");    
 			Statement stmt=con.createStatement();  
 			rs=stmt.executeQuery("select * from users");  
 			while(rs.next())  

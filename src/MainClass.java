@@ -2,10 +2,10 @@ public class MainClass {
 
 	public static void main(String[] args) {
 		System.out.println("Hello World, here we go again");
-		//SNHULogOn a = new SNHULogOn();
-		//a.logOn();
-		SQLConnect con = new SQLConnect();
-		con.connect();
+		SNHULogOn a = new SNHULogOn();
+		a.logOn();
+		//SQLConnect con = new SQLConnect();
+		//con.connect();
 		String encryptThis = "Hello World";
 		PasswordEncryption encryp = new PasswordEncryption();
 		String encrypted = encryp.encryptionAES(encryptThis);
@@ -16,7 +16,7 @@ public class MainClass {
 		
 		//ReadWriteSQL test = new ReadWriteSQL();
 		//test.createConnection();
-		//HI
+		
 		System.out.println("This is a test for the umpteenth time");
 	}
 }

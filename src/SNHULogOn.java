@@ -15,7 +15,7 @@ public class SNHULogOn {
 	        form.getInputByName("username").setValueAttribute("catherine.gallaher@snhu.edu"); 
 	        HtmlInput passWordInput = form.getInputByName("password");
 	        //passWordInput.removeAttribute("disabled");
-	        passWordInput.setValueAttribute("blah"); 
+	        passWordInput.setValueAttribute("3Mog,3Or,3Mb44"); 
 
 	        page = form.getInputByValue("Login").dblClick();
 
