@@ -18,7 +18,9 @@ public class SNHULogOn {
 	        passWordInput.setValueAttribute("3Mog,3Or,3Mb44"); 
 
 	        page = form.getInputByValue("Login").dblClick();
-
+	        
+	        
+	        
 	        form.remove();
 	        page.cleanUp();
 	        page.remove();

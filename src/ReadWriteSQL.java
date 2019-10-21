@@ -9,7 +9,8 @@ public class ReadWriteSQL {
 	
 	private Connection con;
 	private String command = "";
-	ResultSet rs;
+	private ResultSet rs;
+	private Statement stmt;
 	public void createConnection()
 	{
 		//SQLConnect connect = new SQLConnect();
@@ -18,7 +19,7 @@ public class ReadWriteSQL {
 			Class.forName("com.mysql.cj.jdbc.Driver");  
 			con=DriverManager.getConnection(  
 			"jdbc:mysql://localhost:3306/budgetappdemo","root","parterre-classic-compile-pole");    
-			Statement stmt=con.createStatement();  
+			stmt=con.createStatement();  
 			rs=stmt.executeQuery("select * from users");  
 			while(rs.next())  
 			System.out.println(rs.getString(1)+"  "+rs.getString(2)+"  "+rs.getString(3)+" "+rs.getInt(4));  
@@ -40,7 +41,13 @@ public class ReadWriteSQL {
 	public int getUserID(String userEmail) throws SQLException
 	{
 		command = "select * from users where email=" + userEmail; 
+		rs = stmt.executeQuery(command);
 		return rs.getInt(4);
+	}
+	
+	public void scrapeTransactions()
+	{
+		
 	}
 	
 }
