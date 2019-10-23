@@ -1,14 +1,14 @@
-package com.example.testapplication3;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+//package com.example.testapplication3;
+/*import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.*;
-import com.gargoylesoftware.htmlunit.html.*;
+import com.gargoylesoftware.htmlunit.html.*;*/
 /*import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlForm;
 import com.gargoylesoftware.htmlunit.html.HtmlInput;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;*/
 
-public class SNHULogOn {
+/*public class SNHULogOn {
     private HtmlPage transactionPage;
     public void logOn()
     {
@@ -49,4 +49,4 @@ public class SNHULogOn {
         System.out.println(transactionPage.asText());
         transactionPage.remove();
     }
-}
+}*/
