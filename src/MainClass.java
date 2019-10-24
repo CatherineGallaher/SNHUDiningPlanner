@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class MainClass {
 
 	public static void main(String[] args) {
@@ -23,6 +25,19 @@ public class MainClass {
 		
 		System.out.println("\n------------------------------------------------\nAverage spent per day: " + avgDay);
 		
-
+		System.out.println("\n------------------------------------------------\nEnter a string to be encrypted");
+		Scanner in = new Scanner(System.in);
+		
+		String toBeEncrypted = in.nextLine();
+	
+		PasswordEncryption encryp = new PasswordEncryption();
+		PasswordDecryption decryp = new PasswordDecryption();
+		
+		String encrypted = encryp.encryptionAES(toBeEncrypted);
+		
+		System.out.println("Your encrypted string is: " + encrypted);
+		
+		System.out.println("Your decrypted string is: " + decryp.decryptAES(encrypted));
+		
 	}
 }
