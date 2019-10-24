@@ -95,4 +95,10 @@ public class ReadWriteSQL {
 	{
 		return amounts;
 	}
+	
+	public String getAmountLeft(String userEmail) throws SQLException
+	{
+		rs=stmt.executeQuery("select * from users where email=" + userEmail);
+		return rs.getString(3);
+	}
 }

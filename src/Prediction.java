@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,8 +50,8 @@ public class Prediction {
 	
 	private int parseDay(String date)
 	{
-		String parsedDate[] = date.split(" ", 2);
-		String parsedDate2[] = parsedDate[0].split(",", 1);
+		String parsedDate[] = date.split(" ", 3);
+		String parsedDate2[] = parsedDate[1].split(",", 2);
 		
 		return Integer.parseInt(parsedDate2[0]);
 	}
@@ -188,14 +189,24 @@ public class Prediction {
 				totalDays++;
 			}
 		}
+		/*try {
+			estAmountLeft = Double.parseDouble(perDay.getAmountLeft("catherine.gallaher@snhu.edu").substring(1));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
 		perDay.closeConnection();
+		
+		spentPerDay = totalSpent/totalDays;
+		
 	}
 	
 	public void calcEstAmountLeft()
 	{
-		//ReadWriteSQL amountLeft = new ReadWriteSQL();
-		//amountLeft.closeConnection();
-		//double remainingDays = currentAmount - ((endDate.parseDate() - currentDate)*getSpentPerDay())
+		
 	
 	}
 	
