@@ -13,4 +13,6 @@
     <string name="title_home">Data</string>
     <string name="title_dashboard">Graphs</string>
     <string name="title_notifications">Settings</string>
+    <string name="login_userName">Unknown</string>
+
 </resources>

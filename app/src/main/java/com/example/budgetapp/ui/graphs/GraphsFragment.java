@@ -1,4 +1,4 @@
-package com.example.budgetapp.ui.dashboard;
+package com.example.budgetapp.ui.graphs;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,15 +14,15 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.budgetapp.R;
 
-public class DashboardFragment extends Fragment {
+public class GraphsFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private GraphsViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
-                ViewModelProviders.of(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+                ViewModelProviders.of(this).get(GraphsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_graphs, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
         dashboardViewModel.getText().observe(this, new Observer<String>() {
             @Override
