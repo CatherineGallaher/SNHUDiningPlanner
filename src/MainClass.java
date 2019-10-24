@@ -1,7 +1,6 @@
 public class MainClass {
 
 	public static void main(String[] args) {
-		System.out.println("Hello World, here we go again");
 		//SNHULogOn a = new SNHULogOn();
 		//a.logOn();
 		
@@ -19,6 +18,6 @@ public class MainClass {
 		System.out.println("Dinner average: " + mealTypeAverage[2]);
 		System.out.println("Snack average: " + mealTypeAverage[3]);
 
-		System.out.println("This is a test for the umpteenth time");
+		test.closeConnection();
 	}
 }

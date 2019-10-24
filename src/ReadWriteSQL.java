@@ -60,6 +60,11 @@ public class ReadWriteSQL {
 				times.add(rs.getString(2));
 				amounts.add(rs.getString(3)); 
 			}
+			
+			for(int i = 0; i < dates.size(); i++)
+			{
+				System.out.println(dates.get(i) + " " + times.get(i) + " " + amounts.get(i));
+			}
 			  
 			}catch(Exception e){ System.out.println(e);}  
 			

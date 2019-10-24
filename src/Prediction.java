@@ -43,8 +43,16 @@ public class Prediction {
 	
 	private int parseMonth(String date)
 	{
-		String parsedDate[] = date.split(" ", 2);
+		String parsedDate[] = date.split(" ", 1);
 		return months.indexOf(parsedDate[0]);
+	}
+	
+	private int parseDay(String date)
+	{
+		String parsedDate[] = date.split(" ", 2);
+		String parsedDate2[] = parsedDate[0].split(",", 1);
+		
+		return Integer.parseInt(parsedDate2[0]);
 	}
 	
 	private int parseTime(String time)
@@ -95,13 +103,19 @@ public class Prediction {
 		double dinnerAmount = 0;
 		double snackAmount = 0;
 		
-		ReadWriteSQL test = new ReadWriteSQL();
-		List<String> times = test.getTimes();
-		List<String> amounts = test.getAmounts();
+		ReadWriteSQL mealAvg = new ReadWriteSQL();
+		mealAvg.createConnection();
+		List<String> times = mealAvg.getTimes();
+		List<String> amounts = mealAvg.getAmounts();
+		for(int i = 0; i < amounts.size(); i++) {
+			System.out.println(amounts.get(i) + " " + times.get(i));
+		}
 
 		for(int i = 0; i < amounts.size(); i++)
 		{
 			transactionTime = parseTime(times.get(i));
+			System.out.println(transactionTime);
+			System.out.println(numBreakfast + " " + numLunch + " " + numDinner + " " + numSnack);
 			if(transactionTime >= breakfastStart && transactionTime <= breakfastEnd)
 		 	{
 		 		numBreakfast++;
@@ -130,9 +144,16 @@ public class Prediction {
 		mealTypeAverage[1] = lunchAmount/numLunch;
 		mealTypeAverage[2] = dinnerAmount/numDinner;
 		mealTypeAverage[3] = snackAmount/numSnack;
+		
+		for(int i = 0; i < 4; i++)
+		{
+			System.out.println(mealTypeAverage[i]);
+		}
+		
+		mealAvg.closeConnection();
 	}
 	
-	public void calcMonthAverage()
+	public void calcMonthAverage() //Incomplete
 	{
 		double[] monthAverage = {endMonth - startMonth};
 		
@@ -142,7 +163,24 @@ public class Prediction {
 	
 	public void calcSpentPerDay()
 	{
+		ReadWriteSQL perDay = new ReadWriteSQL();
+		perDay.createConnection();
+		List<String> dates = perDay.getDates();
+		List<String> amounts = perDay.getAmounts();
+		double totalSpent = 0;
+		int totalDays = 0;
 		
+		totalSpent += parseAmount(amounts.get(0));
+		for(int i = 1; i < amounts.size(); i++)
+		{
+			totalSpent += parseAmount(amounts.get(i-1));
+			
+			if(parseDay(dates.get(i)) != parseDay(dates.get(i-1)))
+			{
+				totalDays++;
+			}
+		}
+		perDay.closeConnection();
 	}
 	
 	public void calcEstAmountLeft()
