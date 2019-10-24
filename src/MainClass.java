@@ -18,6 +18,7 @@ public class MainClass {
 		System.out.println("Lunch average: " + mealTypeAverage[1]);
 		System.out.println("Dinner average: " + mealTypeAverage[2]);
 		System.out.println("Snack average: " + mealTypeAverage[3]);
+		
 
 		test.closeConnection();
 		*/
