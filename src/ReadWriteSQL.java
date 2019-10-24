@@ -50,10 +50,12 @@ public class ReadWriteSQL {
 
 			
 			rs=stmt.executeQuery("select * from users");
+			System.out.println("\n-----------------------------------------------\nCurrent Users (passwords are encrypted): ");
 			while(rs.next())  {
-				System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getString(4)+"\t"+rs.getInt(5) + "\n");  }
+				System.out.println("*\t"+ rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getString(4)+"\t"+rs.getInt(5) + "\n");  }
 			
 			rs=stmt.executeQuery("select * from transactioninfo");
+			System.out.println("\n-----------------------------------------------\nUser 2's recent transactions: \n");
 			while(rs.next())  {
 				System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getInt(4) + "\t"+rs.getInt(5));  
 				dates.add(rs.getString(1));
@@ -141,5 +143,11 @@ public class ReadWriteSQL {
 	public List<String> getAmounts()
 	{
 		return amounts;
+	}
+	
+	public String getAmountLeft(String userEmail) throws SQLException
+	{
+		rs=stmt.executeQuery("select * from users where email=" + userEmail);
+		return rs.getString(3);
 	}
 }

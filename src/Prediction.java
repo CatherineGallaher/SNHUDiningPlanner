@@ -1,3 +1,4 @@
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class Prediction {
 	private double spentPerDay;
 	private int daysOffCampus;
 	private double estAmountLeft;
+	private ReadWriteSQL test = new ReadWriteSQL();
 	
 	public Prediction(int userID)
 	{
@@ -49,8 +51,8 @@ public class Prediction {
 	
 	private int parseDay(String date)
 	{
-		String parsedDate[] = date.split(" ", 2);
-		String parsedDate2[] = parsedDate[0].split(",", 1);
+		String parsedDate[] = date.split(" ", 3);
+		String parsedDate2[] = parsedDate[1].split(",", 2);
 		
 		return Integer.parseInt(parsedDate2[0]);
 	}
@@ -104,10 +106,11 @@ public class Prediction {
 		double dinnerAmount = 0;
 		double snackAmount = 0;
 		
-		ReadWriteSQL mealAvg = new ReadWriteSQL();
-		mealAvg.createConnection();
-		List<String> times = mealAvg.getTimes();
-		List<String> amounts = mealAvg.getAmounts();
+		//ReadWriteSQL mealAvg = new ReadWriteSQL();
+		//mealAvg.createConnection();
+		test.createConnection();
+		List<String> times = test.getTimes();
+		List<String> amounts = test.getAmounts();
 
 		for(int i = 0; i < amounts.size(); i++)
 		{
@@ -158,7 +161,7 @@ public class Prediction {
 			mealTypeAverage[3] = 0;
 		}
 		
-		mealAvg.closeConnection();
+		//mealAvg.closeConnection();
 	}
 	
 	public void calcMonthAverage() //Incomplete
@@ -171,10 +174,10 @@ public class Prediction {
 	
 	public void calcSpentPerDay()
 	{
-		ReadWriteSQL perDay = new ReadWriteSQL();
-		perDay.createConnection();
-		List<String> dates = perDay.getDates();
-		List<String> amounts = perDay.getAmounts();
+		//ReadWriteSQL perDay = new ReadWriteSQL();
+		//perDay.createConnection();
+		List<String> dates = test.getDates();
+		List<String> amounts = test.getAmounts();
 		double totalSpent = 0;
 		int totalDays = 0;
 		
@@ -188,14 +191,24 @@ public class Prediction {
 				totalDays++;
 			}
 		}
-		perDay.closeConnection();
+		/*try {
+			estAmountLeft = Double.parseDouble(perDay.getAmountLeft("catherine.gallaher@snhu.edu").substring(1));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+		test.closeConnection();
+		
+		spentPerDay = totalSpent/totalDays;
+		
 	}
 	
 	public void calcEstAmountLeft()
 	{
-		//ReadWriteSQL amountLeft = new ReadWriteSQL();
-		//amountLeft.closeConnection();
-		//double remainingDays = currentAmount - ((endDate.parseDate() - currentDate)*getSpentPerDay())
+		
 	
 	}
 	
