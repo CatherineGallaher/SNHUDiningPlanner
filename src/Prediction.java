@@ -63,15 +63,16 @@ public class Prediction {
 	private double parseAmount(String amount)
 	{
 		String parsedAmount = amount.substring(1);
-		return Double.parseDouble(parsedAmount);
+		double tester = Double.parseDouble(parsedAmount);
+		return tester;
 	}
 	
 	private int convertTime(String time)
 	{
 		int newTime = 0;
 		time = time.replaceAll("([:])", "");
-		newTime = Integer.parseInt(time.substring(0, time.length() - 3));
-		if(time.substring(time.length() - 2) == "PM")
+		newTime = Integer.parseInt(time.substring(0, time.length() - 2));
+		if(time.substring(time.length() - 2).compareTo("PM") == 0 && (newTime < 1200))
 		{
 			newTime+=1200;
 		}
@@ -107,15 +108,10 @@ public class Prediction {
 		mealAvg.createConnection();
 		List<String> times = mealAvg.getTimes();
 		List<String> amounts = mealAvg.getAmounts();
-		for(int i = 0; i < amounts.size(); i++) {
-			System.out.println(amounts.get(i) + " " + times.get(i));
-		}
 
 		for(int i = 0; i < amounts.size(); i++)
 		{
 			transactionTime = parseTime(times.get(i));
-			System.out.println(transactionTime);
-			System.out.println(numBreakfast + " " + numLunch + " " + numDinner + " " + numSnack);
 			if(transactionTime >= breakfastStart && transactionTime <= breakfastEnd)
 		 	{
 		 		numBreakfast++;
@@ -124,17 +120,17 @@ public class Prediction {
 		 	else if(transactionTime >= lunchStart && transactionTime <= lunchEnd)
 		 	{
 		 		numLunch++;
-		 		breakfastAmount += parseAmount(amounts.get(i));
+		 		lunchAmount += parseAmount(amounts.get(i));
 		 	}
 		 	else if(transactionTime >= dinnerStart && transactionTime <= dinnerEnd)
 		 	{
 		 		numDinner++;
-		 		breakfastAmount += parseAmount(amounts.get(i));
+		 		dinnerAmount += parseAmount(amounts.get(i));
 		 	}
 		 	else
 		 	{
 		 		numSnack++;
-		 		breakfastAmount += parseAmount(amounts.get(i));
+		 		snackAmount += parseAmount(amounts.get(i));
 		 	}
 		}
 		    
@@ -145,9 +141,21 @@ public class Prediction {
 		mealTypeAverage[2] = dinnerAmount/numDinner;
 		mealTypeAverage[3] = snackAmount/numSnack;
 		
-		for(int i = 0; i < 4; i++)
+		if(breakfastAmount == 0 || numBreakfast == 0)
 		{
-			System.out.println(mealTypeAverage[i]);
+			mealTypeAverage[0] = 0;
+		}
+		if(lunchAmount == 0 || numLunch == 0)
+		{
+			mealTypeAverage[1] = 0;
+		}
+		if(dinnerAmount == 0 || numDinner == 0)
+		{
+			mealTypeAverage[2] = 0;
+		}
+		if(snackAmount == 0 || numSnack == 0)
+		{
+			mealTypeAverage[3] = 0;
 		}
 		
 		mealAvg.closeConnection();
@@ -185,8 +193,10 @@ public class Prediction {
 	
 	public void calcEstAmountLeft()
 	{
-		//get amount left from database
-		//return currentAmount - ((endDate.parseDate() - currentDate)*getSpentPerDay())
+		//ReadWriteSQL amountLeft = new ReadWriteSQL();
+		//amountLeft.closeConnection();
+		//double remainingDays = currentAmount - ((endDate.parseDate() - currentDate)*getSpentPerDay())
+	
 	}
 	
 	public double[] getMealTypeAverage()
