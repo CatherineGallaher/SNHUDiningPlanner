@@ -1,9 +1,10 @@
 public class MainClass {
 
 	public static void main(String[] args) {
-		//SNHULogOn a = new SNHULogOn();
-		//a.logOn();
+		SNHULogOn a = new SNHULogOn();
+		a.logOn();
 		
+		/*
 		ReadWriteSQL test = new ReadWriteSQL();
 		test.createConnection();
 		
@@ -19,5 +20,6 @@ public class MainClass {
 		System.out.println("Snack average: " + mealTypeAverage[3]);
 
 		test.closeConnection();
+		*/
 	}
 }
