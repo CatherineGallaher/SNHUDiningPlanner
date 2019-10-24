@@ -37,6 +37,9 @@ public class MainActivity extends AppCompatActivity {
 
         textBox = (TextView) findViewById(R.id.textBox);
         button = (Button) findViewById(R.id.Connect);
+
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -48,9 +51,27 @@ public class MainActivity extends AppCompatActivity {
                 {
                     System.out.println(e);
                 }
+                //System.out.println("Hello World, here we go again");
+                //SNHULogOn a = new SNHULogOn();
+                //a.logOn();
+                //SQLConnect con = new SQLConnect();
+                //con.connect();
+                /*String encryptThis = "Hello World";
+                PasswordEncryption encryp = new PasswordEncryption();
+                String encrypted = encryp.encryptionAES(encryptThis);
+                PasswordDecryption decryp = new PasswordDecryption();
+                String decrypted = decryp.decryptAES(encrypted);
+                System.out.println(encrypted);
+                System.out.println(decrypted);*/
 
+                //ReadWriteSQL test = new ReadWriteSQL();
+                //test.createConnection();
+
+                System.out.println("This is a test for the umpteenth time");
             }
-        });
+        }
+
+        );
     }
 
 }
