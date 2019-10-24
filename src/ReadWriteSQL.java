@@ -66,6 +66,53 @@ public class ReadWriteSQL {
 			
 	}
 	
+	public void addInfo(String[] info)
+	{
+		try{  
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			String databaseName = "budgetappdemo";
+			con=DriverManager.getConnection(  
+			"jdbc:mysql://localhost:3306/" + databaseName,"root","parterre-classic-compile-pole");  
+			stmt=con.createStatement();
+			
+			String sqlStat = "INSERT INTO transactionInfo VALUES (?, ?, ?, ?, ?)";
+			
+			PreparedStatement ps = con.prepareStatement(sqlStat);
+			
+			//MUST HAVE: database with tables users (email varchar(30), password varchar(100), lastDateAccessed varchar(30), amountLeft varchar(20), id int(100), PRIMARY KEY(id))
+			// and transactionInfo (date varchar(30), time varchar(10), amountSpent varchar(30), transactionID int(100), userId int(100), primary key(transactionid), foreign key(userId) references users(id) )
+			stmt.execute("SET foreign_key_checks = 0");
+			stmt.execute("delete from users");
+			stmt.execute("delete from transactioninfo");
+			stmt.execute("SET foreign_key_checks = 1");
+			
+			for (int i = 1; i < info.length - 1; i++)
+			{
+				ps.setString(0, info[i-1]);
+				ps.setString(1, info[i]);
+				ps.setString(2, info[i+1]); 
+				ps.setInt(3, i+1);
+				ps.setInt(4, 2);
+				ps.executeUpdate();
+			}
+			
+			rs=stmt.executeQuery("select * from users");
+			while(rs.next())  {
+				System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getString(4)+"\t"+rs.getInt(5) + "\n");  }
+			
+			rs=stmt.executeQuery("select * from transactioninfo");
+			while(rs.next())  {
+				System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getInt(4) + "\t"+rs.getInt(5));  
+				dates.add(rs.getString(1));
+				times.add(rs.getString(2));
+				amounts.add(rs.getString(3)); 
+			}
+			
+			  
+			}catch(Exception e){ System.out.println(e);}
+	}
+	
 	public void closeConnection()
 	{
 		try {
