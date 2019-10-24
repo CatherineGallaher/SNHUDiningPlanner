@@ -13,14 +13,15 @@ public class MainClass {
 		//predict.calcEstAmountLeft();
 		
 		double[] mealTypeAverage = predict.getMealTypeAverage();
-		//double avgDay = predict.getSpentPerDay();
+		double avgDay = predict.getSpentPerDay();
 		
+		System.out.println("\n-----------------------------------------------\nAverage expense per meal type (breakfast, lunch, etc.): ");
 		System.out.println("Breakfast average: " + mealTypeAverage[0]);
 		System.out.println("Lunch average: " + mealTypeAverage[1]);
 		System.out.println("Dinner average: " + mealTypeAverage[2]);
 		System.out.println("Snack average: " + mealTypeAverage[3]);
 		
-		//System.out.println("\nAverage spent per day: " + avgDay);
+		System.out.println("\n------------------------------------------------\nAverage spent per day: " + avgDay);
 		
 
 	}

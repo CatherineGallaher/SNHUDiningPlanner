@@ -14,6 +14,7 @@ public class Prediction {
 	private double spentPerDay;
 	private int daysOffCampus;
 	private double estAmountLeft;
+	private ReadWriteSQL test = new ReadWriteSQL();
 	
 	public Prediction(int userID)
 	{
@@ -105,10 +106,11 @@ public class Prediction {
 		double dinnerAmount = 0;
 		double snackAmount = 0;
 		
-		ReadWriteSQL mealAvg = new ReadWriteSQL();
-		mealAvg.createConnection();
-		List<String> times = mealAvg.getTimes();
-		List<String> amounts = mealAvg.getAmounts();
+		//ReadWriteSQL mealAvg = new ReadWriteSQL();
+		//mealAvg.createConnection();
+		test.createConnection();
+		List<String> times = test.getTimes();
+		List<String> amounts = test.getAmounts();
 
 		for(int i = 0; i < amounts.size(); i++)
 		{
@@ -159,7 +161,7 @@ public class Prediction {
 			mealTypeAverage[3] = 0;
 		}
 		
-		mealAvg.closeConnection();
+		//mealAvg.closeConnection();
 	}
 	
 	public void calcMonthAverage() //Incomplete
@@ -172,10 +174,10 @@ public class Prediction {
 	
 	public void calcSpentPerDay()
 	{
-		ReadWriteSQL perDay = new ReadWriteSQL();
-		perDay.createConnection();
-		List<String> dates = perDay.getDates();
-		List<String> amounts = perDay.getAmounts();
+		//ReadWriteSQL perDay = new ReadWriteSQL();
+		//perDay.createConnection();
+		List<String> dates = test.getDates();
+		List<String> amounts = test.getAmounts();
 		double totalSpent = 0;
 		int totalDays = 0;
 		
@@ -198,7 +200,7 @@ public class Prediction {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}*/
-		perDay.closeConnection();
+		test.closeConnection();
 		
 		spentPerDay = totalSpent/totalDays;
 		
