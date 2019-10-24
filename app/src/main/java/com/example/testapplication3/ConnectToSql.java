@@ -1,15 +1,17 @@
 package com.example.testapplication3;
 
-public class ConnectToSql{
-
-}
-
-/*
 import android.os.AsyncTask;
 
-import java.sql.*;
+import com.google.api.client.googleapis.auth.oauth2.GoogleCredential;
+import com.google.api.client.http.HttpTransport;
+import com.google.api.client.json.JsonFactory;
+import com.google.auth.oauth2.GoogleCredentials;
 
-import java.util.Properties;
+import java.io.File;
+import java.io.IOException;
+import java.security.GeneralSecurityException;
+import java.sql.*;
+import java.util.Collection;
 
 public class ConnectToSql extends AsyncTask<String, Void, String> {
 
@@ -19,76 +21,35 @@ public class ConnectToSql extends AsyncTask<String, Void, String> {
 
     public String doInBackground(String... params) {
         String useless = params[0];
-        Connection conn3 = null;
-        Statement stat = null;
-        ResultSet res = null;
-
         try {
-
-            Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+            Class.forName("com.mysql.cj.jdbc.Driver");
 
             String instanceConnectionName = "budgetappsqlservertry2:us-central1:budgetapp2";
             String databaseName = "BudgetApp";
 
             String IP_of_instance = "127.0.0.1:3307";
-            String username = "root";
-            String password = "nerdalert42!";
+            String username = "Septri";
+            String password = "septri258";
 
-            String jdbcUrl = String.format("jdbc:mysql://%s/%s?cloudSqlInstance=%s" + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory&autoReconnect=true&&maxReconnects=3&useSSL=FALSE&user=%s&password=%s",
-                    IP_of_instance, databaseName, instanceConnectionName, username, password);
+            //String jdbcUrl = String.format("jdbc:mysql://%s/%s?cloudSqlInstance=%s" + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory&autoReconnect=true&&maxReconnects=5&useSSL=FALSE",
+            //        IP_of_instance, databaseName, instanceConnectionName);
 
-            //String jdbcUrl = "jdbc:mysql://127.0.0.1:3307/";
+            String jdbcUrl = "jdbc:mysql://127.0.0.1:3307/BudgetApp?cloudSqlInstance=budgetappsqlservertry2:us-central1:budgetapp2&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false";
 
-            Properties info = new Properties();
-            info.put("proxy_host", "127.0.0.1");
-            info.put("proxy_port", "3307");
-            info.put("user", "root");
-            info.put("password", "nerdalert42!");
+            Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
 
-            conn3 = DriverManager.getConnection(jdbcUrl, info);
-            //Connection connection = DriverManager.getConnection(jdbcUrl);
-
-            System.out.println("Test");
-            stat = conn3.createStatement();
-
-            res = stat.executeQuery("Select * from users;");
+            Statement stat = connection.createStatement();
+            ResultSet res = stat.executeQuery("Select * from users;");
             String result = "";
             while (res.next()) {
                result += (res.getInt(1) + " " + res.getString(2) + " " + res.getString(3));
             }
 
+            connection.close();
             return result;
         } catch (Exception e) {
             System.out.println(e);
             return "error";
-        }
-        finally {
-            System.out.println("In finally");
-            if (conn3 != null) {
-                try {
-                    conn3.close();
-                    System.out.println("Closing Connection");
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            if (stat != null)
-            {
-                try {
-                    stat.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            if (res != null)
-            {
-                try {
-                    res.close();
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
-                }
-            }
-
         }
     }
 
@@ -96,4 +57,4 @@ public class ConnectToSql extends AsyncTask<String, Void, String> {
     {
         super.onPostExecute(result);
     }
-} */
+}
