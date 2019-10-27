@@ -23,8 +23,8 @@
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="391dp"
-        android:layout_height="550dp"
-        android:layout_marginStart="1dp"
+        android:layout_height="500dp"
+        android:layout_marginStart="0.25dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/graph" />
