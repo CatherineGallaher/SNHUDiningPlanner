@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.budgetapprebuild"
-        minSdkVersion 26
+        minSdkVersion 29
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -18,6 +18,10 @@ android {
         exclude 'README'
         exclude 'INFO_BIN'
         exclude 'INFO_SRC'
+        exclude 'META-INF/versions/*'
+        exclude 'w3c-dom.jar/org.w3c.dom/DOMException'
+        exclude 'htmlunit-2.36.0.jar/com.gargoylesoftware.htmlunit/AjaxController'
+
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -44,7 +48,9 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation files('libs/htmlunit-2.9.jar')
     implementation files('libs/mysql-connector-java-8.0.18.jar')
     implementation 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.0.15'
+    implementation files('libs/htmlunit-2.36.0.jar')
+    implementation files('libs/w3c-dom.jar')
+
 }
