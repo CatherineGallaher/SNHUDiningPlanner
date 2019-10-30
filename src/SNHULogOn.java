@@ -113,6 +113,7 @@ public class SNHULogOn {
             //final List<HtmlTableColumn> listCol;
             
             List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
+            String parsedText[] = {"","","","","","","","","","",""};
             i = 0;
             for (HtmlTable table : listTables)
             {
@@ -128,26 +129,30 @@ public class SNHULogOn {
 	            	
 	            	System.out.println(temp);
 	            	
-	        		String parsedText[] = temp.split(" ", 11);
+	        		parsedText = temp.split(" ", 11);
+	        		
 	        		if (temp.length() < 21 || parsedText[1].compareTo("Cash") != 0)
 	        		{
 	        			continue;
 	        		}
 	        			
 	        		
-	        		info.get(i).add(parseDay(row.asText())); 
-	            	info.get(i).add(parseTime(row.asText()));
-	            	info.get(i).add(parseAmount(row.asText()));
+	        		info.get(i).add(parseDay(temp)); 
+	            	info.get(i).add(parseTime(temp));
+	            	info.get(i).add(parseAmount(temp));
 	        		i++;
 	            }
-	            
+
             }
+            
+
+            
             
             for(int k = 0; k < info.size(); k++)
             {
             	for(int j = 0; j < info.get(k).size(); j++)
             	{
-            		System.out.print(info.get(k).get(j) + " ");
+            		System.out.print(info.get(k).get(j) + "| ");
             	}
             	System.out.println();
             }
@@ -196,10 +201,8 @@ public class SNHULogOn {
     	date = date.replaceAll("\t", " ");
 		String parsedDate[] = date.split(" ", 11);
 		
-		if (parsedDate.length < 6)
-			return " ";
 		//System.out.println(parsedDate.length + " " + parsedDate[3]);
-		String completeDate = parsedDate[3] + " " + parsedDate[4] + " " + parsedDate[6];
+		String completeDate = parsedDate[3] + " " + parsedDate[4] + " " + parsedDate[5];
 		//String parsedDate2[] = parsedDate[0].split(",", 1);
 		
 		
@@ -212,17 +215,13 @@ public class SNHULogOn {
 	{
     	String temp = time.replaceAll("\t", " ");
 		String parsedTime[] = temp.split(" ", 11);
-		if (parsedTime.length < 11)
-			return " ";
-		return parsedTime[5];//7 on main page
+		return parsedTime[6];//7 on main page
 	}
     
     private String parseAmount(String amount)
     {
     	String temp = amount.replaceAll("\t", " ");
-    	String parsedAmount[] = temp.split(" ", 11);
-    	if (parsedAmount.length < 11)
-    		return " ";
-    	return parsedAmount[8];//10 on main page
+    	String parsedAmount[] = temp.split(" ", 20);
+    	return parsedAmount[parsedAmount.length];//10 on main page
     }
 }
