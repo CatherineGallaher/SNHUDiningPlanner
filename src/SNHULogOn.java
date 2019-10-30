@@ -23,10 +23,10 @@ public class SNHULogOn {
             
             HtmlForm form = page.getFormByName("login_form");
             
-            form.getInputByName("username").setValueAttribute("john.canducci@snhu.edu");
+            form.getInputByName("username").setValueAttribute("catherine.gallaher@snhu.edu");
             HtmlInput passWordInput = form.getInputByName("password");
             //passWordInput.removeAttribute("disabled");
-            passWordInput.setValueAttribute("");
+            passWordInput.setValueAttribute("3Mog,3Or,3Mb44");
 
             page = form.getInputByValue("Login").dblClick();
 
@@ -41,6 +41,42 @@ public class SNHULogOn {
             HtmlForm selectionForm = currentPage.getHtmlElementById("child_selection_form");
             //String f = currentPage.getElementByName("activity_details").asText();
             HtmlDivision div = currentPage.getHtmlElementById("my_recent_transactions");
+            List<HtmlTable> listTables = currentPage.getByXPath("//table");
+            if (listTables == null)
+            	System.out.println("no tables found");
+            
+            String currBalance = "its not working dumbass";
+            int i = 0;
+            for (HtmlTable table : listTables)
+            {
+            	if (table == listTables.listIterator(0))
+            		continue;
+	            for (HtmlTableRow row : table.getRows())
+	            {
+	            	
+	            	String rowText = row.asText();
+	            	String temp = rowText.replaceAll("\t", " ");
+	            	
+	            	System.out.println(temp);
+	            	
+	        		String parsedText[] = temp.split(" ", 11);
+	        		if (temp.length() < 21 || parsedText[1].compareTo("Name") == 0)
+	        		{
+	        			if(parsedText[1].compareTo("Cash") ==0)
+	        			{
+	        				currBalance = parseBalance(row.asText());
+	        			}
+	        			break;
+	        		}
+	        			
+	        		i++;
+	            }
+	            
+            }
+            
+            transactionPage = currentPage.getAnchorByHref("history.php").dblClick();
+            
+            currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
             //HtmlAnchor htmlAnchor = currentPage.getAnchorByHref("history.php");
             //transactionPage = currentPage.getAnchorByHref("history.php").click();
             //HtmlPage transactionPage = htmlAnchor.click();
@@ -68,30 +104,56 @@ public class SNHULogOn {
             
             //List<HtmlTable> tables = (HtmlTableColumn) div.getByXPath("//table");
             
-            List<HtmlTable> listTables = currentPage.getByXPath("//table");
+            listTables = currentPage.getByXPath("//table");
             if (listTables == null)
             	System.out.println("no tables found");
             
-            System.out.println(listTables.toArray().length);
+            //System.out.println(listTables.toArray().length);
             //Iterable<HtmlTable> newTable = (Iterable<HtmlTable>) table;
             //final List<HtmlTableColumn> listCol;
             
+            List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
+            i = 0;
             for (HtmlTable table : listTables)
             {
             	if (table == listTables.listIterator(0))
             		continue;
 	            for (HtmlTableRow row : table.getRows())
 	            {
-	            	String[] info = new String[3];
-	            	System.out.println(row.asText());
-	            	info[0] = parseDay(row.asText());
-	            	info[1] = parseTime(row.asText());
-	            	info[2] = parseAmount(row.asText());
-	            	for (int i = 0; i < info.length; i++)
-	            		System.out.println(info[i]);
+	            	info.add(new ArrayList<String>());
+	            	//System.out.println(row.asText());
+	            	
+	            	String rowText = row.asText();
+	            	String temp = rowText.replaceAll("\t", " ");
+	            	
+	            	System.out.println(temp);
+	            	
+	        		String parsedText[] = temp.split(" ", 11);
+	        		if (temp.length() < 21 || parsedText[1].compareTo("Cash") != 0)
+	        		{
+	        			continue;
+	        		}
+	        			
+	        		
+	        		info.get(i).add(parseDay(row.asText())); 
+	            	info.get(i).add(parseTime(row.asText()));
+	            	info.get(i).add(parseAmount(row.asText()));
+	        		i++;
 	            }
+	            
             }
-            System.out.println("finished!");
+            
+            for(int k = 0; k < info.size(); k++)
+            {
+            	for(int j = 0; j < info.get(k).size(); j++)
+            	{
+            		System.out.print(info.get(k).get(j) + " ");
+            	}
+            	System.out.println();
+            }
+            
+            System.out.println(currBalance);
+            System.out.println("Finished parsing data from scrape!\n-----------------------------------------------\n\n");
             
             //System.out.println(currentPage.asText());
             //System.out.println(trans1.asText());
@@ -126,28 +188,25 @@ public class SNHULogOn {
     
     private String parseBalance(String bal)
     {
-    	return bal.substring(3);
+    	return bal.substring(bal.length() - 6);
     }
     
     private String parseDay(String date)
 	{
     	date = date.replaceAll("\t", " ");
 		String parsedDate[] = date.split(" ", 11);
-		for(int i = 0; i < parsedDate.length; i++)
-		{
-			System.out.println(i + " " + parsedDate[i] + "-");
-		}
+		
 		if (parsedDate.length < 6)
 			return " ";
 		//System.out.println(parsedDate.length + " " + parsedDate[3]);
-		String completeDate = parsedDate[3] + " " + parsedDate[4] + " " + parsedDate[5];
+		String completeDate = parsedDate[3] + " " + parsedDate[4] + " " + parsedDate[6];
 		//String parsedDate2[] = parsedDate[0].split(",", 1);
 		
 		
 		
 		
 		//return Integer.parseInt(parsedDate2[0]);
-		return completeDate;
+		return completeDate.substring(0, completeDate.length()-1);
 	}
     private String parseTime(String time)
 	{
@@ -155,7 +214,7 @@ public class SNHULogOn {
 		String parsedTime[] = temp.split(" ", 11);
 		if (parsedTime.length < 11)
 			return " ";
-		return parsedTime[7];//7
+		return parsedTime[5];//7 on main page
 	}
     
     private String parseAmount(String amount)
@@ -164,6 +223,6 @@ public class SNHULogOn {
     	String parsedAmount[] = temp.split(" ", 11);
     	if (parsedAmount.length < 11)
     		return " ";
-    	return parsedAmount[10];//10
+    	return parsedAmount[8];//10 on main page
     }
 }

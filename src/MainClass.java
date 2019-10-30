@@ -3,8 +3,8 @@ import java.util.Scanner;
 public class MainClass {
 
 	public static void main(String[] args) {
-		//SNHULogOn a = new SNHULogOn();
-		//a.logOn();
+		SNHULogOn a = new SNHULogOn();
+		a.logOn();
 		
 		Prediction predict = new Prediction(2);
 		predict.predictionSettings("October 20, 2019", "December 20, 2019", 5, 600, 1000, 1000, 1600, 1600, 2000);
