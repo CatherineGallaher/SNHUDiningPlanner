@@ -1,16 +1,20 @@
-package com.example.budgetapprebuild.ui.dashboard;
+package com.example.budgetapprebuild.ui.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+import com.example.budgetapprebuild.SQLConnect;
+
+public class DataViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public DataViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        SQLConnect con = new SQLConnect();
+
+        mText.setValue(con.connect());
     }
 
     public LiveData<String> getText() {
