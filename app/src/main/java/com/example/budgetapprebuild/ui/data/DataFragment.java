@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.LinearLayout;
+import android.widget.GridLayout.LayoutParams;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
@@ -18,8 +20,9 @@ public class DataFragment extends Fragment {
 
     private DataViewModel dataViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        //pre-generated code below
         dataViewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         View root = inflater.inflate(R.layout.fragment_data, container, false);
         final TextView textView = root.findViewById(R.id.text_funds_remaining);
@@ -27,6 +30,8 @@ public class DataFragment extends Fragment {
         dataViewModel.getText().observe(this, new Observer<String>() {
             @Override public void onChanged(@Nullable String s) { textView.setText(s); }
         });
+
+
         return root;
     }
 }

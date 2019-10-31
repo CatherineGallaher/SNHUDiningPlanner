@@ -13,7 +13,7 @@
 
     <fragment
         android:id="@+id/navigation_dashboard"
-        android:name="com.example.budgetapprebuild.ui.graphs.DashboardFragment"
+        android:name="com.example.budgetapprebuild.ui.graphs.GraphsFragment"
         android:label="@string/title_graphs"
         tools:layout="@layout/fragment_graphs" />
 
