@@ -5,24 +5,123 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <!--<LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="403dp"
-        android:layout_height="640dp"
-        app:srcCompat="@drawable/settings"
-        tools:layout_editor_absoluteX="-7dp"
-        tools:layout_editor_absoluteY="51dp" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/settings" />
+
+    </LinearLayout>-->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Name: " />
+
+            <TextView
+                android:id="@+id/text_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Email: " />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:orientation="vertical">
+
+        <!-- This is the start of semester layout-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_startSemester"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Start of Semester: " />
+
+                <EditText
+                    android:id="@+id/date_startSemester"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="date" />
+
+
+            </LinearLayout>
+
+        <!-- This is the end of semester layout-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_endSemester"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="End of Semester" />
+
+                <EditText
+                    android:id="@+id/date_endSemester"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="date" />
+
+            </LinearLayout>
+
+            <!-- This is the start of days off campus layout-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150px"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_daysOffCampus"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Days off Campus: " />
+
+                <EditText
+                    android:id="@+id/number_daysOffCampus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="number" />
+
+            </LinearLayout>
+
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
