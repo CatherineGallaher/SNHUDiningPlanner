@@ -2,6 +2,7 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 
 import javax.xml.crypto.Data;
 
@@ -12,6 +13,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 
 public class SNHULogOn {
     private HtmlPage transactionPage;
+    private List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
     public void logOn()
     {
         WebClient webClient = new WebClient();
@@ -46,7 +48,6 @@ public class SNHULogOn {
             	System.out.println("no tables found");
             
             String currBalance = "its not working dumbass";
-            int i = 0;
             for (HtmlTable table : listTables)
             {
             	if (table == listTables.listIterator(0))
@@ -68,8 +69,6 @@ public class SNHULogOn {
 	        			}
 	        			break;
 	        		}
-	        			
-	        		i++;
 	            }
 	            
             }
@@ -112,9 +111,9 @@ public class SNHULogOn {
             //Iterable<HtmlTable> newTable = (Iterable<HtmlTable>) table;
             //final List<HtmlTableColumn> listCol;
             
-            List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
+            
             String parsedText[] = {"","","","","","","","","","",""};
-            i = 0;
+           /* i = 0;
             for (HtmlTable table : listTables)
             {
             	if (table == listTables.listIterator(0))
@@ -135,16 +134,28 @@ public class SNHULogOn {
 	        		{
 	        			continue;
 	        		}
-	        			
-	        		
-	        		info.get(i).add(parseDay(temp)); 
-	            	info.get(i).add(parseTime(temp));
-	            	info.get(i).add(parseAmount(temp));
+
+	        		//info.get(i).add(parseDay(temp)); 
+	            	//info.get(i).add(parseTime(temp));
+	            	//info.get(i).add(parseAmount(temp));
 	        		i++;
 	            }
-
-            }
+            }*/
             
+            
+            for(HtmlTable table : listTables)
+            {
+				if(table == listTables.listIterator(0))
+            		continue;
+
+            	for(int i = 1; i < table.getRowCount(); i++)
+            	{
+            		info.add(new ArrayList<String>());
+            		info.get(i-1).add(parseDay(table.getCellAt(i, 1).asText()));
+            		info.get(i-1).add(parseTime(table.getCellAt(i, 1).asText()));
+            		info.get(i-1).add(parseAmount(table.getCellAt(i, 3).asText()));
+            	}
+            }
 
             
             
@@ -152,7 +163,7 @@ public class SNHULogOn {
             {
             	for(int j = 0; j < info.get(k).size(); j++)
             	{
-            		System.out.print(info.get(k).get(j) + "| ");
+            		System.out.print(info.get(k).get(j) + " ");
             	}
             	System.out.println();
             }
@@ -202,11 +213,11 @@ public class SNHULogOn {
 		String parsedDate[] = date.split(" ", 11);
 		
 		//System.out.println(parsedDate.length + " " + parsedDate[3]);
-		String completeDate = parsedDate[3] + " " + parsedDate[4] + " " + parsedDate[5];
+		//String completeDate = parsedDate[3] + " " + parsedDate[4] + " " + parsedDate[5];
 		//String parsedDate2[] = parsedDate[0].split(",", 1);
 		
 		
-		
+		String completeDate = parsedDate[0] + " " + parsedDate[1] + " " + parsedDate[2].substring(0, 5);
 		
 		//return Integer.parseInt(parsedDate2[0]);
 		return completeDate.substring(0, completeDate.length()-1);
@@ -215,13 +226,18 @@ public class SNHULogOn {
 	{
     	String temp = time.replaceAll("\t", " ");
 		String parsedTime[] = temp.split(" ", 11);
-		return parsedTime[6];//7 on main page
+		return parsedTime[3];//6];//7 on main page
 	}
     
     private String parseAmount(String amount)
     {
     	String temp = amount.replaceAll("\t", " ");
     	String parsedAmount[] = temp.split(" ", 20);
-    	return parsedAmount[parsedAmount.length];//10 on main page
+    	return parsedAmount[1];//9];//parsedAmount.length];//10 on main page
+    }
+    
+    public List<ArrayList<String>> getInfo()
+    {
+    	return info;
     }
 }

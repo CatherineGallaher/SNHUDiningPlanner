@@ -109,6 +109,7 @@ public class Prediction {
 		//ReadWriteSQL mealAvg = new ReadWriteSQL();
 		//mealAvg.createConnection();
 		test.createConnection();
+		
 		List<String> times = test.getTimes();
 		List<String> amounts = test.getAmounts();
 

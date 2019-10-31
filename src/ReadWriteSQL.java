@@ -40,13 +40,13 @@ public class ReadWriteSQL {
 			stmt.execute("INSERT INTO users VALUES('catherine.gallaher@snhu.edu',':{$#Uhjkfafdsfess','October 23', '$1200.45', 2)");
 			stmt.execute("INSERT INTO users VALUES('dylan.bryant@snhu.edu',';kgj%*$GF:KHDAS','October 16', '$34.80', 3)");
 			
-			stmt.execute("INSERT INTO transactionInfo VALUES('October 23, 2019', '5:55PM', '$15.00', 1, 2)");
+			/*stmt.execute("INSERT INTO transactionInfo VALUES('October 23, 2019', '5:55PM', '$15.00', 1, 2)");
 			stmt.execute("INSERT INTO transactionInfo VALUES('October 23, 2019', '1:50PM', '$3.29', 2, 2)");
 			stmt.execute("INSERT INTO transactionInfo VALUES('October 23, 2019', '11:37AM', '$6.96', 3, 2)");
 			stmt.execute("INSERT INTO transactionInfo VALUES('October 22, 2019', '11:01AM', '$14.08', 4, 2)");
 			stmt.execute("INSERT INTO transactionInfo VALUES('October 21, 2019', '7:49PM', '$5.76', 5, 2)");
 			stmt.execute("INSERT INTO transactionInfo VALUES('October 21, 2019', '12:24PM', '$9.49', 6, 2)");
-			stmt.execute("INSERT INTO transactionInfo VALUES('October 20, 2019', '4:42PM', '$4.90', 7, 2)");
+			stmt.execute("INSERT INTO transactionInfo VALUES('October 20, 2019', '4:42PM', '$4.90', 7, 2)");*/
 
 			
 			rs=stmt.executeQuery("select * from users");
@@ -54,7 +54,7 @@ public class ReadWriteSQL {
 			while(rs.next())  {
 				System.out.println("*\t"+ rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getString(4)+"\t"+rs.getInt(5) + "\n");  }
 			
-			rs=stmt.executeQuery("select * from transactioninfo");
+			/*rs=stmt.executeQuery("select * from transactioninfo");
 			System.out.println("\n-----------------------------------------------\nUser 2's recent transactions: \n");
 			while(rs.next())  {
 				System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getInt(4) + "\t"+rs.getInt(5));  
@@ -62,13 +62,13 @@ public class ReadWriteSQL {
 				times.add(rs.getString(2));
 				amounts.add(rs.getString(3)); 
 			}
-			
+			*/
 			  
 			}catch(Exception e){ System.out.println(e);}  
 			
 	}
 	
-	public void addInfo(String[] info)
+	public void addInfo()//List<ArrayList<String>> info)
 	{
 		try{  
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -89,11 +89,14 @@ public class ReadWriteSQL {
 			stmt.execute("delete from transactioninfo");
 			stmt.execute("SET foreign_key_checks = 1");
 			
-			for (int i = 1; i < info.length - 1; i++)
+			SNHULogOn test = new SNHULogOn();
+			List<ArrayList<String>> info = test.getInfo();
+			
+			for (int i = 1; i < info.size() - 1; i++)
 			{
-				ps.setString(0, info[i-1]);
-				ps.setString(1, info[i]);
-				ps.setString(2, info[i+1]); 
+				ps.setString(0, info.get(i).get(0));
+				ps.setString(1, info.get(i).get(1));
+				ps.setString(2, info.get(i).get(2)); 
 				ps.setInt(3, i+1);
 				ps.setInt(4, 2);
 				ps.executeUpdate();
@@ -144,6 +147,8 @@ public class ReadWriteSQL {
 	{
 		return amounts;
 	}
+	
+	
 	
 	public String getAmountLeft(String userEmail) throws SQLException
 	{
