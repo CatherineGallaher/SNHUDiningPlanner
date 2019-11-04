@@ -5,23 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!--<LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="vertical">
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/settings" />
-
-    </LinearLayout>-->
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -30,25 +18,40 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/text_name"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Name: " />
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Name: " />
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Logout" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/text_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight=".25"
                 android:text="Email: " />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight=".1"
+            android:layout_weight=".125"
             android:orientation="vertical">
 
         <!-- This is the start of semester layout-->
@@ -119,12 +122,115 @@
             </LinearLayout>
 
             <Switch
-                android:id="@+id/switch_customize"
+                android:id="@+id/switch_customMealTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Customize Meal Times" />
 
+            <LinearLayout
+                android:id="@+id/layout_mealTimes"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_breakfast"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".09"
+                        android:text="Breakfast: " />
+
+                    <EditText
+                        android:id="@+id/time_breakstart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:ems="10"
+                        android:inputType="time"
+                        android:text="start: " />
+
+                    <EditText
+                        android:id="@+id/time_breakend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:ems="10"
+                        android:inputType="time"
+                        android:text="end: " />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_lunch"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".09"
+                        android:text="Lunch: " />
+
+                    <EditText
+                        android:id="@+id/time_lunchstart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:ems="10"
+                        android:inputType="time"
+                        android:text="start: " />
+
+                    <EditText
+                        android:id="@+id/time_lunchend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:ems="10"
+                        android:inputType="time"
+                        android:text="end: " />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/text_dinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".09"
+                        android:text="Dinner: " />
+
+                    <EditText
+                        android:id="@+id/time_dinnerstart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:ems="10"
+                        android:inputType="time"
+                        android:text="start: " />
+
+                    <EditText
+                        android:id="@+id/time_dinnerend"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="5"
+                        android:ems="10"
+                        android:inputType="time"
+                        android:text="end: " />
+                </LinearLayout>
+
+            </LinearLayout>
 
 
         </LinearLayout>
