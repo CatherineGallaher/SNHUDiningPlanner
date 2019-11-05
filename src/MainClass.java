@@ -3,8 +3,12 @@ import java.util.Scanner;
 public class MainClass {
 
 	public static void main(String[] args) {
-		SNHULogOn a = new SNHULogOn();
-		a.logOn();
+		//SNHULogOn a = new SNHULogOn();
+		//a.logOn();
+		
+		SNHULogOn.dataScrape.logOn();
+		String balance = SNHULogOn.dataScrape.currBalance;
+		System.out.println(balance);
 		
 		/*Prediction predict = new Prediction(2);
 		predict.predictionSettings("October 20, 2019", "December 20, 2019", 5, 600, 1000, 1000, 1600, 1600, 2000);
@@ -23,7 +27,7 @@ public class MainClass {
 		System.out.println("Dinner average: " + mealTypeAverage[2]);
 		System.out.println("Snack average: " + mealTypeAverage[3]);
 		
-		System.out.println("\n------------------------------------------------\nAverage spent per day: " + avgDay);*/
+		System.out.println("\n------------------------------------------------\nAverage spent per day: " + avgDay);
 		
 		System.out.println("\n------------------------------------------------\nEnter a string to be encrypted");
 		Scanner in = new Scanner(System.in);
@@ -37,7 +41,7 @@ public class MainClass {
 		
 		System.out.println("Your encrypted string is: " + encrypted);
 		
-		System.out.println("Your decrypted string is: " + decryp.decryptAES(encrypted));
+		System.out.println("Your decrypted string is: " + decryp.decryptAES(encrypted));*/
 		
 	}
 }

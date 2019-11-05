@@ -14,7 +14,8 @@ public class Prediction {
 	private double spentPerDay;
 	private int daysOffCampus;
 	private double estAmountLeft;
-	private ReadWriteSQL test = new ReadWriteSQL();
+	//private ReadWriteSQL test = new ReadWriteSQL();
+	private SQLConnect connection;
 	
 	public Prediction(int userID)
 	{
@@ -108,9 +109,9 @@ public class Prediction {
 		
 		//ReadWriteSQL mealAvg = new ReadWriteSQL();
 		//mealAvg.createConnection();
-		test.createConnection();
+		//test.createConnection();
 		
-		List<String> times = test.getTimes();
+		/*List<String> times = test.getTimes();
 		List<String> amounts = test.getAmounts();
 
 		for(int i = 0; i < amounts.size(); i++)
@@ -137,7 +138,7 @@ public class Prediction {
 		 		snackAmount += parseAmount(amounts.get(i));
 		 	}
 		}
-		    
+		    */
 		  	
 		
 		mealTypeAverage[0] = breakfastAmount/numBreakfast;
@@ -177,12 +178,12 @@ public class Prediction {
 	{
 		//ReadWriteSQL perDay = new ReadWriteSQL();
 		//perDay.createConnection();
-		List<String> dates = test.getDates();
-		List<String> amounts = test.getAmounts();
+		//List<String> dates = test.getDates();
+		//List<String> amounts = test.getAmounts();
 		double totalSpent = 0;
 		int totalDays = 0;
 		
-		totalSpent += parseAmount(amounts.get(0));
+		/*totalSpent += parseAmount(amounts.get(0));
 		for(int i = 1; i < amounts.size(); i++)
 		{
 			totalSpent += parseAmount(amounts.get(i-1));
@@ -192,16 +193,8 @@ public class Prediction {
 				totalDays++;
 			}
 		}
-		/*try {
-			estAmountLeft = Double.parseDouble(perDay.getAmountLeft("catherine.gallaher@snhu.edu").substring(1));
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-		test.closeConnection();
+
+		test.closeConnection();*/
 		
 		spentPerDay = totalSpent/totalDays;
 		
@@ -231,6 +224,11 @@ public class Prediction {
 	public double getEstAmountLeft()
 	{
 		return estAmountLeft;
+	}
+	
+	public void setSQLConnectObj(SQLConnect connection)
+	{
+		this.connection = connection;
 	}
 
 }

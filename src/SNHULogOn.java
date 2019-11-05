@@ -11,10 +11,19 @@ import com.gargoylesoftware.htmlunit.html.*;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;    
+
 public class SNHULogOn {
     private HtmlPage transactionPage;
     private List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
-    public void logOn()
+    public static SNHULogOn dataScrape = new SNHULogOn();
+    public String currBalance = "its not working dumbass";
+    public String email;
+    public String password;
+    public String dateLastAccessed;
+    
+    public void logOn(String email, String password)
     {
         WebClient webClient = new WebClient();
         webClient.getOptions().setCssEnabled(false);
@@ -28,7 +37,8 @@ public class SNHULogOn {
             form.getInputByName("username").setValueAttribute("catherine.gallaher@snhu.edu");
             HtmlInput passWordInput = form.getInputByName("password");
             //passWordInput.removeAttribute("disabled");
-            passWordInput.setValueAttribute("3Mog,3Or,3Mb44");
+            passWordInput.setValueAttribute(PasswordDecryption.decryptAES(password));
+            
 
             page = form.getInputByValue("Login").dblClick();
 
@@ -36,18 +46,21 @@ public class SNHULogOn {
 
             webClient.waitForBackgroundJavaScript(10000);
             
-            //transactionPage = page.getAnchorByHref("https://get.cbord.com/snhu/full/history.php").click();
-            //transactionPage = page.getAnchorByHref("tabletop_left").click();
-            //HtmlPage newPage = (HtmlPage) webClient.getPage("https://get.cbord.com/snhu/full/funds_home.php");
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");// HH:mm:ss");  
+            LocalDateTime now = LocalDateTime.now();  
+            System.out.println(dtf.format(now));  
+
+            
+
             HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
             HtmlForm selectionForm = currentPage.getHtmlElementById("child_selection_form");
-            //String f = currentPage.getElementByName("activity_details").asText();
             HtmlDivision div = currentPage.getHtmlElementById("my_recent_transactions");
             List<HtmlTable> listTables = currentPage.getByXPath("//table");
-            if (listTables == null)
+            if (listTables == null) {
             	System.out.println("no tables found");
+            }
             
-            String currBalance = "its not working dumbass";
+            
             for (HtmlTable table : listTables)
             {
             	if (table == listTables.listIterator(0))
@@ -58,18 +71,17 @@ public class SNHULogOn {
 	            	String rowText = row.asText();
 	            	String temp = rowText.replaceAll("\t", " ");
 	            	
-	            	System.out.println(temp);
+	            	//System.out.println(temp);
 	            	
 	        		String parsedText[] = temp.split(" ", 11);
-	        		if (temp.length() < 21 || parsedText[1].compareTo("Name") == 0)
+	        		if ((temp.length() < 21 || parsedText[1].compareTo("Name") == 0) && parsedText[1].compareTo("Cash") ==0)
 	        		{
-	        			if(parsedText[1].compareTo("Cash") ==0)
-	        			{
-	        				currBalance = parseBalance(row.asText());
-	        			}
+	        			currBalance = parseBalance(row.asText());
 	        			break;
+
 	        		}
 	            }
+	            break;
 	            
             }
             
@@ -107,42 +119,6 @@ public class SNHULogOn {
             if (listTables == null)
             	System.out.println("no tables found");
             
-            //System.out.println(listTables.toArray().length);
-            //Iterable<HtmlTable> newTable = (Iterable<HtmlTable>) table;
-            //final List<HtmlTableColumn> listCol;
-            
-            
-            String parsedText[] = {"","","","","","","","","","",""};
-           /* i = 0;
-            for (HtmlTable table : listTables)
-            {
-            	if (table == listTables.listIterator(0))
-            		continue;
-	            for (HtmlTableRow row : table.getRows())
-	            {
-	            	info.add(new ArrayList<String>());
-	            	//System.out.println(row.asText());
-	            	
-	            	String rowText = row.asText();
-	            	String temp = rowText.replaceAll("\t", " ");
-	            	
-	            	System.out.println(temp);
-	            	
-	        		parsedText = temp.split(" ", 11);
-	        		
-	        		if (temp.length() < 21 || parsedText[1].compareTo("Cash") != 0)
-	        		{
-	        			continue;
-	        		}
-
-	        		//info.get(i).add(parseDay(temp)); 
-	            	//info.get(i).add(parseTime(temp));
-	            	//info.get(i).add(parseAmount(temp));
-	        		i++;
-	            }
-            }*/
-            
-            
             for(HtmlTable table : listTables)
             {
 				if(table == listTables.listIterator(0))
@@ -159,30 +135,30 @@ public class SNHULogOn {
 
             
             
-            for(int k = 0; k < info.size(); k++)
+           /* for(int k = 0; k < info.size(); k++)
             {
             	for(int j = 0; j < info.get(k).size(); j++)
             	{
             		System.out.print(info.get(k).get(j) + " ");
             	}
             	System.out.println();
-            }
+            }*/
             
-            System.out.println(currBalance);
+            //System.out.println(currBalance);
+            
             System.out.println("Finished parsing data from scrape!\n-----------------------------------------------\n\n");
-            
-            //System.out.println(currentPage.asText());
-            //System.out.println(trans1.asText());
-            
+
             form.remove();
             selectionForm.remove();
             page.cleanUp();
             page.remove();
             currentPage.cleanUp();
             currentPage.remove();
-            //transactionPage.cleanUp();
-            //transactionPage.remove();
+            transactionPage.cleanUp();
+            transactionPage.remove();
             webClient.close();
+            
+            //SQLConnect.setSNHULogOnObj(this);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -190,21 +166,10 @@ public class SNHULogOn {
             webClient.close();
         }
     }
-
-    public HtmlPage getTransactionPage()
-    {
-        return transactionPage;
-    }
-
-    public void closeTransactionPage()
-    {
-        System.out.println(transactionPage.asText());
-        transactionPage.remove();
-    }
     
     private String parseBalance(String bal)
     {
-    	return bal.substring(bal.length() - 6);
+    	return bal.substring(bal.length() - 7);
     }
     
     private String parseDay(String date)
@@ -226,7 +191,7 @@ public class SNHULogOn {
 	{
     	String temp = time.replaceAll("\t", " ");
 		String parsedTime[] = temp.split(" ", 11);
-		return parsedTime[3];//6];//7 on main page
+		return parsedTime[3];//7 on main page
 	}
     
     private String parseAmount(String amount)
@@ -239,5 +204,10 @@ public class SNHULogOn {
     public List<ArrayList<String>> getInfo()
     {
     	return info;
+    }
+    
+    public String getBalance()
+    {
+    	return currBalance;
     }
 }

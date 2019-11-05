@@ -40,24 +40,24 @@ public class ReadWriteSQL {
 			stmt.execute("INSERT INTO users VALUES('catherine.gallaher@snhu.edu',':{$#Uhjkfafdsfess','October 23', '$1200.45', 2)");
 			stmt.execute("INSERT INTO users VALUES('dylan.bryant@snhu.edu',';kgj%*$GF:KHDAS','October 16', '$34.80', 3)");
 			
-			/*stmt.execute("INSERT INTO transactionInfo VALUES('October 23, 2019', '5:55PM', '$15.00', 1, 2)");
+			stmt.execute("INSERT INTO transactionInfo VALUES('October 23, 2019', '5:55PM', '$15.00', 1, 2)");
 			stmt.execute("INSERT INTO transactionInfo VALUES('October 23, 2019', '1:50PM', '$3.29', 2, 2)");
 			stmt.execute("INSERT INTO transactionInfo VALUES('October 23, 2019', '11:37AM', '$6.96', 3, 2)");
 			stmt.execute("INSERT INTO transactionInfo VALUES('October 22, 2019', '11:01AM', '$14.08', 4, 2)");
 			stmt.execute("INSERT INTO transactionInfo VALUES('October 21, 2019', '7:49PM', '$5.76', 5, 2)");
 			stmt.execute("INSERT INTO transactionInfo VALUES('October 21, 2019', '12:24PM', '$9.49', 6, 2)");
-			stmt.execute("INSERT INTO transactionInfo VALUES('October 20, 2019', '4:42PM', '$4.90', 7, 2)");*/
+			stmt.execute("INSERT INTO transactionInfo VALUES('October 20, 2019', '4:42PM', '$4.90', 7, 2)");
 
 			
-			rs=stmt.executeQuery("select * from users");
+			/*rs=stmt.executeQuery("select * from users");
 			System.out.println("\n-----------------------------------------------\nCurrent Users (passwords are encrypted): ");
 			while(rs.next())  {
 				System.out.println("*\t"+ rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getString(4)+"\t"+rs.getInt(5) + "\n");  }
 			
-			/*rs=stmt.executeQuery("select * from transactioninfo");
+			rs=stmt.executeQuery("select * from transactioninfo");
 			System.out.println("\n-----------------------------------------------\nUser 2's recent transactions: \n");
 			while(rs.next())  {
-				System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getInt(4) + "\t"+rs.getInt(5));  
+				//System.out.println(rs.getString(1)+"\t"+rs.getString(2)+"\t"+rs.getString(3)+"\t"+rs.getInt(4) + "\t"+rs.getInt(5));  
 				dates.add(rs.getString(1));
 				times.add(rs.getString(2));
 				amounts.add(rs.getString(3)); 

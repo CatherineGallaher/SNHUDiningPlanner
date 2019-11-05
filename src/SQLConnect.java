@@ -2,8 +2,15 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SQLConnect {
+	private List<ArrayList<String>> info;
+	private String balance;
+	private String email;
+	private String password;
+	
 	public SQLConnect()
 	{
 	
@@ -48,5 +55,13 @@ public class SQLConnect {
 			
 			connection.close();
 		}catch(Exception e) {System.out.println(e);}
+	}
+	
+	public void setInfo()
+	{
+		SNHULogOn.dataScrape.logOn();
+		balance = SNHULogOn.dataScrape.currBalance;
+		//System.out.println(balance);
+		this.info = SNHULogOn.dataScrape.getInfo();
 	}
 }
