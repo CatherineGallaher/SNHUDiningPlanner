@@ -1,4 +1,4 @@
-package com.example.budgetapprebuild.ui.home;
+package com.example.budgetapprebuild.ui.data;
 
 import android.util.Log;
 
@@ -8,11 +8,11 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.budgetapprebuild.SQLConnect;
 
-public class HomeViewModel extends ViewModel {
+public class DataViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public DataViewModel() {
         mText = new MutableLiveData<>();
 
         SQLConnect con = new SQLConnect();
