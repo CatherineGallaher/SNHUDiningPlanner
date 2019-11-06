@@ -10,6 +10,7 @@ public class SQLConnect {
 	private String balance;
 	private String email;
 	private String password;
+	private String dateLastAccessed;
 	
 	public SQLConnect()
 	{
@@ -59,9 +60,20 @@ public class SQLConnect {
 	
 	public void setInfo()
 	{
-		SNHULogOn.dataScrape.logOn();
-		balance = SNHULogOn.dataScrape.currBalance;
-		//System.out.println(balance);
+		SNHULogOn.dataScrape.logOn("catherine.gallaher@snhu.edu", PasswordEncryption.encryptionAES("3Mog,3Or,3Mb44"));
+		this.balance = SNHULogOn.dataScrape.currBalance;
 		this.info = SNHULogOn.dataScrape.getInfo();
+		this.dateLastAccessed = SNHULogOn.dataScrape.dateLastAccessed;
+		System.out.println(dateLastAccessed);
+		System.out.println(balance);
+		
+		for(int k = 0; k < info.size(); k++)
+        {
+        	for(int j = 0; j < info.get(k).size(); j++)
+        	{
+        		System.out.print(info.get(k).get(j) + " ");
+        	}
+        	System.out.println();
+        }
 	}
 }

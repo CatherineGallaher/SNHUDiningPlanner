@@ -6,9 +6,12 @@ public class MainClass {
 		//SNHULogOn a = new SNHULogOn();
 		//a.logOn();
 		
-		SNHULogOn.dataScrape.logOn();
-		String balance = SNHULogOn.dataScrape.currBalance;
-		System.out.println(balance);
+		//SNHULogOn.dataScrape.logOn();
+		//String balance = SNHULogOn.dataScrape.currBalance;
+		//System.out.println(balance);
+		
+		SQLConnect connect = new SQLConnect();
+		connect.setInfo();
 		
 		/*Prediction predict = new Prediction(2);
 		predict.predictionSettings("October 20, 2019", "December 20, 2019", 5, 600, 1000, 1000, 1600, 1600, 2000);
