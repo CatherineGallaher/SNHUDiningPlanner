@@ -23,7 +23,7 @@ public class SNHULogOn {
     public String password;
     public String dateLastAccessed;
     
-    public void logOn(String email, String password)
+    public boolean logOn(String email, String password)
     {
         WebClient webClient = new WebClient();
         webClient.getOptions().setCssEnabled(false);
@@ -43,128 +43,134 @@ public class SNHULogOn {
             page = form.getInputByValue("Login").dblClick();
 
             //System.out.println(page.asText());
-
-            webClient.waitForBackgroundJavaScript(10000);
-            
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");// HH:mm:ss");  
-            LocalDateTime now = LocalDateTime.now();  
-            System.out.println(dtf.format(now));  
-
-            
-
-            HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
-            HtmlForm selectionForm = currentPage.getHtmlElementById("child_selection_form");
-            HtmlDivision div = currentPage.getHtmlElementById("my_recent_transactions");
-            List<HtmlTable> listTables = currentPage.getByXPath("//table");
-            if (listTables == null) {
-            	System.out.println("no tables found");
-            }
-            
-            
-            for (HtmlTable table : listTables)
+            String[] thePage = page.asText().split(" ");
+            if(thePage[9].compareTo("failed,") != 0)
             {
-            	if (table == listTables.listIterator(0))
-            		continue;
-	            for (HtmlTableRow row : table.getRows())
-	            {
-	            	
-	            	String rowText = row.asText();
-	            	String temp = rowText.replaceAll("\t", " ");
-	            	
-	            	//System.out.println(temp);
-	            	
-	        		String parsedText[] = temp.split(" ", 11);
-	        		if ((temp.length() < 21 || parsedText[1].compareTo("Name") == 0) && parsedText[1].compareTo("Cash") ==0)
-	        		{
-	        			currBalance = parseBalance(row.asText());
-	        			break;
+            	webClient.waitForBackgroundJavaScript(10000);
+                
+                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd");// HH:mm:ss");  
+                LocalDateTime now = LocalDateTime.now();  
+                System.out.println(dtf.format(now)); 
+                dateLastAccessed = dtf.format(now);
 
-	        		}
-	            }
-	            break;
-	            
-            }
-            
-            transactionPage = currentPage.getAnchorByHref("history.php").dblClick();
-            
-            currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
-            //HtmlAnchor htmlAnchor = currentPage.getAnchorByHref("history.php");
-            //transactionPage = currentPage.getAnchorByHref("history.php").click();
-            //HtmlPage transactionPage = htmlAnchor.click();
-            /*
-            List<String> searchResults = new ArrayList<>();
-            List<HtmlAnchor> l = page.getByXPath("//a[@class='https://get.cbord.com/snhu/full/history.php']");
-            for(HtmlAnchor a: l) {
-                a.click();
-            }
-            */
-            /*
-            Iterable<DomNode> node = (Iterable<DomNode>) currentPage.getDescendants();
-            System.out.println("0");
-            for (DomNode a : node)
-            {
-            	System.out.println(a.asText());
-            }
-            currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
-            */
-            //HtmlDivision div = currentPage.getHtmlElementById("my_recent_transactions");
-            //Iterable<HtmlElement> subDiv = div.getHtmlElementDescendants();
-            
-            //String xpath = "(//table[@class='table table-striped table-bordered'])";
-            //HtmlTable transTable = (HtmlTable) div.getByXPath("//table[@class=table table-striped table-bordered]").get(1);
-            
-            //List<HtmlTable> tables = (HtmlTableColumn) div.getByXPath("//table");
-            
-            listTables = currentPage.getByXPath("//table");
-            if (listTables == null)
-            	System.out.println("no tables found");
-            
-            for(HtmlTable table : listTables)
-            {
-				if(table == listTables.listIterator(0))
-            		continue;
+                
 
-            	for(int i = 1; i < table.getRowCount(); i++)
-            	{
-            		info.add(new ArrayList<String>());
-            		info.get(i-1).add(parseDay(table.getCellAt(i, 1).asText()));
-            		info.get(i-1).add(parseTime(table.getCellAt(i, 1).asText()));
-            		info.get(i-1).add(parseAmount(table.getCellAt(i, 3).asText()));
-            	}
+                HtmlPage currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+                HtmlForm selectionForm = currentPage.getHtmlElementById("child_selection_form");
+                HtmlDivision div = currentPage.getHtmlElementById("my_recent_transactions");
+                List<HtmlTable> listTables = currentPage.getByXPath("//table");
+                if (listTables == null) {
+                	System.out.println("no tables found");
+                }
+                
+                
+                for (HtmlTable table : listTables)
+                {
+                	if (table == listTables.listIterator(0))
+                		continue;
+    	            for (HtmlTableRow row : table.getRows())
+    	            {
+    	            	
+    	            	String rowText = row.asText();
+    	            	String temp = rowText.replaceAll("\t", " ");
+    	            	
+    	            	//System.out.println(temp);
+    	            	
+    	        		String parsedText[] = temp.split(" ", 11);
+    	        		if ((temp.length() < 21 || parsedText[1].compareTo("Name") == 0) && parsedText[1].compareTo("Cash") ==0)
+    	        		{
+    	        			currBalance = parseBalance(row.asText());
+    	        			break;
+
+    	        		}
+    	            }
+    	            break;
+    	            
+                }
+                
+                transactionPage = currentPage.getAnchorByHref("history.php").dblClick();
+                
+                currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+                //HtmlAnchor htmlAnchor = currentPage.getAnchorByHref("history.php");
+                //transactionPage = currentPage.getAnchorByHref("history.php").click();
+                //HtmlPage transactionPage = htmlAnchor.click();
+                /*
+                List<String> searchResults = new ArrayList<>();
+                List<HtmlAnchor> l = page.getByXPath("//a[@class='https://get.cbord.com/snhu/full/history.php']");
+                for(HtmlAnchor a: l) {
+                    a.click();
+                }
+                */
+                /*
+                Iterable<DomNode> node = (Iterable<DomNode>) currentPage.getDescendants();
+                System.out.println("0");
+                for (DomNode a : node)
+                {
+                	System.out.println(a.asText());
+                }
+                currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
+                */
+                //HtmlDivision div = currentPage.getHtmlElementById("my_recent_transactions");
+                //Iterable<HtmlElement> subDiv = div.getHtmlElementDescendants();
+                
+                //String xpath = "(//table[@class='table table-striped table-bordered'])";
+                //HtmlTable transTable = (HtmlTable) div.getByXPath("//table[@class=table table-striped table-bordered]").get(1);
+                
+                //List<HtmlTable> tables = (HtmlTableColumn) div.getByXPath("//table");
+                
+                listTables = currentPage.getByXPath("//table");
+                if (listTables == null)
+                	System.out.println("no tables found");
+                
+                for(HtmlTable table : listTables)
+                {
+    				if(table == listTables.listIterator(0))
+                		continue;
+
+                	for(int i = 1; i < table.getRowCount(); i++)
+                	{
+                		info.add(new ArrayList<String>());
+                		info.get(i-1).add(parseDay(table.getCellAt(i, 1).asText()));
+                		info.get(i-1).add(parseTime(table.getCellAt(i, 1).asText()));
+                		info.get(i-1).add(parseAmount(table.getCellAt(i, 3).asText()));
+                	}
+                }
+
+                
+                
+               /* for(int k = 0; k < info.size(); k++)
+                {
+                	for(int j = 0; j < info.get(k).size(); j++)
+                	{
+                		System.out.print(info.get(k).get(j) + " ");
+                	}
+                	System.out.println();
+                }*/
+                
+                //System.out.println(currBalance);
+                
+                System.out.println("Finished parsing data from scrape!\n-----------------------------------------------\n\n");
+
+                form.remove();
+                selectionForm.remove();
+                page.cleanUp();
+                page.remove();
+                currentPage.cleanUp();
+                currentPage.remove();
+                transactionPage.cleanUp();
+                transactionPage.remove();
+                webClient.close();
+                
+                //SQLConnect.setSNHULogOnObj(this);
+                return true;
             }
 
-            
-            
-           /* for(int k = 0; k < info.size(); k++)
-            {
-            	for(int j = 0; j < info.get(k).size(); j++)
-            	{
-            		System.out.print(info.get(k).get(j) + " ");
-            	}
-            	System.out.println();
-            }*/
-            
-            //System.out.println(currBalance);
-            
-            System.out.println("Finished parsing data from scrape!\n-----------------------------------------------\n\n");
-
-            form.remove();
-            selectionForm.remove();
-            page.cleanUp();
-            page.remove();
-            currentPage.cleanUp();
-            currentPage.remove();
-            transactionPage.cleanUp();
-            transactionPage.remove();
-            webClient.close();
-            
-            //SQLConnect.setSNHULogOnObj(this);
-            
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             webClient.close();
         }
+        return false;
     }
     
     private String parseBalance(String bal)
