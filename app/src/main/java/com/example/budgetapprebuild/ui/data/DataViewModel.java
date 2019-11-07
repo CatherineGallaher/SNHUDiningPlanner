@@ -17,10 +17,10 @@ public class DataViewModel extends ViewModel {
 
         SQLConnect con = new SQLConnect();
         try {
-            String result = con.execute().get();
+            /*String result = con.execute().get();
             System.out.println(result);
             Log.i("PHPConnect", "running php script");
-            mText.setValue(result);
+            mText.setValue(result);*/
         }
         catch (Exception e)
         {

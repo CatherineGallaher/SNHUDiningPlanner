@@ -29,8 +29,11 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        SNHULogOn a = new SNHULogOn();
-        a.logOn();
+        //SNHULogOn a = new SNHULogOn();
+        //a.logOn();
+
+        SQLConnect test = new SQLConnect();
+        //test.setInfo();
 
         Prediction predict = new Prediction(2);
         predict.predictionSettings("October 20, 2019", "December 20, 2019", 5, 600, 1000, 1000, 1600, 1600, 2000);
