@@ -130,27 +130,5 @@ public class SQLConnect extends AsyncTask<String, String, String> {
         }
     }
 
-    /*public void setInfo()
-    {
-        boolean isLoggedIn = SNHULogOn.dataScrape.logOn("catherine.gallaher@snhu.edu", PasswordEncryption.encryptionAES("x")); //Should really be called from LoginActivity or something
-        if(isLoggedIn)
-        {
-            this.balance = SNHULogOn.dataScrape.currBalance; //Current balance
-            this.info = SNHULogOn.dataScrape.getInfo(); //List<ArrayList<String>> of transactions
-            this.theDate = SNHULogOn.dataScrape.dateLastAccessed; //Last date accessed
-            System.out.println(theDate);
-            System.out.println(balance);
-
-            for(int k = 0; k < info.size(); k++)
-            {
-                for(int j = 0; j < info.get(k).size(); j++)
-                {
-                    System.out.print(info.get(k).get(j) + " ");
-                }
-                System.out.println();
-            }
-        }
-    }*/
-
 }
 

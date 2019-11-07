@@ -3,7 +3,6 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
-    sourceSets.main.res.filter.exclude 'libs/htmlunit-2.36.0-OSGi.jar/org/*'
     defaultConfig {
         applicationId "com.example.budgetapprebuild"
         minSdkVersion 26
@@ -20,8 +19,8 @@ android {
         exclude 'INFO_BIN'
         exclude 'INFO_SRC'
         exclude 'META-INF/versions/*'
-        exclude 'libs/htmlunit-2.36.0-OSGi.jar/org/w3c.dom/*'
-        exclude 'libs/htmlunit-2.36.0-OSGi.jar/com.gargoylesoftware/htmlunit/AjaxController'
+        exclude 'w3c-dom.jar/org.w3c.dom/DOMException'
+        exclude 'htmlunit-2.36.0.jar/com.gargoylesoftware.htmlunit/AjaxController'
 
     }
     compileOptions {
@@ -49,5 +48,10 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation files('libs/htmlunit-2.36.0-OSGi.jar')
+    implementation files('libs/mysql-connector-java-8.0.18.jar')
+    implementation 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.0.15'
+    implementation files('libs/htmlunit-2.36.0.jar')
+    implementation files('libs/w3c-dom.jar')
+    implementation 'com.jjoe64:graphview:4.2.2'
+
 }
