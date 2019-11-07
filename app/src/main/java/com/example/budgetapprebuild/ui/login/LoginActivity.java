@@ -34,6 +34,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class LoginActivity extends AppCompatActivity {
 
     private LoginViewModel loginViewModel;
+    private Button logoutButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         final EditText passwordEditText = findViewById(R.id.password);
         final Button loginButton = findViewById(R.id.login);
         final ProgressBar loadingProgressBar = findViewById(R.id.loading);
+        logoutButton = findViewById(R.id.button_logout);
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -115,6 +117,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        //Logout Button Listener activated
+        TimeMenuControl();
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +151,19 @@ public class LoginActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+    }
+
+    private void TimeMenuControl() {
+        System.out.println("Here");
+
+        //switch code
+        /*logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //setContentView(R.layout.activity_login);
+            }
+        });*/
+
     }
 
 }

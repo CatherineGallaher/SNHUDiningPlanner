@@ -49,9 +49,59 @@
                 android:layout_weight=".5">
 
                 <LinearLayout
+                    android:id="@+id/linear_databoxes"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/text_purchases"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:text="Purchases: "
+                        android:textAlignment="viewStart"
+                        android:textSize="20sp" />
+
+                    //https://stackoverflow.com/questions/7241145/creating-linearlayout-in-java-elements-are-not-shown
+                    //You might need to add some code to create more of these for better structure/UX - Dylan
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/text_dataBox"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="" />
+
+                        <!--<TextView
+                            android:id="@+id/text_date1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="##/##/####" />
+
+                        <TextView
+                            android:id="@+id/text_amount1"
+                            android:layout_width="100dp"
+                            android:layout_height="wrap_content"
+                            android:text="$$$$" />
+-->
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
+
+            <!--<ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".5">
+
+                <LinearLayout
+                    android:id="@+id/linear_databoxes"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:orientation="vertical">
 
                     <TextView
@@ -71,6 +121,12 @@
 
                         <TextView
                             android:id="@+id/text_date1"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="##/##/####" />
+
+                        <TextView
+                            android:id="@+id/text_date1"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:text="##/##/####" />
@@ -84,7 +140,7 @@
                     </LinearLayout>
 
                 </LinearLayout>
-            </ScrollView>
+            </ScrollView>-->
 
         </LinearLayout>
     </LinearLayout>

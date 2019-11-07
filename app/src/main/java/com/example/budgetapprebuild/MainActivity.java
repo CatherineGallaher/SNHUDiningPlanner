@@ -3,7 +3,10 @@ import java.util.Scanner;
 import android.util.Log;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
+import com.example.budgetapprebuild.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -29,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        //Jack and Catherine stuff
         SNHULogOn a = new SNHULogOn();
         a.logOn();
 
