@@ -1,4 +1,5 @@
 package com.example.budgetapprebuild;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,6 +16,7 @@ public class Prediction {
     private double spentPerDay;
     private int daysOffCampus;
     private double estAmountLeft;
+    private ReadWriteSQL test = new ReadWriteSQL();
 
     public Prediction(int userID)
     {
@@ -108,36 +110,35 @@ public class Prediction {
 
         //ReadWriteSQL mealAvg = new ReadWriteSQL();
         //mealAvg.createConnection();
-        //test.createConnection();
+        test.createConnection();
+        List<String> times = test.getTimes();
+        List<String> amounts = test.getAmounts();
 
-		/*List<String> times = test.getTimes();
-		List<String> amounts = test.getAmounts();
+        for(int i = 0; i < amounts.size(); i++)
+        {
+            transactionTime = parseTime(times.get(i));
+            if(transactionTime >= breakfastStart && transactionTime <= breakfastEnd)
+            {
+                numBreakfast++;
+                breakfastAmount += parseAmount(amounts.get(i));
+            }
+            else if(transactionTime >= lunchStart && transactionTime <= lunchEnd)
+            {
+                numLunch++;
+                lunchAmount += parseAmount(amounts.get(i));
+            }
+            else if(transactionTime >= dinnerStart && transactionTime <= dinnerEnd)
+            {
+                numDinner++;
+                dinnerAmount += parseAmount(amounts.get(i));
+            }
+            else
+            {
+                numSnack++;
+                snackAmount += parseAmount(amounts.get(i));
+            }
+        }
 
-		for(int i = 0; i < amounts.size(); i++)
-		{
-			transactionTime = parseTime(times.get(i));
-			if(transactionTime >= breakfastStart && transactionTime <= breakfastEnd)
-		 	{
-		 		numBreakfast++;
-		 		breakfastAmount += parseAmount(amounts.get(i));
-		 	}
-		 	else if(transactionTime >= lunchStart && transactionTime <= lunchEnd)
-		 	{
-		 		numLunch++;
-		 		lunchAmount += parseAmount(amounts.get(i));
-		 	}
-		 	else if(transactionTime >= dinnerStart && transactionTime <= dinnerEnd)
-		 	{
-		 		numDinner++;
-		 		dinnerAmount += parseAmount(amounts.get(i));
-		 	}
-		 	else
-		 	{
-		 		numSnack++;
-		 		snackAmount += parseAmount(amounts.get(i));
-		 	}
-		}
-		    */
 
 
         mealTypeAverage[0] = breakfastAmount/numBreakfast;
@@ -177,23 +178,31 @@ public class Prediction {
     {
         //ReadWriteSQL perDay = new ReadWriteSQL();
         //perDay.createConnection();
-        //List<String> dates = test.getDates();
-        //List<String> amounts = test.getAmounts();
+        List<String> dates = test.getDates();
+        List<String> amounts = test.getAmounts();
         double totalSpent = 0;
         int totalDays = 0;
 
-		/*totalSpent += parseAmount(amounts.get(0));
-		for(int i = 1; i < amounts.size(); i++)
-		{
-			totalSpent += parseAmount(amounts.get(i-1));
+        totalSpent += parseAmount(amounts.get(0));
+        for(int i = 1; i < amounts.size(); i++)
+        {
+            totalSpent += parseAmount(amounts.get(i-1));
 
-			if(parseDay(dates.get(i)) != parseDay(dates.get(i-1)))
-			{
-				totalDays++;
-			}
-		}
-
-		test.closeConnection();*/
+            if(parseDay(dates.get(i)) != parseDay(dates.get(i-1)))
+            {
+                totalDays++;
+            }
+        }
+		/*try {
+			estAmountLeft = Double.parseDouble(perDay.getAmountLeft("catherine.gallaher@snhu.edu").substring(1));
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}*/
+        test.closeConnection();
 
         spentPerDay = totalSpent/totalDays;
 
@@ -224,6 +233,5 @@ public class Prediction {
     {
         return estAmountLeft;
     }
-
 
 }

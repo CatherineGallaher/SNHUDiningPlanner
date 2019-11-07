@@ -36,15 +36,34 @@ public class DataFragment extends Fragment {
         //Catherine Elizabeth Gallaher here is where you need to be
         //If you can change check if my array size is big enough
 
+        String[][] info = new String[100][3];
+        //SNHULogOn s = new SNHULogOn();
+        //info = s.getInfo();
+        for (int i = 0; i < 20; i++){
+            info[i][0] = ("Date" + i);
+            info[i][1] = ("Time" + i);
+            info[i][2] = ("Purchase" + i);
 
-        boolean isLoggedIn = SNHULogOn.dataScrape.logOn("catherine.gallaher@snhu.edu", PasswordEncryption.encryptionAES("x"));
+        }
+
+        for(int k = 0; k < info.length; k++)
+        {
+            if (info[k][0] == null){
+                break;
+            }
+            dataBox.setText(((dataBox.getText() + (info[k][0]) + "\t\t\t" + (info[k][1])) + "\t\t\t" + (info[k][1])) + "\n");
+        }
+
+        System.out.println("OverHere");
+       // boolean isLoggedIn = SNHULogOn.dataScrape.logOn("catherine.gallaher@snhu.edu", PasswordEncryption.encryptionAES("3Mog,3Or,3Mb44"));
+        /*
         if(isLoggedIn)
         {
             List<ArrayList<String>> info = SNHULogOn.dataScrape.getInfo();
             //String[][] info = new String[100][2];
             //SNHULogOn s = new SNHULogOn();
             //info = s.getInfo();
-            /*info[0][0] = ("Date1");
+            info[0][0] = ("Date1");
             info[0][1] = ("Purchase1");
             info[1][0] = ("Date2");
             info[1][1] = ("Purchase2");
@@ -61,13 +80,16 @@ public class DataFragment extends Fragment {
             info[7][0] = ("Date8");
             info[7][1] = ("Purchase8");
             info[8][0] = ("Date9");
-            info[8][1] = ("Purchase9");*/
-
+            info[8][1] = ("Purchase9");
+/*
             for(int k = 0; k < info.size(); k++)
             {//System.out.print(info.get(k).get(j) + " ");
                 dataBox.setText((dataBox.getText() + (info.get(k).get(0)) + "\t\t" + (info.get(k).get(1)) + "\t\t" + (info.get(k).get(2))) + "\n");
             }
-        }
+        }*/
+
+        System.out.println("Out");
+
 
 
         dataViewModel.getText().observe(this, new Observer<String>() {
