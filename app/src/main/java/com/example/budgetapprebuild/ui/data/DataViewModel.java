@@ -17,12 +17,14 @@ public class DataViewModel extends ViewModel {
     public DataViewModel() {
         mText = new MutableLiveData<>();
 
+        mText.setValue("");
+        /*
         SQLConnect con = new SQLConnect();
         try {
             /*String result = con.execute().get();
             System.out.println(result);
             Log.i("PHPConnect", "running php script");
-            mText.setValue(result);*/
+            mText.setValue(result);
         }
         catch (Exception e)
         {
@@ -31,6 +33,7 @@ public class DataViewModel extends ViewModel {
             Log.i("PHPConnect", result);
             mText.setValue(result);
         }
+        */
 
     }
 
