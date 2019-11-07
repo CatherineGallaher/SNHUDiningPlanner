@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Switch;
 
 import androidx.annotation.Nullable;
@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.budgetapprebuild.R;
+import com.example.budgetapprebuild.ui.login.LoginActivity;
 
 public class SettingsFragment extends Fragment {
 
@@ -26,6 +27,21 @@ public class SettingsFragment extends Fragment {
         //objects
         settingsViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_settings, container, false);
+        TimeMenuControl(root);
+
+        //LinearLayout specificMealTime = (LinearLayout) root.findViewById(R.id.layout_mealTimes);
+        /*final TextView textView = root.findViewById(R.id.text_notifications);
+        settingsViewModel.getText().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                textView.setText(s);
+            }
+        });*/
+        return root;
+    }
+
+    private void TimeMenuControl(View root){
+
         customMealTime = root.findViewById(R.id.switch_customMealTime);
         specificMealTime = root.findViewById(R.id.layout_mealTimes);
 
@@ -41,20 +57,8 @@ public class SettingsFragment extends Fragment {
                 else{
                     specificMealTime.setVisibility(view.VISIBLE);
                 }
-                System.out.println("Visibility: " + specificMealTime.getVisibility());
             }
         } );
-
-        //logout
-
-        //LinearLayout specificMealTime = (LinearLayout) root.findViewById(R.id.layout_mealTimes);
-        /*final TextView textView = root.findViewById(R.id.text_notifications);
-        settingsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
-        return root;
     }
+
 }
