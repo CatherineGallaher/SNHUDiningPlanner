@@ -1,7 +1,12 @@
 package com.example.budgetapprebuild;
+import java.util.Scanner;
+import android.util.Log;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
+import com.example.budgetapprebuild.ui.login.LoginActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -26,6 +32,43 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        //Jack and Catherine stuff
+        SNHULogOn a = new SNHULogOn();
+        //a.logOn();
+
+        Prediction predict = new Prediction(2);
+        predict.predictionSettings("October 20, 2019", "December 20, 2019", 5, 600, 1000, 1000, 1600, 1600, 2000);
+        System.out.println("Settings (set in settings tab):\n\tSchool year: October 20, 2019-December 20, 2019\n\tDays off: 5\n\tBreakfast Times: 6:00AM - 10:00AM\n\t Lunch Times: 10:00AM - 4:00PM\n\tDinner Times: 4:00PM - 8:00PM");
+
+        predict.calcMealTypeAverage();
+        predict.calcSpentPerDay();
+        //predict.calcEstAmountLeft();
+
+        double[] mealTypeAverage = predict.getMealTypeAverage();
+        double avgDay = predict.getSpentPerDay();
+
+        Log.d("Demo", "\n-----------------------------------------------\nAverage expense per meal type (breakfast, lunch, etc.): ");
+        Log.d("Demo","Breakfast average: " + mealTypeAverage[0]);
+        Log.d("Demo","Lunch average: " + mealTypeAverage[1]);
+        Log.d("Demo","Dinner average: " + mealTypeAverage[2]);
+        Log.d("Demo","Snack average: " + mealTypeAverage[3]);
+
+        Log.d("Demo","\n------------------------------------------------\nAverage spent per day: " + avgDay);
+
+        Log.d("Demo","\n------------------------------------------------\nEnter a string to be encrypted");
+        //Scanner in = new Scanner(System.in);
+
+        //String toBeEncrypted = in.nextLine();
+        String toBeEncrypted = "ThisStringWillBeEncryptedAndDecryptedBelow";
+
+        PasswordEncryption encryp = new PasswordEncryption();
+        PasswordDecryption decryp = new PasswordDecryption();
+
+        String encrypted = encryp.encryptionAES(toBeEncrypted);
+
+        Log.d("Demo","Your encrypted string is: " + encrypted);
+
+        Log.d("Demo","Your decrypted string is: " + decryp.decryptAES(encrypted));
 
     }
 

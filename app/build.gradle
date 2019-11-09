@@ -5,7 +5,7 @@ android {
     buildToolsVersion "29.0.2"
     defaultConfig {
         applicationId "com.example.budgetapprebuild"
-        minSdkVersion 29
+        minSdkVersion 26
         targetSdkVersion 29
         versionCode 1
         versionName "1.0"
@@ -52,5 +52,6 @@ dependencies {
     implementation 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.0.15'
     implementation files('libs/htmlunit-2.36.0.jar')
     implementation files('libs/w3c-dom.jar')
+    implementation 'com.jjoe64:graphview:4.2.2'
 
 }
