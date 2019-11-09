@@ -17,7 +17,7 @@ public class DataViewModel extends ViewModel {
     public DataViewModel() {
         mText = new MutableLiveData<>();
 
-        /*SQLConnect con = new SQLConnect();
+        SQLConnect con = new SQLConnect();
         try {
             String result = con.execute().get();
             System.out.println(result);
@@ -30,7 +30,7 @@ public class DataViewModel extends ViewModel {
             System.out.println(result);
             Log.i("PHPConnect", result);
             mText.setValue(result);
-        }*/
+        }
 
     }
 
