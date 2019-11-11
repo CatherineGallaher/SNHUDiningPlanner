@@ -25,68 +25,25 @@ import java.util.Random;
 public class GraphsFragment extends Fragment {
 
     private GraphsViewModel graphsViewModel;
-    private LineGraphSeries<DataPoint> pointsForAverage;
-    private BarGraphSeries<DataPoint> barGraphPoints;
-    int[][] dataPoints;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        graphsViewModel =
-                ViewModelProviders.of(this).get(GraphsViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        graphsViewModel = ViewModelProviders.of(this).get(GraphsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_graphs, container, false);
 
-        //line graph code for average
-        int dataPointsSize = 20;
-        Random rand = new Random();
-        dataPoints = new int[2][dataPointsSize];
-        for (int k = 0; k < dataPointsSize; k++){
-            dataPoints[0][k] = (rand.nextInt(dataPointsSize));
-            dataPoints[1][k] = (rand.nextInt(dataPointsSize));
-        }
-        Arrays.sort(dataPoints[0]);
-        pointsForAverage = new LineGraphSeries<>(setDataPoints());
-
-        //pointsForAverage.setDataPointsRadius(10);
-        GraphView averageLineGraph = root.findViewById(R.id.graph_average);
-        averageLineGraph.getViewport().setMaxX(10);
-        averageLineGraph.getViewport().setMaxY(10);
-        averageLineGraph.getViewport().setXAxisBoundsManual(true);
-        averageLineGraph.getViewport().setYAxisBoundsManual(true);
-
-        averageLineGraph.addSeries(pointsForAverage);
-
-
         //bar graph
-        barGraphPoints = new BarGraphSeries<>(setDataPoints());
+        //graphsViewModel.mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
+        //graphsViewModel.setBarGraph();
 
-        GraphView mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
-        mealTimeSpending.getViewport().setMaxX(10);
-        mealTimeSpending.getViewport().setMaxY(10);
-        mealTimeSpending.getViewport().setXAxisBoundsManual(true);
-        mealTimeSpending.getViewport().setYAxisBoundsManual(true);
+        //line graph code for average
+        //graphsViewModel.averageLineGraph = root.findViewById(R.id.graph_average);
+        //graphsViewModel.setAverageGraph();
 
-        mealTimeSpending.addSeries(barGraphPoints);
+        //line graph for money left
+        //graphsViewModel.moneyLeftLineGraph = root.findViewById(R.id.graph_fundsRemaining);
+        //graphsViewModel.setMoneyLeftGraph();
+
+
+
         return root;
     }
-
-    private DataPoint[] setDataPoints(){
-        int n=dataPoints.length;
-        DataPoint[] values = new DataPoint[n];
-        for(int i=0;i<n;i++){
-            DataPoint v = new DataPoint(dataPoints[0][i], dataPoints[1][i]);
-            values[i] = v;
-        }
-        return values;
-    }
-
-    /*private DataPoint[] setGraphPoints(){
-        int n=dataPoints.length;    //to find out the no. of data-points
-        Data[] values = new Data[n];     //creating an object of type DataPoint[] of size 'n'
-        for(int i=0;i<n;i++){
-            DataPoint v = new DataPoint(dataPoints[0][i], dataPoints[1][i]);
-            values[i] = v;
-        }
-        return values;
-    }*/
-
 }
