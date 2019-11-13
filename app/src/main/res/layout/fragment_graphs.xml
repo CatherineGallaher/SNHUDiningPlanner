@@ -5,16 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="60dp"
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView3"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/graph" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/graph_average"
+                android:layout_width="match_parent"
+                android:layout_height="200dip" />
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/graph_fundsRemaining"
+                android:layout_width="match_parent"
+                android:layout_height="200dip" />
+
+            <com.jjoe64.graphview.GraphView
+                android:id="@+id/graph_mealTimeSpending"
+                android:layout_width="match_parent"
+                android:layout_height="200dip" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

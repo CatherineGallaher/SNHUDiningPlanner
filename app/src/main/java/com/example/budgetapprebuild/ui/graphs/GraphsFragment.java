@@ -13,23 +13,37 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.example.budgetapprebuild.R;
+import com.google.api.client.util.Data;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.BarGraphSeries;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
+
+import java.util.Arrays;
+import java.util.Random;
 
 public class GraphsFragment extends Fragment {
 
     private GraphsViewModel graphsViewModel;
 
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        graphsViewModel =
-                ViewModelProviders.of(this).get(GraphsViewModel.class);
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        graphsViewModel = ViewModelProviders.of(this).get(GraphsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_graphs, container, false);
-        /*final TextView textView = root.findViewById(R.id.text_graphs);
-        graphsViewModel.getText().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });*/
+
+        //bar graph
+        //graphsViewModel.mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
+        //graphsViewModel.setBarGraph();
+
+        //line graph code for average
+        //graphsViewModel.averageLineGraph = root.findViewById(R.id.graph_average);
+        //graphsViewModel.setAverageGraph();
+
+        //line graph for money left
+        //graphsViewModel.moneyLeftLineGraph = root.findViewById(R.id.graph_fundsRemaining);
+        //graphsViewModel.setMoneyLeftGraph();
+
+
+
         return root;
     }
 }
