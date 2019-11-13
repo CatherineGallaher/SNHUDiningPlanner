@@ -24,56 +24,10 @@ public class SQLConnect extends AsyncTask<String, String, String> {
     public static final int CONNECTION_TIMEOUT = 10000;
     public static final int READ_TIMEOUT = 15000;
 
-
-    /*
-    public String connect()
-    {
-        try
-        {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //Connection con = DriverManager.getConnection("jdbc:mysql://35.226.216.86:budgetappsqlservertry2:us-central1:budgetapp2?user=Septri");
-            //DriverManager.getConnection("jdbc:mysql://IP:Instance_name?user=user_name");
-			/*
-			Statement statement= con.createStatement();
-			ResultSet resultSet=statement.executeQuery("select * from users");
-			while(resultSet.next())
-			{
-				System.out.println(resultSet.getInt(1) + " " + resultSet.getString(2) + " " + resultSet.getString(3));
-				con.close();
-			}
-
-            String instanceConnectionName = "budgetappsqlservertry2:us-central1:budgetapp2";
-            String databaseName = "BudgetApp";
-
-            String IP_of_instance = "35.226.216.86";
-            String username = "root";
-            String password = "nerdalert42!";
-
-            //String testURL = "jdbc:mysql://35.226.216.86:budgetapp2?user=Septri";
-            //jdbc:mysql://google/%s?cloudSqlInstance=<INSTANCE_CONNECTION_NAME>&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false&user=<MYSQL_USER_NAME>&password=<MYSQL_USER_PASSWORD
-            String jdbcUrl = String.format("jdbc:mysql://%s/%s?cloudSqlInstance=%s" + "&socketFactory=com.google.cloud.sql.mysql.SocketFactory&useSSL=false",
-                    IP_of_instance, databaseName , instanceConnectionName);
-
-            Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
-
-            Statement stat = connection.createStatement();
-            ResultSet res = stat.executeQuery("Select * from users;");
-            String result = "";
-            while(res.next())
-            {
-                result += res.getInt(1) + " " + res.getString(2) + " " + res.getString(3);
-            }
-
-            connection.close();
-            return result;
-        }catch(Exception e) {System.out.println(e); return "error";}
-    }
-    */
-
     protected String doInBackground(String... params) {
         try {
             // Enter URL address where your php file resides
-            url = new URL("http://10.0.82.131/db-api/API.php?apicall=getall");
+            url = new URL("http://10.0.233.76/db-api/API.php?apicall=getall");
 
         } catch (MalformedURLException e) {
             // TODO Auto-generated catch block
