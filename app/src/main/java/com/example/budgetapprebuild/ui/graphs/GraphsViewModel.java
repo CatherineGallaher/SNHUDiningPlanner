@@ -1,5 +1,7 @@
 package com.example.budgetapprebuild.ui.graphs;
 
+import android.provider.ContactsContract;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
@@ -42,8 +44,8 @@ public class GraphsViewModel extends ViewModel {
         Random rand = new Random();
         dataPoints = new int[2][dataPointsSize];
         for (int k = 0; k < dataPointsSize; k++){
-            dataPoints[0][k] = (rand.nextInt(dataPointsSize));
-            dataPoints[1][k] = (rand.nextInt(dataPointsSize));
+            dataPoints[0][k] = (k);//rand.nextInt(dataPointsSize));
+            dataPoints[1][k] = (k);//rand.nextInt(dataPointsSize));
         }
         Arrays.sort(dataPoints[0]);
         pointsForAverage = new LineGraphSeries<>(setDataPoints());
@@ -66,15 +68,22 @@ public class GraphsViewModel extends ViewModel {
             dataPoints[1][k] = (rand.nextInt(dataPointsSize));
         }
         Arrays.sort(dataPoints[0]);
+        /*pointsForAverage = new LineGraphSeries<>(new DataPoint[]{
+                new DataPoint(0, 1),
+                new DataPoint(1, 5),
+                new DataPoint(2, 3),
+                new DataPoint(3, 2),
+                new DataPoint(4, 6)
+        });
+*/
         pointsForAverage = new LineGraphSeries<>(setDataPoints());
-
         //pointsForAverage.setDataPointsRadius(10);
-        averageLineGraph.getViewport().setMaxX(10);
-        averageLineGraph.getViewport().setMaxY(10);
-        averageLineGraph.getViewport().setXAxisBoundsManual(true);
-        averageLineGraph.getViewport().setYAxisBoundsManual(true);
+        moneyLeftLineGraph.getViewport().setMaxX(10);
+        moneyLeftLineGraph.getViewport().setMaxY(10);
+        moneyLeftLineGraph.getViewport().setXAxisBoundsManual(true);
+        moneyLeftLineGraph.getViewport().setYAxisBoundsManual(true);
 
-        averageLineGraph.addSeries(pointsForAverage);
+        moneyLeftLineGraph.addSeries(pointsForAverage);
     }
 
     protected void setBarGraph(){

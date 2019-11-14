@@ -30,19 +30,19 @@ public class GraphsFragment extends Fragment {
         graphsViewModel = ViewModelProviders.of(this).get(GraphsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_graphs, container, false);
 
-        //bar graph
-        //graphsViewModel.mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
-        //graphsViewModel.setBarGraph();
+
 
         //line graph code for average
-        //graphsViewModel.averageLineGraph = root.findViewById(R.id.graph_average);
-        //graphsViewModel.setAverageGraph();
+        graphsViewModel.averageLineGraph = root.findViewById(R.id.graph_average);
+        graphsViewModel.setAverageGraph();
 
         //line graph for money left
-        //graphsViewModel.moneyLeftLineGraph = root.findViewById(R.id.graph_fundsRemaining);
-        //graphsViewModel.setMoneyLeftGraph();
+        graphsViewModel.moneyLeftLineGraph = root.findViewById(R.id.graph_fundsRemaining);
+        graphsViewModel.setMoneyLeftGraph();
 
-
+        //bar graph
+        graphsViewModel.mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
+        graphsViewModel.setBarGraph();
 
         return root;
     }
