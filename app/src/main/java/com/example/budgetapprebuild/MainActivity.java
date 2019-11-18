@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        System.out.println("--------------------------------------------------------------------------\n");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -33,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         //Jack and Catherine stuff
-        SNHULogOn a = new SNHULogOn();
-        a.logOn();
+        //SNHULogOn a = new SNHULogOn();
+        //a.logOn();
 
         Prediction predict = new Prediction(2);
         predict.predictionSettings("October 20, 2019", "December 20, 2019", 5, 600, 1000, 1000, 1600, 1600, 2000);
