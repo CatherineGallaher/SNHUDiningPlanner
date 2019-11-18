@@ -18,6 +18,8 @@ import java.sql.*;
 public class SQLConnect extends AsyncTask<String, String, String> {
     public SQLConnect(){}
 
+    public static final String IPADDRESS = "";
+
     HttpURLConnection conn;
     URL url = null;
 
@@ -25,10 +27,30 @@ public class SQLConnect extends AsyncTask<String, String, String> {
     public static final int READ_TIMEOUT = 15000;
 
     protected String doInBackground(String... params) {
-        try {
-            // Enter URL address where your php file resides
-            url = new URL("http://10.0.233.76/db-api/API.php?apicall=getall");
 
+        String operation = "";
+        String[] colVals = new String[6];
+
+        try {
+            switch(params[0]) {
+                case "getall":
+                    url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0]);
+                    break;
+                case "inputVal":
+                    url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0] + "&tableName=" + params[1] + "&colOne=" + params[2] + "&colTwo=" + params[3] + "&colThree" + params[4] + "&colFour" + params[5] + "&colFive=" + params[6]);
+                    break;
+                case "getTableInfo":
+                    url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0] + "&tableName=" + params[1]);
+                    break;
+                case "createTITable":
+                    url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0] + "&tableName=" + params[1] + "&pass=" + params[2]);
+                    break;
+                case "dropTITable":
+                    if (params[2] != "nerdalert42!")
+                        System.out.println("Wrong password provided!");
+                    url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0] + "&tableName=" + params[1] + "&pass=" + params[2]);
+                    break;
+            }
         } catch (MalformedURLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -69,7 +91,16 @@ public class SQLConnect extends AsyncTask<String, String, String> {
                 }
 
                 // Pass data to onPostExecute method
-                return (result.toString());
+
+                //parses the json
+
+                String resultString = result.toString();
+
+                resultString = result.substring(1, result.length() - 1 ).replace("{", "");
+
+                resultString = result.substring(1, result.length() - 1 ).replace("}", "");
+
+                return (resultString);
 
             } else {
 
