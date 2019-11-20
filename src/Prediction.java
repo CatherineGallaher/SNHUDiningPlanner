@@ -239,22 +239,28 @@ public class Prediction {
 		
 		List<String> dates = new ArrayList<String>();
 		List<String> amounts = new ArrayList<String>();
-        for(int j = 0; j < SNHULogOn.dataScrape.info.get(0).size(); j++)
+        for(int j = 0; j < SNHULogOn.dataScrape.info.size(); j++)
         {
         		dates.add(SNHULogOn.dataScrape.info.get(j).get(0));
         		amounts.add(SNHULogOn.dataScrape.info.get(j).get(2));
+        		System.out.println(dates.get(j) + "\t" + amounts.get(j));
         }
         
 		double totalSpent = 0;
-		int totalDays = 0;
+		int totalDays = 1;
 		totalSpent += parseAmount(amounts.get(0));
 		for(int i = 1; i < amounts.size(); i++)
 		{
+			System.out.println("Current Amount: " + amounts.get(i-1) + "\t\tTotal: " + totalSpent + "\t\tCurrent Day: " + parseDay(dates.get(i)) + "\t\tDay count: " + totalDays);
 			totalSpent += parseAmount(amounts.get(i-1));
 			
 			if(parseDay(dates.get(i)) != parseDay(dates.get(i-1)))
 			{
 				totalDays++;
+			}
+			
+			if(startMonth == parseMonth(dates.get(i-1)))
+			{
 			}
 		}
 

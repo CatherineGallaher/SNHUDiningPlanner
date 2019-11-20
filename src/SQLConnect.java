@@ -15,7 +15,7 @@ import java.sql.*;
 public class SQLConnect {
     public SQLConnect(){}
 
-    public static final String IPADDRESS = "localhost";
+    public static final String IPADDRESS = "10.0.87.169";
 
     HttpURLConnection conn;
     URL url = null;
