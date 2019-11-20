@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class MainClass {
+	
+	
 
 	public static void main(String[] args) {
 		//SNHULogOn a = new SNHULogOn();
@@ -11,7 +13,36 @@ public class MainClass {
 		//System.out.println(balance);
 		
 		SQLConnect connect = new SQLConnect();
-		connect.setInfo();
+		System.out.println("Result: " + connect.doInBackground("getall"));
+		boolean isLoggedIn = SNHULogOn.dataScrape.logOn("catherine.gallaher@snhu.edu", "3Mog,3Or,3Mb44");//PasswordEncryption.encryptionAES("3Mog,3Or,3Mb44"));
+		if(isLoggedIn)
+		{
+			SNHULogOn.dataScrape.logOn("catherine.gallaher@snhu.edu", "3Mog,3Or,3Mb44");
+			Prediction.predict.predictionSettings("2019-09-03", "2019-12-20", 8, 600, 1000, 1000, 1600, 1600, 2000);
+			Prediction.predict.calcDaysLeft();
+			System.out.println("Days Left: " + Prediction.predict.getDaysLeft());
+			Prediction.predict.calcSpentPerDay();
+			System.out.println("Spent per day: " + Prediction.predict.getSpentPerDay());
+			Prediction.predict.calcMealTypeAverage();
+			System.out.println("Meal Type Avg: ");
+			for(int i = 0; i < Prediction.predict.getMealTypeAverage().length; i++)
+			{
+				System.out.println(Prediction.predict.getMealTypeAverage()[i]);
+			}
+			Prediction.predict.calcMonthAverage();
+		}
+		
+		
+		
+		
+		
+		
+		
+		System.out.println("Month Average: ");
+		for(int i = 0; i < Prediction.predict.getMonthAverage().length; i++)
+		{
+			System.out.println(Prediction.predict.getMonthAverage()[i]);
+		}
 		
 		/*Prediction predict = new Prediction(2);
 		predict.predictionSettings("October 20, 2019", "December 20, 2019", 5, 600, 1000, 1000, 1600, 1600, 2000);

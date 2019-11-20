@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 
 public class SNHULogOn {
     private HtmlPage transactionPage;
-    private List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
+    public List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
     public static SNHULogOn dataScrape = new SNHULogOn();
     public String currBalance = "its not working dumbass";
     public String email;
@@ -37,7 +37,8 @@ public class SNHULogOn {
             form.getInputByName("username").setValueAttribute("catherine.gallaher@snhu.edu");
             HtmlInput passWordInput = form.getInputByName("password");
             //passWordInput.removeAttribute("disabled");
-            passWordInput.setValueAttribute(PasswordDecryption.decryptAES(password));
+            //System.out.println(PasswordDecryption.decryptAES(password));
+            passWordInput.setValueAttribute(password);//PasswordDecryption.decryptAES(password));
             
 
             page = form.getInputByValue("Login").dblClick();
@@ -164,6 +165,8 @@ public class SNHULogOn {
                 //SQLConnect.setSNHULogOnObj(this);
                 return true;
             }
+            
+            System.out.println("Exiting log on");
 
         } catch (Exception e) {
             e.printStackTrace();
