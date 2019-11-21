@@ -15,7 +15,6 @@ public class DataViewModel extends ViewModel {
 
     public DataViewModel() {
 
-        mText.setValue("");
         /*
         SQLConnect con = new SQLConnect();
         try {
