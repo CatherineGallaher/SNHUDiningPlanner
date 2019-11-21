@@ -8,6 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -21,7 +23,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Funds Remaining: "
+                android:text="Funds Remaining: ####"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -31,6 +33,15 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="Initial Funds (start of the semester: $$$)"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/text_daysUntilEnd"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight=".9"
+                android:text="Days until end of semester: ###"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 
@@ -46,6 +57,7 @@
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginBottom="60dp"
                 android:layout_weight=".5">
 
                 <LinearLayout

@@ -6,6 +6,7 @@ public class SettingsViewModel extends ViewModel {
 
 
     public SettingsViewModel() {
+
     }
 
 }
