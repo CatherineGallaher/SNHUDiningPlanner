@@ -229,7 +229,8 @@ public class SNHULogOn {
     {
     	String temp = amount.replaceAll("\t", " ");
     	String parsedAmount[] = temp.split(" ", 20);
-    	return parsedAmount[1];//9];//parsedAmount.length];//10 on main page
+    	return parsedAmount[1];//.substring(1);//9];//parsedAmount.length];//10 on main page
+    	
     }
     
     public List<ArrayList<String>> getInfo()

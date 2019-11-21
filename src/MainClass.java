@@ -34,16 +34,18 @@ public class MainClass {
 		
 		//SQLConnect conOne = new SQLConnect();
 		//conOne.doInBackground("createTITable", "ti_catherine_gallaher", "nerdalert42!");
-		
+
+		//conOne.doInBackground("inputVal", "transactioninfo", "f", "f", "f", "NULL", "catherine_gallaher");
 		for(int i = 0; i < SNHULogOn.dataScrape.getInfo().size(); i++)
 		{
 			//dates: SNHULogOn.dataScrape.getInfo().get(i).get(0);
 			//times: SNHULogOn.dataScrape.getInfo().get(i).get(1);
 			//amounts: SNHULogOn.dataScrape.getInfo().get(i).get(2);
 			//email: 
-			//SQLConnect con = new SQLConnect();
-			//String result = con.doInBackground("inputVal", "transactioninfo", SNHULogOn.dataScrape.getInfo().get(i).get(0), SNHULogOn.dataScrape.getInfo().get(i).get(1), SNHULogOn.dataScrape.getInfo().get(i).get(2), "null", "catherine_gallaher");
-			//System.out.println(result);
+			
+			SQLConnect con = new SQLConnect();
+			String result = con.doInBackground("inputVal", "transactioninfo", SNHULogOn.dataScrape.getInfo().get(i).get(0).toString(), SNHULogOn.dataScrape.getInfo().get(i).get(1).toString(), SNHULogOn.dataScrape.getInfo().get(i).get(2).toString(), "null", "catherine_gallaher");
+			System.out.println(result);
 		}
 		
 		
