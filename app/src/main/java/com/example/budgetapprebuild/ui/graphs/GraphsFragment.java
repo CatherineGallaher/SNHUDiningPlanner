@@ -43,7 +43,6 @@ public class GraphsFragment extends Fragment {
         graphsViewModel = ViewModelProviders.of(this).get(GraphsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_graphs, container, false);
 
-
         //line graph code for average
         averageLineGraph = root.findViewById(R.id.graph_average);
         setAverageGraph();
@@ -84,9 +83,12 @@ public class GraphsFragment extends Fragment {
     protected void setAverageGraph(){
 
         pointsForAverage = new LineGraphSeries<>(setDataPoints(setRandomArrayPoints(10, 10)));
-        //pointsForAverage.setDataPointsRadius(10);
-        //averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getContext()));
-        averageLineGraph.getGridLabelRenderer().setHorizontalAxisTitle("Month");
+        averageLineGraph.setTitle("Average Spendings per Month");
+        averageLineGraph.setTitleTextSize(50);
+
+        //averageLineGraph.getGridLabelRenderer().setHorizontalAxisTitle("Month");
+        averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+
         averageLineGraph.getViewport().setMaxX(10);
         //averageLineGraph.getViewport().setX(10);
         averageLineGraph.getViewport().setMaxY(10);
@@ -98,6 +100,9 @@ public class GraphsFragment extends Fragment {
 
     protected void setMoneyLeftGraph(){
         pointsFundsRemaining = new LineGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 1000)));
+        moneyLeftLineGraph.setTitle("Funds Remaining");
+        moneyLeftLineGraph.setTitleTextSize(50);
+
         //pointsForAverage.setDataPointsRadius(10);
         moneyLeftLineGraph.getViewport().setMaxX(12);
         moneyLeftLineGraph.getViewport().setMaxY(1000);
@@ -109,6 +114,8 @@ public class GraphsFragment extends Fragment {
 
     protected void setBarGraph(){
         barGraphPoints = new BarGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 20)));
+        mealTimeSpending.setTitle("Spending Per Meal");
+        mealTimeSpending.setTitleTextSize(50);
 
         mealTimeSpending.getViewport().setMaxX(12);
         mealTimeSpending.getViewport().setMaxY(20);
