@@ -10,7 +10,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class Prediction {
-    private List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
+    public List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
     public static Prediction predict = new Prediction();
 
 
