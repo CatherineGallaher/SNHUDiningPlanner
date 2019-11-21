@@ -140,9 +140,10 @@ public class SNHULogOn {
                 		tableExtras.get(i-1).add(table.getCellAt(i, 2).asText());
                 		split1 = tableExtras.get(i-1).get(0).split(" ");
                 		split2 = tableExtras.get(i-1).get(1).split(" ");
-                		System.out.println("Split 1[0] " + (split1[0].compareTo("VISA") == 0) + "\tsplit 2 length " + split2.length + " " + (split2.length <= 3));
+                		System.out.println("Split 1[0] " + (split1[0].compareTo("VISA") == 0) + "\tsplit 2 length " + split2.length + " " + (split2.length >= 3));
                 		if(split1[0].compareTo("VISA") == 0 || split2.length >= 3)
                 		{
+                			System.out.println(tableExtras.get(i-1).get(1));
                 		}
                 		else
                 		{
@@ -155,8 +156,7 @@ public class SNHULogOn {
                        		infoIndex++;
                 			
                 		}
-                		
-                		
+
                 	}
                 }
 
