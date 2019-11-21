@@ -1,5 +1,4 @@
 package com.example.budgetapprebuild;
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 
 import java.io.BufferedReader;
@@ -9,16 +8,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.sql.*;
 
 public class SQLConnect extends AsyncTask<String, String, String> {
     public SQLConnect(){}
 
-    public static final String IPADDRESS = "";
+    public static final String IPADDRESS = "10.0.240.206";
 
     HttpURLConnection conn;
     URL url = null;
@@ -37,7 +31,7 @@ public class SQLConnect extends AsyncTask<String, String, String> {
                     url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0]);
                     break;
                 case "inputVal":
-                    url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0] + "&tableName=" + params[1] + "&colOne=" + params[2] + "&colTwo=" + params[3] + "&colThree" + params[4] + "&colFour" + params[5] + "&colFive=" + params[6]);
+                    url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0] + "&tableName=" + params[1] + "&colOne=" + params[2] + "&colTwo=" + params[3] + "&colThree=" + params[4] + "&colFour=" + params[5] + "&colFive=" + params[6]);
                     break;
                 case "getTableInfo":
                     url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0] + "&tableName=" + params[1]);
@@ -96,9 +90,22 @@ public class SQLConnect extends AsyncTask<String, String, String> {
 
                 String resultString = result.toString();
 
-                resultString = result.substring(1, result.length() - 1 ).replace("{", "");
+                resultString = result.substring(0, result.length() ).replace("_", " ");
 
-                resultString = result.substring(1, result.length() - 1 ).replace("}", "");
+                resultString = resultString.substring(0, resultString.length()).replace(":", "");
+
+                resultString = resultString.substring(0, resultString.length()).replace("data", "");
+
+                resultString = resultString.substring(0, resultString.length()).replace("time", "");
+
+                resultString = resultString.substring(0, resultString.length()).replace("amountSpent", "");
+
+                resultString = resultString.substring(0, resultString.length()).replace("transactionID", "");
+
+                resultString = resultString.substring(0, resultString.length()).replace("userEmail", "");
+
+                resultString = resultString.substring(0, resultString.length()).replace('"', '*').replace("*", "");
+                //resultString = result.substring(1, result.length() - 1 ).replace("}", "");
 
                 return (resultString);
 

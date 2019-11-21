@@ -36,8 +36,8 @@ public class DataFragment extends Fragment {
         //If you can change check if my array size is big enough
 
         String[][] info = new String[100][2];
-        SNHULogOn s = new SNHULogOn();
-        s.logOn();
+        //SNHULogOn s = new SNHULogOn();
+        //s.logOn();
         for (int k = 0; k < 20; k++){
             info[k][0] = ("Date" + k);
             info[k][1] = ("Purchase" + k);
