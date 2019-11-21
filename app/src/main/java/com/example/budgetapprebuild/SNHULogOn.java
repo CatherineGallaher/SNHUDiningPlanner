@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-
 import com.gargoylesoftware.htmlunit.*;
 import com.gargoylesoftware.htmlunit.html.*;
 import com.gargoylesoftware.htmlunit.Page;
@@ -17,7 +16,7 @@ import java.time.LocalDateTime;
 
 public class SNHULogOn {
     private HtmlPage transactionPage;
-    private List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
+    public List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
     public static SNHULogOn dataScrape = new SNHULogOn();
     public String currBalance = "its not working dumbass";
     public String email;
@@ -26,7 +25,6 @@ public class SNHULogOn {
 
     public boolean logOn(String email, String password)
     {
-        System.out.println("Entering log on");
         WebClient webClient = new WebClient();
         webClient.getOptions().setCssEnabled(false);
         webClient.getOptions().setJavaScriptEnabled(true);
@@ -36,10 +34,11 @@ public class SNHULogOn {
 
             HtmlForm form = page.getFormByName("login_form");
 
-            form.getInputByName("username").setValueAttribute("catherine.gallaher@snhu.edu");
+            form.getInputByName("username").setValueAttribute(email);
             HtmlInput passWordInput = form.getInputByName("password");
             //passWordInput.removeAttribute("disabled");
-            passWordInput.setValueAttribute(PasswordDecryption.decryptAES(password));
+            //System.out.println(PasswordDecryption.decryptAES(password));
+            passWordInput.setValueAttribute(password);//PasswordDecryption.decryptAES(password));
 
 
             page = form.getInputByValue("Login").dblClick();
@@ -124,6 +123,11 @@ public class SNHULogOn {
                 if (listTables == null)
                     System.out.println("no tables found");
 
+                List<ArrayList<String>> tableExtras = new ArrayList<ArrayList<String>>();
+                int infoIndex = 1;
+                String[] split1;
+                String[] split2;
+
                 for(HtmlTable table : listTables)
                 {
                     if(table == listTables.listIterator(0))
@@ -131,23 +135,36 @@ public class SNHULogOn {
 
                     for(int i = 1; i < table.getRowCount(); i++)
                     {
-                        info.add(new ArrayList<String>());
-                        info.get(i-1).add(parseDay(table.getCellAt(i, 1).asText()));
-                        info.get(i-1).add(parseTime(table.getCellAt(i, 1).asText()));
-                        info.get(i-1).add(parseAmount(table.getCellAt(i, 3).asText()));
+                        tableExtras.add(new ArrayList<String>());
+                        tableExtras.get(i-1).add(table.getCellAt(i, 0).asText());
+                        tableExtras.get(i-1).add(table.getCellAt(i, 2).asText());
+                        split1 = tableExtras.get(i-1).get(0).split(" ");
+                        split2 = tableExtras.get(i-1).get(1).split(" ");
+                        System.out.println("Split 1[0] " + (split1[0].compareTo("VISA") == 0) + "\tsplit 2 length " + split2.length + " " + (split2.length >= 3));
+                        if(split1[0].compareTo("VISA") != 0 && split2.length < 3)
+                        {
+                            System.out.println(tableExtras.get(i-1).get(1));
+                            //if(Double.parseDouble(parseAmount(table.getCellAt(infoIndex, 3).asText()).substring(1)) <= 00.15)
+                            info.add(new ArrayList<String>());
+                            info.get(infoIndex-1).add(parseDay(table.getCellAt(infoIndex, 1).asText()));
+                            info.get(infoIndex-1).add(parseTime(table.getCellAt(infoIndex, 1).asText()));
+                            info.get(infoIndex-1).add(parseAmount(table.getCellAt(infoIndex, 3).asText()));
+                            System.out.println(info.get(infoIndex-1).get(2));
+                            infoIndex++;
+                        }
                     }
                 }
 
 
 
-               /* for(int k = 0; k < info.size(); k++)
+                for(int k = 0; k < info.size(); k++)
                 {
-                	for(int j = 0; j < info.get(k).size(); j++)
-                	{
-                		System.out.print(info.get(k).get(j) + " ");
-                	}
-                	System.out.println();
-                }*/
+                    for(int j = 0; j < info.get(k).size(); j++)
+                    {
+                        System.out.print(info.get(k).get(j) + " ");
+                    }
+                    System.out.println();
+                }
 
                 //System.out.println(currBalance);
 
@@ -191,7 +208,6 @@ public class SNHULogOn {
         //String completeDate = parsedDate[3] + " " + parsedDate[4] + " " + parsedDate[5];
         //String parsedDate2[] = parsedDate[0].split(",", 1);
 
-
         String completeDate = parsedDate[0] + " " + parsedDate[1] + " " + parsedDate[2].substring(0, 5);
 
         //return Integer.parseInt(parsedDate2[0]);
@@ -208,7 +224,8 @@ public class SNHULogOn {
     {
         String temp = amount.replaceAll("\t", " ");
         String parsedAmount[] = temp.split(" ", 20);
-        return parsedAmount[1];//9];//parsedAmount.length];//10 on main page
+        return parsedAmount[1];//.substring(1);//9];//parsedAmount.length];//10 on main page
+
     }
 
     public List<ArrayList<String>> getInfo()
@@ -221,3 +238,4 @@ public class SNHULogOn {
         return currBalance;
     }
 }
+
