@@ -37,6 +37,9 @@ public class SettingsFragment extends Fragment {
                 textView.setText(s);
             }
         });*/
+
+
+
         return root;
     }
 
@@ -61,4 +64,8 @@ public class SettingsFragment extends Fragment {
         } );
     }
 
+
+    private void Logout(){
+
+    }
 }
