@@ -10,7 +10,7 @@ import java.util.List;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class Prediction {
-    private List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
+    public List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
     public static Prediction predict = new Prediction();
 
 
@@ -152,10 +152,10 @@ public class Prediction {
 
         List<String> times = new ArrayList<String>();
         List<String> amounts = new ArrayList<String>();
-        for(int j = 0; j < SNHULogOn.dataScrape.info.get(0).size(); j++)
+        for(int j = 0; j < this.info.size(); j++)//j < SNHULogOn.dataScrape.info.get(0).size(); j++)
         {
-            times.add(SNHULogOn.dataScrape.info.get(j).get(1));
-            amounts.add(SNHULogOn.dataScrape.info.get(j).get(2));
+            times.add(this.info.get(j).get(1));//SNHULogOn.dataScrape.info.get(j).get(1));
+            amounts.add(this.info.get(j).get(2));//SNHULogOn.dataScrape.info.get(j).get(2));
         }
 
         for(int i = 0; i < amounts.size(); i++)
@@ -218,10 +218,10 @@ public class Prediction {
 
         List<String> dates = new ArrayList<String>();
         List<String> amounts = new ArrayList<String>();
-        for(int j = 0; j < SNHULogOn.dataScrape.info.size(); j++)
+        for(int j = 0; j < this.info.size(); j++)//SNHULogOn.dataScrape.info.size(); j++)
         {
-            dates.add(SNHULogOn.dataScrape.info.get(j).get(0));
-            amounts.add(SNHULogOn.dataScrape.info.get(j).get(2));
+            dates.add(this.info.get(j).get(0));//SNHULogOn.dataScrape.info.get(j).get(0));
+            amounts.add(this.info.get(j).get(2));//SNHULogOn.dataScrape.info.get(j).get(2));
         }
 
         int currMonth = parseMonth(dates.get(0));
@@ -246,10 +246,10 @@ public class Prediction {
 
         List<String> dates = new ArrayList<String>();
         List<String> amounts = new ArrayList<String>();
-        for(int j = 0; j < SNHULogOn.dataScrape.info.size(); j++)
+        for(int j = 0; j < this.info.size(); j++)//SNHULogOn.dataScrape.info.size(); j++)
         {
-            dates.add(SNHULogOn.dataScrape.info.get(j).get(0));
-            amounts.add(SNHULogOn.dataScrape.info.get(j).get(2));
+            dates.add(this.info.get(j).get(0));//NHULogOn.dataScrape.info.get(j).get(0));
+            amounts.add(this.info.get(j).get(2));//SNHULogOn.dataScrape.info.get(j).get(2));
             System.out.println(dates.get(j) + "\t" + amounts.get(j));
         }
 
@@ -278,7 +278,7 @@ public class Prediction {
 
     public void calcEstAmountLeft()
     {
-        estAmountLeft = parseBalance(SNHULogOn.dataScrape.currBalance) - spentPerDay*daysLeft;
+        estAmountLeft = 580.00 - spentPerDay*daysLeft;//parseBalance(SNHULogOn.dataScrape.currBalance) - spentPerDay*daysLeft;
     }
 
     public double[] getMealTypeAverage()
@@ -316,16 +316,16 @@ public class Prediction {
         List<Double> myList = new ArrayList<Double>();
         double spentSum = 0;
         //List<String> amounts = new ArrayList<String>();
-        for(int j = 0; j < SNHULogOn.dataScrape.info.size(); j++)
+        for(int j = 0; j < this.info.size(); j++)//SNHULogOn.dataScrape.info.size(); j++)
         {
-            spentSum += Double.parseDouble(SNHULogOn.dataScrape.info.get(j).get(2).substring(1));
+            spentSum += Double.parseDouble(this.info.get(j).get(2).substring(1));//SNHULogOn.dataScrape.info.get(j).get(2).substring(1));
             //myList.add(SNHULogOn.dataScrape.info.get(j).get(2));
         }
 
         myList.add(spentSum);
-        for(int i = SNHULogOn.dataScrape.info.size()-1; i >=0 ; i--)
+        for(int i = this.info.size()-1; i >=0; i--)//SNHULogOn.dataScrape.info.size()-1; i >=0 ; i--)
         {
-            spentSum -= Double.parseDouble(SNHULogOn.dataScrape.info.get(i).get(2).substring(1));
+            spentSum -= Double.parseDouble(this.info.get(i).get(2).substring(1));//SNHULogOn.dataScrape.info.get(i).get(2).substring(1));
             if(spentSum <0.5)
             {
                 spentSum = 0;
@@ -336,4 +336,19 @@ public class Prediction {
 
         return myList;
     }
+
+    public void setInfo(String jsonText) {
+        String[] parsedRows = jsonText.split("([{])");//"}|\\{");
+        System.out.println(parsedRows[0]);
+        String[] parsedCol;
+        for(int i = 1; i < parsedRows.length; i++)
+        {
+            parsedCol = parsedRows[i-1].split(",");
+            this.info.add(new ArrayList<String>());
+            this.info.get(i-1).add(parsedCol[0] + parsedCol[1]);
+            this.info.get(i-1).add(parsedCol[2]);
+            this.info.get(i-1).add(parsedCol[3]);
+        }
+    }
 }
+
