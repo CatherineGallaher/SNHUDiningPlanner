@@ -17,7 +17,7 @@ public class MainClass {
 		boolean isLoggedIn = SNHULogOn.dataScrape.logOn("catherine.gallaher@snhu.edu", "3Mog,3Or,3Mb44");//PasswordEncryption.encryptionAES("3Mog,3Or,3Mb44"));
 		if(isLoggedIn)
 		{
-			Prediction.predict.predictionSettings("2019-09-03", "2019-12-20", 8, 600, 1000, 1000, 1600, 1600, 2000);
+			/*Prediction.predict.predictionSettings("2019-09-03", "2019-12-20", 8, 600, 1000, 1000, 1600, 1600, 2000);
 			Prediction.predict.calcDaysLeft();
 			System.out.println("Days Left: " + Prediction.predict.getDaysLeft());
 			Prediction.predict.calcSpentPerDay();
@@ -28,7 +28,7 @@ public class MainClass {
 			{
 				System.out.println(Prediction.predict.getMealTypeAverage()[i]);
 			}
-			Prediction.predict.calcMonthAverage();
+			Prediction.predict.calcMonthAverage();*/
 		}
 		
 		
@@ -41,6 +41,7 @@ public class MainClass {
 			//times: SNHULogOn.dataScrape.getInfo().get(i).get(1);
 			//amounts: SNHULogOn.dataScrape.getInfo().get(i).get(2);
 			//email: 
+			
 			SQLConnect con = new SQLConnect();
 			String result = con.doInBackground("inputVal", "transactioninfo", SNHULogOn.dataScrape.getInfo().get(i).get(0).toString(), SNHULogOn.dataScrape.getInfo().get(i).get(1).toString(), SNHULogOn.dataScrape.getInfo().get(i).get(2).toString(), "null", "catherine_gallaher");
 			//System.out.println(result);
