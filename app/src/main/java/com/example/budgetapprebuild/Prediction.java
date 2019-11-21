@@ -234,9 +234,7 @@ public class Prediction {
             currMonth = parseMonth(dates.get(i));
             monthAverage[currMonth] += Double.parseDouble(amounts.get(i).substring(1));
             monthTransactionCount[currMonth]++;
-
         }
-
     }
 
     public void calcSpentPerDay()
@@ -339,13 +337,22 @@ public class Prediction {
 
     public void setInfo(String jsonText) {
         String[] parsedRows = jsonText.split("([{])");//"}|\\{");
-        System.out.println(parsedRows[0]);
         String[] parsedCol;
-        for(int i = 1; i < parsedRows.length; i++)
+
+        //for(int j = 0; j < parsedRows.length; j++)
         {
-            parsedCol = parsedRows[i-1].split(",");
+            //System.out.println(parsedRows[j]);
+        }
+        for(int i = 1; i < parsedRows.length-1; i++)
+        {
+            parsedCol = parsedRows[i].split(",");
+
+            for(int j = 0; j < parsedCol.length; j++)
+            {
+                System.out.println(parsedCol[j]);
+            }
             this.info.add(new ArrayList<String>());
-            this.info.get(i-1).add(parsedCol[0] + parsedCol[1]);
+            this.info.get(i-1).add(parsedCol[0] + ", " + parsedCol[1]);
             this.info.get(i-1).add(parsedCol[2]);
             this.info.get(i-1).add(parsedCol[3]);
         }

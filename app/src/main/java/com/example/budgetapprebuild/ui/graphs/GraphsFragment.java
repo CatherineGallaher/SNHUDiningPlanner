@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.budgetapprebuild.Prediction;
 import com.example.budgetapprebuild.R;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LabelFormatter;
@@ -24,6 +25,7 @@ import java.text.DateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 public class GraphsFragment extends Fragment {
@@ -42,6 +44,14 @@ public class GraphsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         graphsViewModel = ViewModelProviders.of(this).get(GraphsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_graphs, container, false);
+
+        //Prediction.predict.getSpentPerDay();
+        //Prediction.predict.getEstAmountLeft();
+        Prediction.predict.calcMealTypeAverage();
+        Prediction.predict.calcMonthAverage();
+        Prediction.predict.calcSpentPerDay();
+        Prediction.predict.calcEstAmountLeft();
+        Prediction.predict.getMealTypeAverage();
 
         //line graph code for average
         averageLineGraph = root.findViewById(R.id.graph_average);
@@ -80,16 +90,40 @@ public class GraphsFragment extends Fragment {
         return dataPoints;
     }
 
+    private int[][] setMyArray(double[] p){
+        int[][] dp = new int[2][p.length];
+        for (int i = 0; i < p.length-1; i++){
+            dp[0][i] = (i+1);
+            dp[1][i] = ((int)(p[i]));
+        }
+        return dp;
+    }
+
+    private int[][] convertListToArray(List<Double> l){
+
+        int[][] dp = new int[2][l.size()];
+
+        for (int i = 0; i < l.size()-1; i++)
+        {
+            dp[0][i] = (i+1);
+            dp[1][i] = (int) Math.round(l.get(i));
+        }
+
+        return dp;
+    }
+
     protected void setAverageGraph(){
 
-        pointsForAverage = new LineGraphSeries<>(setDataPoints(setRandomArrayPoints(10, 10)));
-        averageLineGraph.setTitle("Average Spendings per Month");
+        //pointsForAverage = new LineGraphSeries<>(setDataPoints(setMyArray(Prediction.predict.getMonthAverage())));
+        pointsForAverage = new LineGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 10)));
+
+        averageLineGraph.setTitle("Average Spending per Month");
         averageLineGraph.setTitleTextSize(50);
 
         //averageLineGraph.getGridLabelRenderer().setHorizontalAxisTitle("Month");
-        averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        //averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
 
-        averageLineGraph.getViewport().setMaxX(10);
+        averageLineGraph.getViewport().setMaxX(12);
         //averageLineGraph.getViewport().setX(10);
         averageLineGraph.getViewport().setMaxY(10);
         averageLineGraph.getViewport().setXAxisBoundsManual(true);
@@ -99,6 +133,9 @@ public class GraphsFragment extends Fragment {
     }
 
     protected void setMoneyLeftGraph(){
+
+
+        //pointsFundsRemaining = new LineGraphSeries<>(setDataPoints(convertListToArray(Prediction.predict.spentGraph())));
         pointsFundsRemaining = new LineGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 1000)));
         moneyLeftLineGraph.setTitle("Funds Remaining");
         moneyLeftLineGraph.setTitleTextSize(50);
@@ -113,6 +150,8 @@ public class GraphsFragment extends Fragment {
     }
 
     protected void setBarGraph(){
+
+        //barGraphPoints = new BarGraphSeries<>(setDataPoints(setMyArray(Prediction.predict.getMealTypeAverage())));
         barGraphPoints = new BarGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 20)));
         mealTimeSpending.setTitle("Spending Per Meal");
         mealTimeSpending.setTitleTextSize(50);

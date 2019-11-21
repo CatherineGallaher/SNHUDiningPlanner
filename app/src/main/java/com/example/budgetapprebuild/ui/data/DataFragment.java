@@ -15,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import java.text.DecimalFormat;
 
+import com.example.budgetapprebuild.Prediction;
 import com.example.budgetapprebuild.R;
 import com.example.budgetapprebuild.SNHULogOn;
 
@@ -46,14 +47,18 @@ public class DataFragment extends Fragment {
         info = new String[100][2];
         //SNHULogOn s = new SNHULogOn();
         //info = s.getInfo();
+        //Prediction.predict.calcDaysLeft();
+        //daysUntilEnd.setText("Days until end of semester: " + Prediction.predict.getDaysLeft());
+
         setPredictionText("30", "3", "less than", "You might want to change some habits.");
         randomlyGenerate();
 
-        for(int k = 0; k < info.length; k++) {
+        for(int k = 0; k < Prediction.predict.info.size(); k++) {
             if (info[k][0] == null){
                 break;
             }
-            inputData(info[k][0], info[k][1]);
+            inputData(Prediction.predict.info.get(k).get(0), Prediction.predict.info.get(k).get(2));
+            //inputData(info[k][0], info[k][1]);
         }
 
         /*dataViewModel.getText().observe(this, new Observer<String>() {
