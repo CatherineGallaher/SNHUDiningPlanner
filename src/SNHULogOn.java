@@ -123,6 +123,11 @@ public class SNHULogOn {
                 if (listTables == null)
                 	System.out.println("no tables found");
                 
+                List<ArrayList<String>> tableExtras = new ArrayList<ArrayList<String>>();
+                int infoIndex = 1;
+                String[] split1;
+                String[] split2;
+                
                 for(HtmlTable table : listTables)
                 {
     				if(table == listTables.listIterator(0))
@@ -130,23 +135,41 @@ public class SNHULogOn {
 
                 	for(int i = 1; i < table.getRowCount(); i++)
                 	{
-                		info.add(new ArrayList<String>());
-                		info.get(i-1).add(parseDay(table.getCellAt(i, 1).asText()));
-                		info.get(i-1).add(parseTime(table.getCellAt(i, 1).asText()));
-                		info.get(i-1).add(parseAmount(table.getCellAt(i, 3).asText()));
+                		tableExtras.add(new ArrayList<String>());
+                		tableExtras.get(i-1).add(table.getCellAt(i, 0).asText());
+                		tableExtras.get(i-1).add(table.getCellAt(i, 2).asText());
+                		split1 = tableExtras.get(i-1).get(0).split(" ");
+                		split2 = tableExtras.get(i-1).get(1).split(" ");
+                		System.out.println("Split 1[0] " + (split1[0].compareTo("VISA") == 0) + "\tsplit 2 length " + split2.length + " " + (split2.length <= 3));
+                		if(split1[0].compareTo("VISA") == 0 || split2.length >= 3)
+                		{
+                		}
+                		else
+                		{
+                			System.out.println("Entering insertion");
+                			//if(Double.parseDouble(parseAmount(table.getCellAt(infoIndex, 3).asText()).substring(1)) <= 00.15)
+                			info.add(new ArrayList<String>());
+                        	info.get(infoIndex-1).add(parseDay(table.getCellAt(infoIndex, 1).asText()));
+                       		info.get(infoIndex-1).add(parseTime(table.getCellAt(infoIndex, 1).asText()));
+                       		info.get(infoIndex-1).add(parseAmount(table.getCellAt(infoIndex, 3).asText()));
+                       		infoIndex++;
+                			
+                		}
+                		
+                		
                 	}
                 }
 
                 
                 
-               /* for(int k = 0; k < info.size(); k++)
+               for(int k = 0; k < info.size(); k++)
                 {
                 	for(int j = 0; j < info.get(k).size(); j++)
                 	{
                 		System.out.print(info.get(k).get(j) + " ");
                 	}
                 	System.out.println();
-                }*/
+                }
                 
                 //System.out.println(currBalance);
                 
@@ -189,7 +212,6 @@ public class SNHULogOn {
 		//System.out.println(parsedDate.length + " " + parsedDate[3]);
 		//String completeDate = parsedDate[3] + " " + parsedDate[4] + " " + parsedDate[5];
 		//String parsedDate2[] = parsedDate[0].split(",", 1);
-		
 		
 		String completeDate = parsedDate[0] + " " + parsedDate[1] + " " + parsedDate[2].substring(0, 5);
 		

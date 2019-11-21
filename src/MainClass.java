@@ -12,12 +12,12 @@ public class MainClass {
 		//String balance = SNHULogOn.dataScrape.currBalance;
 		//System.out.println(balance);
 		
-		SQLConnect connect = new SQLConnect();
-		System.out.println("Result: " + connect.doInBackground("getall"));
+		//SQLConnect connect = new SQLConnect();
+		//System.out.println("Result: " + connect.doInBackground("getall"));
 		boolean isLoggedIn = SNHULogOn.dataScrape.logOn("catherine.gallaher@snhu.edu", "3Mog,3Or,3Mb44");//PasswordEncryption.encryptionAES("3Mog,3Or,3Mb44"));
 		if(isLoggedIn)
 		{
-			Prediction.predict.predictionSettings("2019-09-03", "2019-12-20", 8, 600, 1000, 1000, 1600, 1600, 2000);
+			/*Prediction.predict.predictionSettings("2019-09-03", "2019-12-20", 8, 600, 1000, 1000, 1600, 1600, 2000);
 			Prediction.predict.calcDaysLeft();
 			System.out.println("Days Left: " + Prediction.predict.getDaysLeft());
 			Prediction.predict.calcSpentPerDay();
@@ -28,12 +28,12 @@ public class MainClass {
 			{
 				System.out.println(Prediction.predict.getMealTypeAverage()[i]);
 			}
-			Prediction.predict.calcMonthAverage();
+			Prediction.predict.calcMonthAverage();*/
 		}
 		
 		
-		SQLConnect conOne = new SQLConnect();
-		conOne.doInBackground("createTITable", "ti_catherine_gallaher", "nerdalert42!");
+		//SQLConnect conOne = new SQLConnect();
+		//conOne.doInBackground("createTITable", "ti_catherine_gallaher", "nerdalert42!");
 		
 		for(int i = 0; i < SNHULogOn.dataScrape.getInfo().size(); i++)
 		{
@@ -41,9 +41,9 @@ public class MainClass {
 			//times: SNHULogOn.dataScrape.getInfo().get(i).get(1);
 			//amounts: SNHULogOn.dataScrape.getInfo().get(i).get(2);
 			//email: 
-			SQLConnect con = new SQLConnect();
-			String result = con.doInBackground("inputVal", "transactioninfo", SNHULogOn.dataScrape.getInfo().get(i).get(0), SNHULogOn.dataScrape.getInfo().get(i).get(1), SNHULogOn.dataScrape.getInfo().get(i).get(2), "null", "catherine_gallaher");
-			System.out.println(result);
+			//SQLConnect con = new SQLConnect();
+			//String result = con.doInBackground("inputVal", "transactioninfo", SNHULogOn.dataScrape.getInfo().get(i).get(0), SNHULogOn.dataScrape.getInfo().get(i).get(1), SNHULogOn.dataScrape.getInfo().get(i).get(2), "null", "catherine_gallaher");
+			//System.out.println(result);
 		}
 		
 		
