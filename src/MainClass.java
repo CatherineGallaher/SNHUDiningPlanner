@@ -12,8 +12,8 @@ public class MainClass {
 		//String balance = SNHULogOn.dataScrape.currBalance;
 		//System.out.println(balance);
 		
-		SQLConnect connect = new SQLConnect();
-		System.out.println("Result: " + connect.doInBackground("getall"));
+		//SQLConnect connect = new SQLConnect();
+		//System.out.println("Result: " + connect.doInBackground("getall"));
 		boolean isLoggedIn = SNHULogOn.dataScrape.logOn("catherine.gallaher@snhu.edu", "3Mog,3Or,3Mb44");//PasswordEncryption.encryptionAES("3Mog,3Or,3Mb44"));
 		if(isLoggedIn)
 		{
@@ -32,9 +32,9 @@ public class MainClass {
 		}
 		
 		
-		SQLConnect conOne = new SQLConnect();
-		conOne.doInBackground("createTITable", "ti_catherine_gallaher", "nerdalert42!");
-		
+		//SQLConnect conOne = new SQLConnect();
+		//conOne.doInBackground("createTITable", "ti_catherine_gallaher", "nerdalert42!");
+		//conOne.doInBackground("inputVal", "transactioninfo", "f", "f", "f", "NULL", "catherine_gallaher");
 		for(int i = 0; i < SNHULogOn.dataScrape.getInfo().size(); i++)
 		{
 			//dates: SNHULogOn.dataScrape.getInfo().get(i).get(0);
@@ -42,7 +42,7 @@ public class MainClass {
 			//amounts: SNHULogOn.dataScrape.getInfo().get(i).get(2);
 			//email: 
 			SQLConnect con = new SQLConnect();
-			String result = con.doInBackground("inputVal", "transactioninfo", SNHULogOn.dataScrape.getInfo().get(i).get(0), SNHULogOn.dataScrape.getInfo().get(i).get(1), SNHULogOn.dataScrape.getInfo().get(i).get(2), "null", "catherine_gallaher");
+			String result = con.doInBackground("inputVal", "transactioninfo", SNHULogOn.dataScrape.getInfo().get(i).get(0).toString(), SNHULogOn.dataScrape.getInfo().get(i).get(1).toString(), SNHULogOn.dataScrape.getInfo().get(i).get(2).toString(), "null", "catherine_gallaher");
 			System.out.println(result);
 		}
 		

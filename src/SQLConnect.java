@@ -15,7 +15,7 @@ import java.sql.*;
 public class SQLConnect {
     public SQLConnect(){}
 
-    public static final String IPADDRESS = "10.0.87.169";
+    public static final String IPADDRESS = "10.0.240.206";
 
     HttpURLConnection conn;
     URL url = null;
@@ -35,7 +35,9 @@ public class SQLConnect {
                     System.out.println("in getall");
                     break;
                 case "inputVal":
-                    url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0] + "&tableName=" + params[1] + "&colOne=" + params[2] + "&colTwo=" + params[3] + "&colThree" + params[4] + "&colFour" + params[5] + "&colFive=" + params[6]);
+                	System.out.println("in inputVal in switch");
+                    url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0] + "&tableName=" + params[1] + "&colOne=" + params[2] + "&colTwo=" + params[3] + "&colThree=" + params[4] + "&colFour=" + params[5] + "&colFive=" + params[6]);
+                    System.out.println(url);
                     break;
                 case "getTableInfo":
                     url = new URL("http://" + IPADDRESS + "/db-api/API.php?apicall=" + params[0] + "&tableName=" + params[1]);
@@ -74,6 +76,8 @@ public class SQLConnect {
         try {
 
             int response_code = conn.getResponseCode();
+            
+            System.out.println(response_code);
 
             // Check if successful connection made
             if (response_code == HttpURLConnection.HTTP_OK) {
