@@ -16,6 +16,8 @@ import androidx.lifecycle.ViewModelProviders;
 import java.text.DecimalFormat;
 
 import com.example.budgetapprebuild.R;
+import com.example.budgetapprebuild.SNHULogOn;
+
 
 import java.util.ArrayList;
 import java.util.Random;

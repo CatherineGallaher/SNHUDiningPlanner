@@ -1,10 +1,18 @@
 package com.example.budgetapprebuild;
-
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Month;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.gargoylesoftware.htmlunit.html.HtmlPage;
+
 public class Prediction {
+    private List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
+    public static Prediction predict = new Prediction();
+
 
     private List<String> months = new ArrayList<String>();
     private int startMonth;
@@ -16,11 +24,25 @@ public class Prediction {
     private double spentPerDay;
     private int daysOffCampus;
     private double estAmountLeft;
-    private ReadWriteSQL test = new ReadWriteSQL();
+    private int daysLeft;
+    private String startDate;
+    private String endDate;
+    //private ReadWriteSQL test = new ReadWriteSQL();
+    //private SQLConnect connection;
 
+    //spending by month (avg)
+    //spending by meal (avg)
+    //funds remaining
+    //est amount left
+    //
     public Prediction(int userID)
     {
         this.userID = userID;
+        populateMonths();
+    }
+
+    public Prediction()
+    {
         populateMonths();
     }
 
@@ -40,14 +62,28 @@ public class Prediction {
         months.add("December");
     }
 
-    public void ExtractData()
+    public void getData()
     {
 
     }
 
+    public void calcDaysLeft()
+    {
+
+        //Parsing the date
+        LocalDate dateBefore = LocalDate.now();
+        LocalDate dateAfter = LocalDate.parse(endDate);
+
+        //calculating number of days in between
+        long numDays = ChronoUnit.DAYS.between(dateBefore, dateAfter);
+
+        daysLeft = (int)numDays;// - daysOffCampus;
+    }
+
     private int parseMonth(String date)
     {
-        String parsedDate[] = date.split(" ", 1);
+        String parsedDate[] = date.split(" ");
+
         return months.indexOf(parsedDate[0]);
     }
 
@@ -87,6 +123,8 @@ public class Prediction {
     {
         this.startMonth = parseMonth(startDate);
         this.endMonth = parseMonth(endDate);
+        this.startDate = startDate;
+        this.endDate = endDate;
         this.breakfastStart = breakfastStart;
         this.breakfastEnd = breakfastEnd;
         this.lunchStart = lunchStart;
@@ -110,9 +148,15 @@ public class Prediction {
 
         //ReadWriteSQL mealAvg = new ReadWriteSQL();
         //mealAvg.createConnection();
-        test.createConnection();
-        List<String> times = test.getTimes();
-        List<String> amounts = test.getAmounts();
+        //test.createConnection();
+
+        List<String> times = new ArrayList<String>();
+        List<String> amounts = new ArrayList<String>();
+        for(int j = 0; j < SNHULogOn.dataScrape.info.get(0).size(); j++)
+        {
+            times.add(SNHULogOn.dataScrape.info.get(j).get(1));
+            amounts.add(SNHULogOn.dataScrape.info.get(j).get(2));
+        }
 
         for(int i = 0; i < amounts.size(); i++)
         {
@@ -162,47 +206,71 @@ public class Prediction {
         {
             mealTypeAverage[3] = 0;
         }
-
-        //mealAvg.closeConnection();
     }
 
     public void calcMonthAverage() //Incomplete
     {
-        double[] monthAverage = {endMonth - startMonth};
+        double[] monthAverage = {0,0,0,0,0,0,0,0,0,0,0,0};
+        int [] monthTransactionCount = {0,0,0,0,0,0,0,0,0,0,0,0};
 
 
         this.monthAverage = monthAverage;
+
+        List<String> dates = new ArrayList<String>();
+        List<String> amounts = new ArrayList<String>();
+        for(int j = 0; j < SNHULogOn.dataScrape.info.size(); j++)
+        {
+            dates.add(SNHULogOn.dataScrape.info.get(j).get(0));
+            amounts.add(SNHULogOn.dataScrape.info.get(j).get(2));
+        }
+
+        int currMonth = parseMonth(dates.get(0));
+        System.out.println(currMonth);
+
+        int monthIndex = parseMonth(dates.get(0));
+        double amountSum = 0;
+        for(int i = 0; i < amounts.size(); i++)
+        {
+            currMonth = parseMonth(dates.get(i));
+            monthAverage[currMonth] += Double.parseDouble(amounts.get(i).substring(1));
+            monthTransactionCount[currMonth]++;
+
+        }
+
     }
 
     public void calcSpentPerDay()
     {
         //ReadWriteSQL perDay = new ReadWriteSQL();
         //perDay.createConnection();
-        List<String> dates = test.getDates();
-        List<String> amounts = test.getAmounts();
-        double totalSpent = 0;
-        int totalDays = 0;
 
+        List<String> dates = new ArrayList<String>();
+        List<String> amounts = new ArrayList<String>();
+        for(int j = 0; j < SNHULogOn.dataScrape.info.size(); j++)
+        {
+            dates.add(SNHULogOn.dataScrape.info.get(j).get(0));
+            amounts.add(SNHULogOn.dataScrape.info.get(j).get(2));
+            System.out.println(dates.get(j) + "\t" + amounts.get(j));
+        }
+
+        double totalSpent = 0;
+        int totalDays = 1;
         totalSpent += parseAmount(amounts.get(0));
         for(int i = 1; i < amounts.size(); i++)
         {
+            System.out.println("Current Amount: " + amounts.get(i-1) + "\t\tTotal: " + totalSpent + "\t\tCurrent Day: " + parseDay(dates.get(i)) + "\t\tDay count: " + totalDays);
             totalSpent += parseAmount(amounts.get(i-1));
 
             if(parseDay(dates.get(i)) != parseDay(dates.get(i-1)))
             {
                 totalDays++;
             }
+
+            if(startMonth == parseMonth(dates.get(i-1)))
+            {
+            }
         }
-		/*try {
-			estAmountLeft = Double.parseDouble(perDay.getAmountLeft("catherine.gallaher@snhu.edu").substring(1));
-		} catch (NumberFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}*/
-        test.closeConnection();
+
 
         spentPerDay = totalSpent/totalDays;
 
@@ -210,8 +278,7 @@ public class Prediction {
 
     public void calcEstAmountLeft()
     {
-
-
+        estAmountLeft = parseBalance(SNHULogOn.dataScrape.currBalance) - spentPerDay*daysLeft;
     }
 
     public double[] getMealTypeAverage()
@@ -234,4 +301,39 @@ public class Prediction {
         return estAmountLeft;
     }
 
+    public int getDaysLeft()
+    {
+        return daysLeft;
+    }
+
+    public double parseBalance(String balance)
+    {
+        return Double.parseDouble(balance.substring(1));
+    }
+
+    public List<Double> spentGraph()
+    {
+        List<Double> myList = new ArrayList<Double>();
+        double spentSum = 0;
+        //List<String> amounts = new ArrayList<String>();
+        for(int j = 0; j < SNHULogOn.dataScrape.info.size(); j++)
+        {
+            spentSum += Double.parseDouble(SNHULogOn.dataScrape.info.get(j).get(2).substring(1));
+            //myList.add(SNHULogOn.dataScrape.info.get(j).get(2));
+        }
+
+        myList.add(spentSum);
+        for(int i = SNHULogOn.dataScrape.info.size()-1; i >=0 ; i--)
+        {
+            spentSum -= Double.parseDouble(SNHULogOn.dataScrape.info.get(i).get(2).substring(1));
+            if(spentSum <0.5)
+            {
+                spentSum = 0;
+            }
+            myList.add(spentSum);
+            //System.out.println(myList.get(i));
+        }
+
+        return myList;
+    }
 }

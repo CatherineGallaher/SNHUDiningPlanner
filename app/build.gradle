@@ -48,8 +48,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation files('libs/mysql-connector-java-8.0.18.jar')
-    implementation 'com.google.cloud.sql:mysql-socket-factory-connector-j-8:1.0.15'
     implementation files('libs/htmlunit-2.36.0.jar')
     implementation files('libs/w3c-dom.jar')
     implementation 'com.jjoe64:graphview:4.2.2'

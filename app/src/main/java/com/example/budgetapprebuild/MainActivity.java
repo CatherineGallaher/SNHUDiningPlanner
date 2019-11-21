@@ -1,5 +1,7 @@
 package com.example.budgetapprebuild;
 import java.util.Scanner;
+import java.util.concurrent.ExecutionException;
+
 import android.util.Log;
 
 import android.os.Bundle;
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        System.out.println("--------------------------------------------------------------------------\n");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -32,10 +35,20 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        //Jack and Catherine stuff
-        SNHULogOn a = new SNHULogOn();
-        a.logOn();
+        SQLConnect con = new SQLConnect();
+        try {
+            System.out.println("Result: " + con.execute("getTableInfo", "ti_catherine_gallaher").get());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
+        //Jack and Catherine stuff
+        //SNHULogOn a = new SNHULogOn();
+        //a.logOn();
+
+        /*
         Prediction predict = new Prediction(2);
         predict.predictionSettings("October 20, 2019", "December 20, 2019", 5, 600, 1000, 1000, 1600, 1600, 2000);
         System.out.println("Settings (set in settings tab):\n\tSchool year: October 20, 2019-December 20, 2019\n\tDays off: 5\n\tBreakfast Times: 6:00AM - 10:00AM\n\t Lunch Times: 10:00AM - 4:00PM\n\tDinner Times: 4:00PM - 8:00PM");
@@ -70,6 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         Log.d("Demo","Your decrypted string is: " + decryp.decryptAES(encrypted));
 
+        */
     }
 
 }

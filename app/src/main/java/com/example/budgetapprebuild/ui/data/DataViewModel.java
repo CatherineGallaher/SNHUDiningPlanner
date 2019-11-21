@@ -15,6 +15,8 @@ public class DataViewModel extends ViewModel {
 
     public DataViewModel() {
 
+        mText.setValue("");
+        /*
         SQLConnect con = new SQLConnect();
         try {
             String result = con.execute().get();
@@ -30,5 +32,6 @@ public class DataViewModel extends ViewModel {
             //mText.setValue(result);
         }
 
+        */
     }
 }
