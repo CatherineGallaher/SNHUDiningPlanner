@@ -336,25 +336,27 @@ public class Prediction {
     }
 
     public void setInfo(String jsonText) {
+        System.out.println(jsonText);
         String[] parsedRows = jsonText.split("([{])");//"}|\\{");
         String[] parsedCol;
 
-        //for(int j = 0; j < parsedRows.length; j++)
+        for(int j = 0; j < parsedRows.length; j++)
         {
-            //System.out.println(parsedRows[j]);
+            System.out.println(parsedRows[j]);
         }
         for(int i = 1; i < parsedRows.length-1; i++)
         {
             parsedCol = parsedRows[i].split(",");
 
-            for(int j = 0; j < parsedCol.length; j++)
-            {
-                System.out.println(parsedCol[j]);
-            }
             this.info.add(new ArrayList<String>());
             this.info.get(i-1).add(parsedCol[0] + ", " + parsedCol[1]);
             this.info.get(i-1).add(parsedCol[2]);
             this.info.get(i-1).add(parsedCol[3]);
+        }
+
+        for(int j = 0; j< info.size(); j++)
+        {
+            System.out.println(info.get(j).get(0) + "\t" + info.get(j).get(2));
         }
     }
 }

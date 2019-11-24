@@ -51,7 +51,7 @@ public class GraphsFragment extends Fragment {
         Prediction.predict.calcMonthAverage();
         Prediction.predict.calcSpentPerDay();
         Prediction.predict.calcEstAmountLeft();
-        Prediction.predict.getMealTypeAverage();
+        //Prediction.predict.getMealTypeAverage();
 
         //line graph code for average
         averageLineGraph = root.findViewById(R.id.graph_average);
@@ -92,7 +92,7 @@ public class GraphsFragment extends Fragment {
 
     private int[][] setMyArray(double[] p){
         int[][] dp = new int[2][p.length];
-        for (int i = 0; i < p.length-1; i++){
+        for (int i = 1; i < p.length-1; i++){
             dp[0][i] = (i+1);
             dp[1][i] = ((int)(p[i]));
         }
@@ -114,8 +114,8 @@ public class GraphsFragment extends Fragment {
 
     protected void setAverageGraph(){
 
-        //pointsForAverage = new LineGraphSeries<>(setDataPoints(setMyArray(Prediction.predict.getMonthAverage())));
-        pointsForAverage = new LineGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 10)));
+        pointsForAverage = new LineGraphSeries<>(setDataPoints(setMyArray(Prediction.predict.getMonthAverage())));
+        //pointsForAverage = new LineGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 10)));
 
         averageLineGraph.setTitle("Average Spending per Month");
         averageLineGraph.setTitleTextSize(50);
