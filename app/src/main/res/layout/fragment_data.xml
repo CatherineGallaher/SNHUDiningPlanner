@@ -19,22 +19,22 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/text_funds_remaining"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Funds Remaining: ####"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-
-            <TextView
                 android:id="@+id/text_initial_funds"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:text="Initial Funds (start of the semester: $$$)"
+                android:text="Initial Funds: $####.##)"
                 android:textAlignment="center"
                 android:textSize="20sp" />
+
+            <TextView
+            android:id="@+id/text_funds_remaining"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="Funds Remaining: ####"
+            android:textAlignment="center"
+            android:textSize="20sp" />
 
             <TextView
                 android:id="@+id/text_daysUntilEnd"

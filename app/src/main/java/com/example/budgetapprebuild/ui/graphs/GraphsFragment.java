@@ -51,7 +51,6 @@ public class GraphsFragment extends Fragment {
 
         //Prediction.predict.getSpentPerDay();
         //Prediction.predict.getEstAmountLeft();
-        Prediction.predict.predictionSettings("October 20, 2019", "December 20, 2019", 5, 600, 1000, 1000, 1600, 1600, 2000);
         Prediction.predict.calcMealTypeAverage();
         Prediction.predict.calcMonthAverage();
         Prediction.predict.calcSpentPerDay();
@@ -73,7 +72,7 @@ public class GraphsFragment extends Fragment {
     }
 
 
-    private DataPoint[] setDataPoints(int[][] d){
+    private DataPoint[] setDataPoints(double[][] d){
         int init = setMaxAxis(d);
         DataPoint[] values = new DataPoint[init];
         int index = 0;
@@ -98,31 +97,29 @@ public class GraphsFragment extends Fragment {
         return dataPoints;
     }
 
-    private int[][] setMyArray(double[] p){
-        int[][] dp = new int[2][p.length];
+    private double[][] setMyArray(double[] p){
+        double[][] dp = new double[2][p.length];
         for (int i = 1; i < p.length; i++){
             if ((int)(p[i]) == 0.0){
                 continue;
             }
             dp[0][i] = (i+1);
-            dp[1][i] = ((int)(p[i]));
+            dp[1][i] = p[i];
         }
         return dp;
     }
 
-    private int[][] setMyBarArray(double[] p){
-        int[][] dp = new int[2][p.length];
+    private double[][] setMyBarArray(double[] p){
+        double[][] dp = new double[2][p.length];
         for (int i = 1; i < p.length; i++){
             dp[0][i] = (i+1);
-            dp[1][i] = ((int)(p[i]));
+            dp[1][i] = p[i];
         }
         return dp;
     }
 
-    private int[][] convertListToArray(List<Double> l){
-
-        int[][] dp = new int[2][l.size()];
-
+    private double[][] convertListToArray(List<Double> l){
+        double[][] dp = new double[2][l.size()];
         for (int i = 0; i < l.size()-1; i++)
         {
             dp[0][i] = (i+1);
@@ -141,10 +138,10 @@ public class GraphsFragment extends Fragment {
         averageLineGraph.setTitleTextSize(50);
 
         averageLineGraph.getGridLabelRenderer().setHorizontalAxisTitle("Month");
-        averageLineGraph.getGridLabelRenderer().setVerticalAxisTitle("Average Money Spent");
+        averageLineGraph.getGridLabelRenderer().setVerticalAxisTitle("Total Money Spent");
 
-        //SimpleDateFormat sdf = new SimpleDateFormat("MMM");
-        //averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), sdf));
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM");
+        averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), sdf));
 
         averageLineGraph.getViewport().setMinX(minx);
         averageLineGraph.getViewport().setMaxX(maxx);
@@ -196,7 +193,7 @@ public class GraphsFragment extends Fragment {
         //barGraphPoints.setValuesOnTopColor(Color.GREEN);
     }
 
-    private int setMaxAxis(int [][] d){
+    private int setMaxAxis(double [][] d){
         int n = 0;
         maxy = d[1][0];
         for (int i = 0; i < d[0].length; i++){
