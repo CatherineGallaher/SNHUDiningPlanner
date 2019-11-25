@@ -1,21 +1,45 @@
 package com.example.budgetapprebuild;
 
-import com.gargoylesoftware.htmlunit.BrowserVersion;
+
+import android.os.AsyncTask;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 
-import com.gargoylesoftware.htmlunit.*;
-import com.gargoylesoftware.htmlunit.html.*;
-import com.gargoylesoftware.htmlunit.Page;
-import com.gargoylesoftware.htmlunit.WebClient;
 
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
-public class SNHULogOn {
-    private HtmlPage transactionPage;
+public class SNHULogOn extends AsyncTask<String, String, String> {
+    SNHULogOn(){};
+    public List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
+    public static SNHULogOn dataScrape = new SNHULogOn();
+    public String currBalance = "its not working dumbass";
+    public String email;
+    public String password;
+    public String dateLastAccessed;
+
+    public String doInBackground(String... urls) {
+        try {
+            System.out.println("In SNHULogOn");
+            Document dc = Jsoup.connect("https://get.cbord.com/snhu/full/login.php").timeout(6000).get();
+            System.out.println(dc.title());
+            System.out.println("Exit SNHULogOn");
+
+            return "Yes";
+        } catch (Exception e) {
+            System.out.println("In SNHULogOn catch");
+            System.out.println(e);
+            return "No";
+        } finally {
+            return "Maybe";
+        }
+    }
+    /*private HtmlPage transactionPage;
     public List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
     public static SNHULogOn dataScrape = new SNHULogOn();
     public String currBalance = "its not working dumbass";
@@ -92,32 +116,7 @@ public class SNHULogOn {
                 transactionPage = currentPage.getAnchorByHref("history.php").dblClick();
 
                 currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
-                //HtmlAnchor htmlAnchor = currentPage.getAnchorByHref("history.php");
-                //transactionPage = currentPage.getAnchorByHref("history.php").click();
-                //HtmlPage transactionPage = htmlAnchor.click();
-                /*
-                List<String> searchResults = new ArrayList<>();
-                List<HtmlAnchor> l = page.getByXPath("//a[@class='https://get.cbord.com/snhu/full/history.php']");
-                for(HtmlAnchor a: l) {
-                    a.click();
-                }
-                */
-                /*
-                Iterable<DomNode> node = (Iterable<DomNode>) currentPage.getDescendants();
-                System.out.println("0");
-                for (DomNode a : node)
-                {
-                	System.out.println(a.asText());
-                }
-                currentPage = (HtmlPage) webClient.getCurrentWindow().getEnclosedPage();
-                */
-                //HtmlDivision div = currentPage.getHtmlElementById("my_recent_transactions");
-                //Iterable<HtmlElement> subDiv = div.getHtmlElementDescendants();
 
-                //String xpath = "(//table[@class='table table-striped table-bordered'])";
-                //HtmlTable transTable = (HtmlTable) div.getByXPath("//table[@class=table table-striped table-bordered]").get(1);
-
-                //List<HtmlTable> tables = (HtmlTableColumn) div.getByXPath("//table");
 
                 listTables = currentPage.getByXPath("//table");
                 if (listTables == null)
@@ -192,7 +191,7 @@ public class SNHULogOn {
             webClient.close();
         }
         return false;
-    }
+    }*/
 
     private String parseBalance(String bal)
     {
@@ -228,6 +227,7 @@ public class SNHULogOn {
 
     }
 
+    /*
     public List<ArrayList<String>> getInfo()
     {
         return info;
@@ -236,6 +236,6 @@ public class SNHULogOn {
     public String getBalance()
     {
         return currBalance;
-    }
+    }*/
 }
 

@@ -7,7 +7,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class Prediction {
     public List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
