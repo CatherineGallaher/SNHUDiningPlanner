@@ -29,6 +29,8 @@ public class DataFragment extends Fragment {
     private TextView dataBox;
     private TextView daysUntilEnd;
     private TextView predictionText;
+    private TextView initialFunds;
+    private TextView fundsRemaining;
     String[][] info;
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,18 +38,25 @@ public class DataFragment extends Fragment {
         //pre-generated code below
         dataViewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         View root = inflater.inflate(R.layout.fragment_data, container, false);
-        final TextView textView = root.findViewById(R.id.text_funds_remaining);
+        fundsRemaining = root.findViewById(R.id.text_funds_remaining);
         dataBox = root.findViewById(R.id.text_dataBox);
         daysUntilEnd = root.findViewById(R.id.text_daysUntilEnd);
         predictionText = root.findViewById(R.id.text_information);
+        initialFunds = root.findViewById(R.id.text_initial_funds);
 
         info = new String[100][2];
-        //SNHULogOn s = new SNHULogOn();
-        //info = s.getInfo();
-        //Prediction.predict.calcDaysLeft(); error
-        daysUntilEnd.setText("Days until end of semester: " + Prediction.predict.getDaysLeft());
+
+        /*Prediction.predict.predictionSettings("08 ", "12 ", "10", "");
+        Prediction.predict.calcDaysLeft();*/
+
+        daysUntilEnd.setText("Days until end of semester: 16" /*+ Prediction.predict.getDaysLeft()*/);
 
 
+        Prediction.predict.calcSpentPerDay();
+        initialFunds.setText("Initial Funds: $" + (int) Math.round(Prediction.predict.spentGraph().get(0)));
+
+        Prediction.predict.calcEstAmountLeft();
+        fundsRemaining.setText("Funds Remaining: $" + Prediction.predict.getEstAmountLeft());
 
 
         setPredictionText("30", "2", "less than", "You might want to change some habits.");
