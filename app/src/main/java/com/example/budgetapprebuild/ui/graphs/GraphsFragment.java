@@ -39,6 +39,9 @@ public class GraphsFragment extends Fragment {
     protected GraphView averageLineGraph;
     protected GraphView moneyLeftLineGraph;
     protected GraphView mealTimeSpending;
+    private double minx;
+    private double maxx;
+    private double maxy;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -51,7 +54,6 @@ public class GraphsFragment extends Fragment {
         Prediction.predict.calcMonthAverage();
         Prediction.predict.calcSpentPerDay();
         Prediction.predict.calcEstAmountLeft();
-        //Prediction.predict.getMealTypeAverage();
 
         //line graph code for average
         averageLineGraph = root.findViewById(R.id.graph_average);
@@ -70,11 +72,15 @@ public class GraphsFragment extends Fragment {
 
 
     private DataPoint[] setDataPoints(int[][] d){
-        int n=d[0].length;
-        DataPoint[] values = new DataPoint[n];
-        for(int i=0;i<n;i++){
+        int init = setMaxAxis(d);
+        DataPoint[] values = new DataPoint[init];
+        int index = 0;
+        for(int i=0;i<d[0].length;i++){
+            if (d[0][i] == 0){
+                continue;
+            }
             DataPoint v = new DataPoint(d[0][i], d[1][i]);
-            values[i] = v;
+            values[index++] = v;
         }
         return values;
     }
@@ -92,7 +98,19 @@ public class GraphsFragment extends Fragment {
 
     private int[][] setMyArray(double[] p){
         int[][] dp = new int[2][p.length];
-        for (int i = 1; i < p.length-1; i++){
+        for (int i = 1; i < p.length; i++){
+            if ((int)(p[i]) == 0.0){
+                continue;
+            }
+            dp[0][i] = (i+1);
+            dp[1][i] = ((int)(p[i]));
+        }
+        return dp;
+    }
+
+    private int[][] setMyBarArray(double[] p){
+        int[][] dp = new int[2][p.length];
+        for (int i = 1; i < p.length; i++){
             dp[0][i] = (i+1);
             dp[1][i] = ((int)(p[i]));
         }
@@ -123,9 +141,10 @@ public class GraphsFragment extends Fragment {
         //averageLineGraph.getGridLabelRenderer().setHorizontalAxisTitle("Month");
         //averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
 
-        averageLineGraph.getViewport().setMaxX(12);
+        averageLineGraph.getViewport().setMinX(minx);
+        averageLineGraph.getViewport().setMaxX(maxx);
         //averageLineGraph.getViewport().setX(10);
-        averageLineGraph.getViewport().setMaxY(10);
+        averageLineGraph.getViewport().setMaxY(maxy);
         averageLineGraph.getViewport().setXAxisBoundsManual(true);
         averageLineGraph.getViewport().setYAxisBoundsManual(true);
 
@@ -135,14 +154,14 @@ public class GraphsFragment extends Fragment {
     protected void setMoneyLeftGraph(){
 
 
-        //pointsFundsRemaining = new LineGraphSeries<>(setDataPoints(convertListToArray(Prediction.predict.spentGraph())));
-        pointsFundsRemaining = new LineGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 1000)));
+        pointsFundsRemaining = new LineGraphSeries<>(setDataPoints(convertListToArray(Prediction.predict.spentGraph())));
+        //pointsFundsRemaining = new LineGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 1000)));
         moneyLeftLineGraph.setTitle("Funds Remaining");
         moneyLeftLineGraph.setTitleTextSize(50);
 
         //pointsForAverage.setDataPointsRadius(10);
-        moneyLeftLineGraph.getViewport().setMaxX(12);
-        moneyLeftLineGraph.getViewport().setMaxY(1000);
+        moneyLeftLineGraph.getViewport().setMaxX(maxx);
+        moneyLeftLineGraph.getViewport().setMaxY(maxy);
         moneyLeftLineGraph.getViewport().setXAxisBoundsManual(true);
         moneyLeftLineGraph.getViewport().setYAxisBoundsManual(true);
 
@@ -151,12 +170,12 @@ public class GraphsFragment extends Fragment {
 
     protected void setBarGraph(){
 
-        //barGraphPoints = new BarGraphSeries<>(setDataPoints(setMyArray(Prediction.predict.getMealTypeAverage())));
-        barGraphPoints = new BarGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 20)));
+        barGraphPoints = new BarGraphSeries<>(setDataPoints(setMyBarArray(Prediction.predict.getMealTypeAverage())));
+        //barGraphPoints = new BarGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 20)));
         mealTimeSpending.setTitle("Spending Per Meal");
         mealTimeSpending.setTitleTextSize(50);
 
-        mealTimeSpending.getViewport().setMaxX(12);
+        mealTimeSpending.getViewport().setMaxX(5);
         mealTimeSpending.getViewport().setMaxY(20);
         mealTimeSpending.getViewport().setXAxisBoundsManual(true);
         mealTimeSpending.getViewport().setYAxisBoundsManual(true);
@@ -166,6 +185,27 @@ public class GraphsFragment extends Fragment {
         barGraphPoints.setSpacing(20);
         //barGraphPoints.setDrawValuesOnTop(true);
         //barGraphPoints.setValuesOnTopColor(Color.GREEN);
+    }
+
+    private int setMaxAxis(int [][] d){
+        int n = 0;
+        maxy = d[1][0];
+        for (int i = 0; i < d[0].length; i++){
+            if (d[0][i] != 0) {
+                if (n == 0){
+                    minx = i;
+                }
+                n++;
+            }
+            if (maxy < d[1][i]){
+                maxy = d[1][i];
+            }
+        }
+        maxx = minx + n;
+        maxx += maxx * 0.1;
+        maxy += maxy * 0.1;
+
+        return n;
     }
 
 }

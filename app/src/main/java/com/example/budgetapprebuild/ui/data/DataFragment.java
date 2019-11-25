@@ -41,16 +41,16 @@ public class DataFragment extends Fragment {
         daysUntilEnd = root.findViewById(R.id.text_daysUntilEnd);
         predictionText = root.findViewById(R.id.text_information);
 
-        //Catherine Elizabeth Gallaher here is where you need to be
-        //If you can change/check if my array size is big enough
-
         info = new String[100][2];
         //SNHULogOn s = new SNHULogOn();
         //info = s.getInfo();
-        //Prediction.predict.calcDaysLeft();
-        //daysUntilEnd.setText("Days until end of semester: " + Prediction.predict.getDaysLeft());
+        //Prediction.predict.calcDaysLeft(); error
+        daysUntilEnd.setText("Days until end of semester: " + Prediction.predict.getDaysLeft());
 
-        setPredictionText("30", "3", "less than", "You might want to change some habits.");
+
+
+
+        setPredictionText("30", "2", "less than", "You might want to change some habits.");
         randomlyGenerate();
 
         for(int k = 0; k < Prediction.predict.info.size(); k++) {
