@@ -22,6 +22,7 @@ import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -135,15 +136,17 @@ public class GraphsFragment extends Fragment {
         pointsForAverage = new LineGraphSeries<>(setDataPoints(setMyArray(Prediction.predict.getMonthAverage())));
         //pointsForAverage = new LineGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 10)));
 
-        averageLineGraph.setTitle("Average Spending per Month");
+        averageLineGraph.setTitle("Total Spending per Month");
         averageLineGraph.setTitleTextSize(50);
 
-        //averageLineGraph.getGridLabelRenderer().setHorizontalAxisTitle("Month");
-        //averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity()));
+        averageLineGraph.getGridLabelRenderer().setHorizontalAxisTitle("Month");
+        averageLineGraph.getGridLabelRenderer().setVerticalAxisTitle("Average Money Spent");
+
+        //SimpleDateFormat sdf = new SimpleDateFormat("MMM");
+        //averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), sdf));
 
         averageLineGraph.getViewport().setMinX(minx);
         averageLineGraph.getViewport().setMaxX(maxx);
-        //averageLineGraph.getViewport().setX(10);
         averageLineGraph.getViewport().setMaxY(maxy);
         averageLineGraph.getViewport().setXAxisBoundsManual(true);
         averageLineGraph.getViewport().setYAxisBoundsManual(true);
@@ -153,11 +156,13 @@ public class GraphsFragment extends Fragment {
 
     protected void setMoneyLeftGraph(){
 
-
         pointsFundsRemaining = new LineGraphSeries<>(setDataPoints(convertListToArray(Prediction.predict.spentGraph())));
         //pointsFundsRemaining = new LineGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 1000)));
         moneyLeftLineGraph.setTitle("Funds Remaining");
         moneyLeftLineGraph.setTitleTextSize(50);
+
+        moneyLeftLineGraph.getGridLabelRenderer().setHorizontalAxisTitle("Number of Purchases");
+        moneyLeftLineGraph.getGridLabelRenderer().setVerticalAxisTitle("Total Money");
 
         //pointsForAverage.setDataPointsRadius(10);
         moneyLeftLineGraph.getViewport().setMaxX(maxx);
@@ -174,6 +179,9 @@ public class GraphsFragment extends Fragment {
         //barGraphPoints = new BarGraphSeries<>(setDataPoints(setRandomArrayPoints(12, 20)));
         mealTimeSpending.setTitle("Spending Per Meal");
         mealTimeSpending.setTitleTextSize(50);
+
+        mealTimeSpending.getGridLabelRenderer().setHorizontalAxisTitle("Meals");
+        mealTimeSpending.getGridLabelRenderer().setVerticalAxisTitle("Average Money Spent");
 
         mealTimeSpending.getViewport().setMaxX(5);
         mealTimeSpending.getViewport().setMaxY(20);
