@@ -47,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        SNHULogOn a = new SNHULogOn();
+        a.execute("Yes");
 
         //Jack and Catherine stuff
         //SNHULogOn a = new SNHULogOn();
