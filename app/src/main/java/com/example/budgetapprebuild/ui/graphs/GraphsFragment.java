@@ -51,6 +51,7 @@ public class GraphsFragment extends Fragment {
 
         //Prediction.predict.getSpentPerDay();
         //Prediction.predict.getEstAmountLeft();
+        Prediction.predict.predictionSettings("October 20, 2019", "December 20, 2019", 5, 600, 1000, 1000, 1600, 1600, 2000);
         Prediction.predict.calcMealTypeAverage();
         Prediction.predict.calcMonthAverage();
         Prediction.predict.calcSpentPerDay();
