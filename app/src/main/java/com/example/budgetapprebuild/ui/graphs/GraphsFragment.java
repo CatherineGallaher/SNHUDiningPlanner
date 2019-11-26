@@ -67,6 +67,15 @@ public class GraphsFragment extends Fragment {
         //bar graph
         mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
         setBarGraph();
+        /*
+        graphview.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+        @Override
+            public...
+            https://www.youtube.com/watch?v=xt8gx7Z7yJU
+            6:38
+        
+        });
+        */
 
         return root;
     }
