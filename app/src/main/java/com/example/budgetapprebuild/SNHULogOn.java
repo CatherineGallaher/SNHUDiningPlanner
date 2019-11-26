@@ -3,8 +3,11 @@ package com.example.budgetapprebuild;
 
 import android.os.AsyncTask;
 
+import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.nodes.FormElement;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,17 +29,30 @@ public class SNHULogOn extends AsyncTask<String, String, String> {
     public String doInBackground(String... urls) {
         try {
             System.out.println("In SNHULogOn");
-            Document dc = Jsoup.connect("https://get.cbord.com/snhu/full/login.php").timeout(6000).get();
-            System.out.println(dc.title());
+            //Document dc = Jsoup.connect("https://get.cbord.com/snhu/full/login.php").timeout(6000).get();
+            //System.out.println(dc.title());
+            Connection.Response loginFormResponse = Jsoup.connect("https://get.cbord.com/snhu/full/login.php")
+                    .method(Connection.Method.GET)
+                    .userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36")
+                    .execute();
+
+
+            FormElement loginForm = (FormElement)loginFormResponse.parse()
+                    .select("login_form").first();
+            Element loginField = loginForm.select("#login_username_text").first();
+            loginField.val("catherine.gallaher@snhu.edu");
+            loginField = loginForm.select("#login_password_text.password").first();
+            loginField.val("3Mog,3Or,3Mb44");
+
             System.out.println("Exit SNHULogOn");
 
-            return "Yes";
+            return "True";
         } catch (Exception e) {
             System.out.println("In SNHULogOn catch");
             System.out.println(e);
-            return "No";
+            return "False";
         } finally {
-            return "Maybe";
+            return "False";
         }
     }
     /*private HtmlPage transactionPage;
