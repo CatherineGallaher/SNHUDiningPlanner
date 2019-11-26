@@ -74,6 +74,14 @@ public class GraphsFragment extends Fragment {
             https://www.youtube.com/watch?v=xt8gx7Z7yJU
             6:38
         
+        graph.getGridLabelRenderer().setNumVerticalLabels / setNumHorizontalLabels
+        https://github.com/jjoe64/GraphView/wiki/Basics-of-GraphView
+        
+        CEG: please post your design ideas here in this comment
+        
+        
+        
+        
         });
         */
 
