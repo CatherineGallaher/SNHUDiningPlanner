@@ -77,6 +77,9 @@ public class Prediction {
         long numDays = ChronoUnit.DAYS.between(dateBefore, dateAfter);
 
         daysLeft = (int)numDays;// - daysOffCampus;
+
+        System.out.println("THE NUMBER OF DAYS LEFT ISSSSS:::::::::::: " + daysLeft);
+
     }
 
     private int parseMonth(String date)

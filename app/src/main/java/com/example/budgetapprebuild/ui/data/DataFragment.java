@@ -33,6 +33,8 @@ public class DataFragment extends Fragment {
     private TextView fundsRemaining;
     String[][] info;
 
+    private static DecimalFormat df = new DecimalFormat("0.00");
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         //pre-generated code below
@@ -44,26 +46,25 @@ public class DataFragment extends Fragment {
         predictionText = root.findViewById(R.id.text_information);
         initialFunds = root.findViewById(R.id.text_initial_funds);
 
-        info = new String[100][2];
+        //info = new String[100][2];
+        Prediction.predict.predictionSettings("October 20, 2019", "2019-12-20", 5, 600, 1000, 1000, 1600, 1600, 2000);
+        Prediction.predict.calcDaysLeft();
 
-        /*Prediction.predict.predictionSettings("08 ", "12 ", "10", "");
-        Prediction.predict.calcDaysLeft();*/
-
-        daysUntilEnd.setText("Days until end of semester: 16" /*+ Prediction.predict.getDaysLeft()*/);
+        daysUntilEnd.setText("Days until end of semester: " + Prediction.predict.getDaysLeft());
 
 
         Prediction.predict.calcSpentPerDay();
-        initialFunds.setText("Initial Funds: $" + (int) Math.round(Prediction.predict.spentGraph().get(0)));
+        initialFunds.setText("Initial Funds: $" + df.format(Prediction.predict.spentGraph().get(0)));
 
         Prediction.predict.calcEstAmountLeft();
-        fundsRemaining.setText("Funds Remaining: $" + Prediction.predict.getEstAmountLeft());
+        fundsRemaining.setText("Funds Remaining (at end of semester): $" + df.format(Prediction.predict.getEstAmountLeft()));
 
 
         setPredictionText("30", "2", "less than", "You might want to change some habits.");
-        randomlyGenerate();
+        //randomlyGenerate();
 
         for(int k = 0; k < Prediction.predict.info.size(); k++) {
-            if (info[k][0] == null){
+            if (Prediction.predict.info.get(k).get(0) == null){
                 break;
             }
             inputData(Prediction.predict.info.get(k).get(0), Prediction.predict.info.get(k).get(2));
