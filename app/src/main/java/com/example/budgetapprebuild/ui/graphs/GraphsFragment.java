@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.budgetapprebuild.Prediction;
 import com.example.budgetapprebuild.R;
+import com.jjoe64.graphview.DefaultLabelFormatter;
 import com.jjoe64.graphview.GraphView;
 import com.jjoe64.graphview.LabelFormatter;
 import com.jjoe64.graphview.helper.DateAsXAxisLabelFormatter;
@@ -43,6 +44,10 @@ public class GraphsFragment extends Fragment {
     private double minx;
     private double maxx;
     private double maxy;
+    private String[] months = new String[]{
+            "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+    };
+    private int increment = 2;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -149,16 +154,32 @@ public class GraphsFragment extends Fragment {
         averageLineGraph.getGridLabelRenderer().setHorizontalAxisTitle("Month");
         averageLineGraph.getGridLabelRenderer().setVerticalAxisTitle("Total Money Spent");
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MMM");
-        averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), sdf));
+        averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                if (isValueX){
+                    return months[increment++];
+                }
+                return super.formatLabel(value, isValueX);
+            }
 
-        averageLineGraph.getViewport().setMinX(minx);
+        });
+
+        /*SimpleDateFormat sdf = new SimpleDateFormat("MMM");
+        averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), sdf));*/
+
+        averageLineGraph.getViewport().setMinX(minx-1);
         averageLineGraph.getViewport().setMaxX(maxx);
         averageLineGraph.getViewport().setMaxY(maxy);
         averageLineGraph.getViewport().setXAxisBoundsManual(true);
         averageLineGraph.getViewport().setYAxisBoundsManual(true);
 
         averageLineGraph.addSeries(pointsForAverage);
+    }
+
+    private int increment(int v, int i){
+        v+=i;
+        return v;
     }
 
     protected void setMoneyLeftGraph(){
