@@ -342,10 +342,6 @@ public class Prediction {
         String[] parsedRows = jsonText.split("([{])");//"}|\\{");
         String[] parsedCol;
 
-        for(int j = 0; j < parsedRows.length; j++)
-        {
-            System.out.println(parsedRows[j]);
-        }
         for(int i = 1; i < parsedRows.length-1; i++)
         {
             parsedCol = parsedRows[i].split(",");
@@ -354,11 +350,6 @@ public class Prediction {
             this.info.get(i-1).add(parsedCol[0] + ", " + parsedCol[1]);
             this.info.get(i-1).add(parsedCol[2]);
             this.info.get(i-1).add(parsedCol[3]);
-        }
-
-        for(int j = 0; j< info.size(); j++)
-        {
-            System.out.println(info.get(j).get(0) + "\t" + info.get(j).get(2));
         }
     }
 }

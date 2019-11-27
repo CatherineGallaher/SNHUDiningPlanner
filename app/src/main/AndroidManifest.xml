@@ -18,7 +18,8 @@
             android:label="@string/title_activity_main"></activity>
         <activity
             android:name=".ui.login.LoginActivity"
-            android:label="">
+            android:label=""
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
