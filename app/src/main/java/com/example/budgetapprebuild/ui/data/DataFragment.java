@@ -40,40 +40,47 @@ public class DataFragment extends Fragment {
         //pre-generated code below
         dataViewModel = ViewModelProviders.of(this).get(DataViewModel.class);
         View root = inflater.inflate(R.layout.fragment_data, container, false);
+
         fundsRemaining = root.findViewById(R.id.text_funds_remaining);
         dataBox = root.findViewById(R.id.text_dataBox);
         daysUntilEnd = root.findViewById(R.id.text_daysUntilEnd);
         predictionText = root.findViewById(R.id.text_information);
         initialFunds = root.findViewById(R.id.text_initial_funds);
 
-        //info = new String[100][2];
-        Prediction.predict.predictionSettings("October 20, 2019", "2019-12-20", 5, 600, 1000, 1000, 1600, 1600, 2000);
-        Prediction.predict.calcDaysLeft();
+        try {
+            //info = new String[100][2];
+            Prediction.predict.predictionSettings("October 20, 2019", "2019-12-20", 5, 600, 1000, 1000, 1600, 1600, 2000);
+            Prediction.predict.calcDaysLeft();
 
-        daysUntilEnd.setText("Days until end of semester: " + Prediction.predict.getDaysLeft());
-
-
-        Prediction.predict.calcSpentPerDay();
-        initialFunds.setText("Initial Funds: $" + df.format(Prediction.predict.spentGraph().get(0)));
-
-        Prediction.predict.calcEstAmountLeft();
-        fundsRemaining.setText("Funds Remaining (at end of semester): $" + df.format(Prediction.predict.getEstAmountLeft()));
+            daysUntilEnd.setText("Days until end of semester: " + Prediction.predict.getDaysLeft());
 
 
-        setPredictionText("30", "2", "less than", "You might want to change some habits.");
-        //randomlyGenerate();
+            Prediction.predict.calcSpentPerDay();
+            initialFunds.setText("Initial Funds: $" + df.format(Prediction.predict.spentGraph().get(0)));
 
-        for(int k = 0; k < Prediction.predict.info.size(); k++) {
-            if (Prediction.predict.info.get(k).get(0) == null){
-                break;
+            Prediction.predict.calcEstAmountLeft();
+            fundsRemaining.setText("Funds Remaining (at end of semester): $" + df.format(Prediction.predict.getEstAmountLeft()));
+
+
+            setPredictionText("30", "2", "less than", "You might want to change some habits.");
+            //randomlyGenerate();
+
+            for (int k = 0; k < Prediction.predict.info.size(); k++) {
+                if (Prediction.predict.info.get(k).get(0) == null) {
+                    break;
+                }
+                inputData(Prediction.predict.info.get(k).get(0), Prediction.predict.info.get(k).get(2));
+                //inputData(info[k][0], info[k][1]);
             }
-            inputData(Prediction.predict.info.get(k).get(0), Prediction.predict.info.get(k).get(2));
-            //inputData(info[k][0], info[k][1]);
-        }
 
         /*dataViewModel.getText().observe(this, new Observer<String>() {
             @Override public void onChanged(@Nullable String s) { textView.setText(s); }
         });*/
+        }
+        catch (Exception e){
+            initialFunds.setText("An Error has occured");
+        }
+
 
         return root;
     }

@@ -60,24 +60,22 @@ public class GraphsFragment extends Fragment {
 
         //Prediction.predict.getSpentPerDay();
         //Prediction.predict.getEstAmountLeft();
-        Prediction.predict.calcMealTypeAverage();
-        Prediction.predict.calcMonthAverage();
-        Prediction.predict.calcSpentPerDay();
-        Prediction.predict.calcEstAmountLeft();
+        averageLineGraph = root.findViewById(R.id.graph_average);
+        moneyLeftLineGraph = root.findViewById(R.id.graph_fundsRemaining);
+        mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
 
         try {
 
-            //line graph code for average
-            averageLineGraph = root.findViewById(R.id.graph_average);
+            Prediction.predict.calcMealTypeAverage();
+            Prediction.predict.calcMonthAverage();
+            Prediction.predict.calcSpentPerDay();
+            Prediction.predict.calcEstAmountLeft();
+
+
             setAverageGraph();
-
-            //line graph for money left
-            moneyLeftLineGraph = root.findViewById(R.id.graph_fundsRemaining);
             setMoneyLeftGraph();
-
-            //bar graph
-            mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
             setBarGraph();
+
         }
         catch(Exception e){
             averageLineGraph.setTitle("Error creating Graphs");

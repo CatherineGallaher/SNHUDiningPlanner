@@ -65,6 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="17dp"
                     android:text="Start of Semester: " />
 
                 <EditText
@@ -88,6 +89,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="17dp"
                     android:text="End of Semester" />
 
                 <EditText
@@ -110,6 +112,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:textSize="17dp"
                     android:text="Days off Campus: " />
 
                 <EditText
@@ -145,6 +148,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight=".09"
+                        android:textSize="20dp"
                         android:text="Breakfast: " />
 
                     <EditText
@@ -154,7 +158,7 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:inputType="time"
-                        android:text="start: " />
+                        android:hint="start" />
 
                     <EditText
                         android:id="@+id/time_breakend"
@@ -163,7 +167,7 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:inputType="time"
-                        android:text="end: " />
+                        android:hint="end" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -177,6 +181,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight=".09"
+                        android:textSize="20dp"
                         android:text="Lunch: " />
 
                     <EditText
@@ -186,7 +191,7 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:inputType="time"
-                        android:text="start: " />
+                        android:hint="start" />
 
                     <EditText
                         android:id="@+id/time_lunchend"
@@ -195,7 +200,7 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:inputType="time"
-                        android:text="end: " />
+                        android:hint="end" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -209,6 +214,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight=".09"
+                        android:textSize="20dp"
                         android:text="Dinner: " />
 
                     <EditText
@@ -218,7 +224,7 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:inputType="time"
-                        android:text="start: " />
+                        android:hint="start" />
 
                     <EditText
                         android:id="@+id/time_dinnerend"
@@ -227,7 +233,7 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:inputType="time"
-                        android:text="end: " />
+                        android:hint="end" />
                 </LinearLayout>
 
             </LinearLayout>
