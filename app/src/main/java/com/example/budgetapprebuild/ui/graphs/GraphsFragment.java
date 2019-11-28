@@ -65,17 +65,24 @@ public class GraphsFragment extends Fragment {
         Prediction.predict.calcSpentPerDay();
         Prediction.predict.calcEstAmountLeft();
 
-        //line graph code for average
-        averageLineGraph = root.findViewById(R.id.graph_average);
-        setAverageGraph();
+        try {
 
-        //line graph for money left
-        moneyLeftLineGraph = root.findViewById(R.id.graph_fundsRemaining);
-        setMoneyLeftGraph();
+            //line graph code for average
+            averageLineGraph = root.findViewById(R.id.graph_average);
+            setAverageGraph();
 
-        //bar graph
-        mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
-        setBarGraph();
+            //line graph for money left
+            moneyLeftLineGraph = root.findViewById(R.id.graph_fundsRemaining);
+            setMoneyLeftGraph();
+
+            //bar graph
+            mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
+            setBarGraph();
+        }
+        catch(Exception e){
+            averageLineGraph.setTitle("Error creating Graphs");
+        }
+
 
         return root;
     }
@@ -145,9 +152,11 @@ public class GraphsFragment extends Fragment {
 
         averageLineGraph.setTitle("Total Spending per Month");
         averageLineGraph.setTitleTextSize(50);
-
         averageLineGraph.getGridLabelRenderer().setHorizontalAxisTitle("Month");
+        averageLineGraph.getGridLabelRenderer().setHorizontalAxisTitleTextSize(40);
         averageLineGraph.getGridLabelRenderer().setVerticalAxisTitle("Total Money Spent");
+        averageLineGraph.getGridLabelRenderer().setVerticalAxisTitleTextSize(40);
+        averageLineGraph.getGridLabelRenderer().setTextSize(30);
 
         averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
             @Override
@@ -162,9 +171,6 @@ public class GraphsFragment extends Fragment {
             }
         });
 
-        /*SimpleDateFormat sdf = new SimpleDateFormat("MMM");
-        averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), sdf));*/
-
         averageLineGraph.getGridLabelRenderer().setNumHorizontalLabels(6);
         averageLineGraph.getViewport().setMinX((int)(minx));
         averageLineGraph.getViewport().setMaxX((int)(maxx));
@@ -173,11 +179,6 @@ public class GraphsFragment extends Fragment {
         averageLineGraph.getViewport().setYAxisBoundsManual(true);
 
         averageLineGraph.addSeries(pointsForAverage);
-    }
-
-    private int increment(int v, int i){
-        v+=i;
-        return v;
     }
 
     protected void setMoneyLeftGraph(){
@@ -189,6 +190,8 @@ public class GraphsFragment extends Fragment {
 
         moneyLeftLineGraph.getGridLabelRenderer().setHorizontalAxisTitle("Number of Purchases");
         moneyLeftLineGraph.getGridLabelRenderer().setVerticalAxisTitle("Total Money");
+        averageLineGraph.getGridLabelRenderer().setVerticalAxisTitleTextSize(40);
+        averageLineGraph.getGridLabelRenderer().setTextSize(30);
 
         //pointsForAverage.setDataPointsRadius(10);
         moneyLeftLineGraph.getViewport().setMaxX(maxx);
@@ -207,7 +210,10 @@ public class GraphsFragment extends Fragment {
         mealTimeSpending.setTitleTextSize(50);
 
         mealTimeSpending.getGridLabelRenderer().setHorizontalAxisTitle("Meals");
+        averageLineGraph.getGridLabelRenderer().setHorizontalAxisTitleTextSize(40);
         mealTimeSpending.getGridLabelRenderer().setVerticalAxisTitle("Average Money Spent");
+        averageLineGraph.getGridLabelRenderer().setVerticalAxisTitleTextSize(40);
+        averageLineGraph.getGridLabelRenderer().setTextSize(30);
 
         mealTimeSpending.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
             @Override
