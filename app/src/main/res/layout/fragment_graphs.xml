@@ -20,18 +20,21 @@
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/graph_average"
                 android:layout_marginBottom="25dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="200dip" />
 
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/graph_fundsRemaining"
                 android:layout_marginBottom="25dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="200dip" />
 
             <com.jjoe64.graphview.GraphView
                 android:id="@+id/graph_mealTimeSpending"
                 android:layout_marginBottom="25dp"
+                android:layout_marginRight="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="200dip" />
         </LinearLayout>

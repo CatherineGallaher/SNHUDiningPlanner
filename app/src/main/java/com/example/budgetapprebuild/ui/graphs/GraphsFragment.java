@@ -47,7 +47,11 @@ public class GraphsFragment extends Fragment {
     private String[] months = new String[]{
             "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     };
-    private int increment = 2;
+    private String[] meals = new String[]{
+             "", "Breakfast", "Lunch", "Dinner", "Snacks", ""
+    };
+    private int increment = 0;
+    private int num = 5;
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -72,23 +76,6 @@ public class GraphsFragment extends Fragment {
         //bar graph
         mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
         setBarGraph();
-        /*
-        graphview.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
-        @Override
-            public...
-            https://www.youtube.com/watch?v=xt8gx7Z7yJU
-            6:38
-        
-        graph.getGridLabelRenderer().setNumVerticalLabels / setNumHorizontalLabels
-        https://github.com/jjoe64/GraphView/wiki/Basics-of-GraphView
-        
-        CEG: please post your design ideas here in this comment
-        
-        
-        
-        
-        });
-        */
 
         return root;
     }
@@ -166,18 +153,21 @@ public class GraphsFragment extends Fragment {
             @Override
             public String formatLabel(double value, boolean isValueX) {
                 if (isValueX){
-                    return months[increment++];
+                    if (value != 10.915){
+                        return months[(((int)(value))+11) % 12];
+                    }
+                    return months[((increment++)+11) % 12];
                 }
                 return super.formatLabel(value, isValueX);
             }
-
         });
 
         /*SimpleDateFormat sdf = new SimpleDateFormat("MMM");
         averageLineGraph.getGridLabelRenderer().setLabelFormatter(new DateAsXAxisLabelFormatter(getActivity(), sdf));*/
 
-        averageLineGraph.getViewport().setMinX(minx-1);
-        averageLineGraph.getViewport().setMaxX(maxx);
+        averageLineGraph.getGridLabelRenderer().setNumHorizontalLabels(6);
+        averageLineGraph.getViewport().setMinX((int)(minx));
+        averageLineGraph.getViewport().setMaxX((int)(maxx));
         averageLineGraph.getViewport().setMaxY(maxy);
         averageLineGraph.getViewport().setXAxisBoundsManual(true);
         averageLineGraph.getViewport().setYAxisBoundsManual(true);
@@ -219,6 +209,17 @@ public class GraphsFragment extends Fragment {
         mealTimeSpending.getGridLabelRenderer().setHorizontalAxisTitle("Meals");
         mealTimeSpending.getGridLabelRenderer().setVerticalAxisTitle("Average Money Spent");
 
+        mealTimeSpending.getGridLabelRenderer().setLabelFormatter(new DefaultLabelFormatter(){
+            @Override
+            public String formatLabel(double value, boolean isValueX) {
+                if (isValueX){
+                    return meals[num++ % 6];
+                }
+                return super.formatLabel(value, isValueX);
+            }
+        });
+
+        mealTimeSpending.getGridLabelRenderer().setNumHorizontalLabels(6);
         mealTimeSpending.getViewport().setMaxX(5);
         mealTimeSpending.getViewport().setMaxY(20);
         mealTimeSpending.getViewport().setXAxisBoundsManual(true);
