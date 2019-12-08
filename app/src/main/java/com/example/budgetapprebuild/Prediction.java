@@ -37,29 +37,12 @@ public class Prediction {
     public Prediction(int userID)
     {
         this.userID = userID;
-        populateMonths();
     }
 
     public Prediction()
     {
-        populateMonths();
     }
 
-    private void populateMonths()
-    {
-        months.add("January");
-        months.add("February");
-        months.add("March");
-        months.add("April");
-        months.add("May");
-        months.add("June");
-        months.add("July");
-        months.add("August");
-        months.add("September");
-        months.add("October");
-        months.add("November");
-        months.add("December");
-    }
 
     public void getData()
     {
@@ -278,7 +261,7 @@ public class Prediction {
 
     public void calcEstAmountLeft()
     {
-        estAmountLeft = 580.00 - spentPerDay*daysLeft;//parseBalance(SNHULogOn.dataScrape.currBalance) - spentPerDay*daysLeft;
+        estAmountLeft = 417.51 - spentPerDay*daysLeft;//parseBalance(SNHULogOn.dataScrape.currBalance) - spentPerDay*daysLeft; //CATHERINE FIX THIS
     }
 
     public double[] getMealTypeAverage()
@@ -314,7 +297,7 @@ public class Prediction {
     public List<Double> spentGraph()
     {
         List<Double> myList = new ArrayList<Double>();
-        double spentSum = 0;
+        double spentSum = 417.510; //CATHERINE FIX THIS
         //List<String> amounts = new ArrayList<String>();
         for(int j = 0; j < this.info.size(); j++)//SNHULogOn.dataScrape.info.size(); j++)
         {
@@ -338,7 +321,7 @@ public class Prediction {
     }
 
     public void setInfo(String jsonText) {
-        System.out.println(jsonText);
+        System.out.println("Json: " + jsonText);
         String[] parsedRows = jsonText.split("([{])");//"}|\\{");
         String[] parsedCol;
 
