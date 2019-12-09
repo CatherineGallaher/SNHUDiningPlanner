@@ -2,6 +2,7 @@ package com.example.budgetapprebuild;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
+import android.content.Intent;
 import android.util.Log;
 
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.budgetapprebuild.ui.login.LoginActivity;
+import com.example.budgetapprebuild.ui.settings.SettingsFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,10 +21,11 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        System.out.println("--------------------------------------------------------------------------\n");
+        //System.out.println("--------------------------------------------------------------------------\n");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         BottomNavigationView navView = findViewById(R.id.nav_view);
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         SQLConnect con = new SQLConnect();
         try {
-            System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            //System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             //System.out.println("Result: " + con.execute("getTableInfo", "ti_catherine_gallaher2").get());
             Prediction.predict.setInfo(con.execute("getTableInfo", "ti_catherine_gallaher2").get());
             System.out.println(Prediction.predict.info);
