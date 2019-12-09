@@ -8,8 +8,11 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.nodes.FormElement;
+import org.jsoup.select.Elements;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ListIterator;
 
@@ -21,7 +24,7 @@ public class SNHULogOn extends AsyncTask<String, String, String> {
     SNHULogOn(){};
     public List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
     public static SNHULogOn dataScrape = new SNHULogOn();
-    public String currBalance = "its not working dumbass";
+    public String currBalance = "its not working";
     public String email;
     public String password;
     public String dateLastAccessed;
@@ -29,24 +32,114 @@ public class SNHULogOn extends AsyncTask<String, String, String> {
     public String doInBackground(String... urls) {
         try {
             System.out.println("In SNHULogOn");
-            //Document dc = Jsoup.connect("https://get.cbord.com/snhu/full/login.php").timeout(6000).get();
-            //System.out.println(dc.title());
-            Connection.Response loginFormResponse = Jsoup.connect("https://get.cbord.com/snhu/full/login.php")
-                    .method(Connection.Method.GET)
-                    .userAgent("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36")
-                    .execute();
+            Connection.Response loginFormResponse = Jsoup.connect("https://get.cbord.com/snhu/full/login.php").userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").method(Connection.Method.GET).execute();
+            //Document dc = loginFormResponse.parse();//Jsoup.connect("https://get.cbord.com/snhu/full/login.php").timeout(6000).get();
+            System.out.println("Connection made");
+            /*
+            Elements inputs = dc.select("input");
+            Element myLoginInfo[] = {null, null, null, null};
+            int i = 0;
+            for (Element input : inputs) {
+                myLoginInfo[i] = input;
+                i++;
+                System.out.println("\ninput: " + input.attr("id"));
+            }
+            System.out.println("found inputs");
+            myLoginInfo[1].val("catherine.gallaher@snhu.edu");
+            myLoginInfo[2].val("3Mog,3Or,3Mb44");
+            System.out.println("Set login info");
+            //$("input[name='formToken']")*/
 
+/*
+            HashMap<String, String> cookies = new HashMap<>(loginForm.cookies());
+            String formToken = dc.select("#long > form > div:nth-child(1) > input[type=\"hidden\":nth-child(2)").first().attr("value");
 
-            FormElement loginForm = (FormElement)loginFormResponse.parse()
-                    .select("login_form").first();
+            HashMap<String, String> formData = new HashMap<>();
+            formData.put("formToken", formToken);
+            formData.put("username", "catherine.gallaher@snhu.edu");
+            formData.put("password", "3Mog,3Or,3Mb44");
+            formData.put("submit", "Login");
+
+            Connection.Response homePage = Jsoup.connect("https://get.cbord.com/snhu/full/login.php").data(formData).method(Connection.Method.POST).execute();
+            System.out.println(homePage.parse());
+
+ */
+            //Connection.Response homePage = Jsoup.connect("https://get.cbord.com/snhu/full/login.php").data("username", "catherine.gallaher@snhu.edu").data("password", "3Mog,3Or,3Mb44").method(Connection.Method.POST).execute();
+            //Document hp = homePage.parse();
+            //System.out.println(hp.title());
+
+            FormElement loginForm = (FormElement)loginFormResponse.parse().select("#login-form").first();
+
             Element loginField = loginForm.select("#login_username_text").first();
             loginField.val("catherine.gallaher@snhu.edu");
-            loginField = loginForm.select("#login_password_text.password").first();
-            loginField.val("3Mog,3Or,3Mb44");
+            Element passwordField = loginForm.select("#login_password_text").first();
+            passwordField.val("3Mog,3Or,3Mb44");
+
+
+            Connection.Response loginActionResponse = loginForm.submit().cookies(loginFormResponse.cookies()).timeout(6000).execute();
+
+            //System.out.println(loginActionResponse.parse().title());
+
+
+            Connection.Response overviewPage = Jsoup.connect("https://get.cbord.com/snhu/full/funds_home.php").userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").cookies(loginFormResponse.cookies()).method(Connection.Method.GET).timeout(6000).execute();
+            Document doc = overviewPage.parse();//Jsoup.connect("https://get.cbord.com/snhu/full/funds_home.php").timeout(6000).get();
+            System.out.println("Title " + doc.title());
+            Elements ele = doc.select("*");
+            System.out.println(ele.get(74).toString());
+            for (int i = 1; i < ele.size(); i++) { //first row is the col names so skip it.
+                System.out.println(i + "    *****************************\n" + ele.get(i).toString());
+            }
+            /*
+            System.out.println(doc.select("table").get(0).toString());
+            Element table = doc.select("table").get(0); //select the first table.
+            Elements rows = table.select("tr");
+            for (int i = 1; i < rows.size(); i++) { //first row is the col names so skip it.
+                Element row = rows.get(i);
+                Elements cols = row.select("td");
+
+                if (cols.get(7).text().equals("down")) {
+                    System.out.println(cols.get(0));//downServers.add(cols.get(5).text());
+                }
+            }*/
+            //Elements tds = doc.select("table");
+           // System.out.println(tds.size());
+
+            System.out.println("Changed pages");
+
+            //FormElement transactionForm = (FormElement)loginActionResponse.parse().select("#child-selection form")
+            Document balancePage = loginActionResponse.parse();
+            //System.out.println(balancePage.text());
+            String[] thePage = balancePage.text().split(" ");
+            if(thePage[10].compareTo("failed,") != 0)
+            {
+                //System.out.println(balancePage);
+                //Elements balanceElement = balancePage.getElementsByTag("table");
+                //Elements myPage = balancePage.select("*");
+                //Elements myPage = balancePage.getElementsByClass("last-child balance");
+                //for (Element input : myPage) {
+                //    System.out.println("\ninput: " + input + input.attr("class"));
+                //}
+                //Elements cells = balancePage.select("td"); //select the first table
+                //System.out.println("Balance: " + myPage.first());
+                //System.out.println("table found\n" + table.text());
+                //Elements rows = table.select("tr");
+
+                //for (int i = 0; i < rows.size(); i++) {
+                //Element row = rows.get(i);
+                //System.out.println(row.text());
+                //Elements col = row.select("td");
+
+                //System.out.println(row + " " + col);
+                //}
+
+                //System.out.println("Val: " + loginActionResponse.parse().getElementsByClass("last-child balance").());
+                return "True";
+            }
+
 
             System.out.println("Exit SNHULogOn");
 
-            return "True";
+            return "False";
         } catch (Exception e) {
             System.out.println("In SNHULogOn catch");
             System.out.println(e);

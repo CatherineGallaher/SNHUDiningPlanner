@@ -56,13 +56,13 @@ public class DataFragment extends Fragment {
 
 
             Prediction.predict.calcSpentPerDay();
-            initialFunds.setText("Initial Funds: $" + df.format(Prediction.predict.spentGraph().get(0)));
+            initialFunds.setText("Estimated initial Funds: $" + df.format(Prediction.predict.spentGraph().get(0)));
 
             Prediction.predict.calcEstAmountLeft();
             fundsRemaining.setText("Funds Remaining (at end of semester): $" + df.format(Prediction.predict.getEstAmountLeft()));
 
 
-            setPredictionText("30", "2", "less than", "You might want to change some habits.");
+            setPredictionText("26 days", "12", "more than", "You are all set.");
             //randomlyGenerate();
 
             for (int k = 0; k < Prediction.predict.info.size(); k++) {
@@ -100,7 +100,7 @@ public class DataFragment extends Fragment {
 
 
     private void setPredictionText(String lastDays, String daysNeeded, String morl, String reinforcement){
-        predictionText.setText("If you continue with your current rate of expenditure,your funds will last last " + lastDays +
+        predictionText.setText("If you continue with your current habits,your funds will last last " + lastDays +
                                ". This is " + daysNeeded + " days " + morl + " than you need. " + reinforcement);
     }
 
