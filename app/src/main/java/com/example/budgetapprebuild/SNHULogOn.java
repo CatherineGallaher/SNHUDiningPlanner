@@ -84,11 +84,11 @@ public class SNHULogOn extends AsyncTask<String, String, String> {
             Connection.Response overviewPage = Jsoup.connect("https://get.cbord.com/snhu/full/funds_home.php").userAgent("Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2228.0 Safari/537.36").cookies(loginFormResponse.cookies()).method(Connection.Method.GET).timeout(6000).execute();
             Document doc = overviewPage.parse();//Jsoup.connect("https://get.cbord.com/snhu/full/funds_home.php").timeout(6000).get();
             System.out.println("Title " + doc.title());
-            Elements ele = doc.select("*");
-            System.out.println(ele.get(74).toString());
-            for (int i = 1; i < ele.size(); i++) { //first row is the col names so skip it.
-                System.out.println(i + "    *****************************\n" + ele.get(i).toString());
-            }
+            //Elements ele = doc.select("*");
+            //System.out.println(ele.get(74).toString());
+            //for (int i = 1; i < ele.size(); i++) { //first row is the col names so skip it.
+            //    System.out.println(i + "    *****************************\n" + ele.get(i).toString());
+            //}
             /*
             System.out.println(doc.select("table").get(0).toString());
             Element table = doc.select("table").get(0); //select the first table.
