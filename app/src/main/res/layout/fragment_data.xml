@@ -18,47 +18,71 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/text_initial_funds"
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Initial Funds: $####.##)"
-                android:textAlignment="center"
-                android:textSize="20sp" />
+                android:layout_weight=".8">
 
-            <TextView
-            android:id="@+id/text_funds_remaining"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:text="Funds Remaining: ####"
-            android:textAlignment="center"
-            android:textSize="20sp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" >
 
-            <TextView
-                android:id="@+id/text_daysUntilEnd"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:text="Days Until End of Semester: "
-                android:textAlignment="center"
-                android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/text_daysUntilEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Days Until End of Semester: "
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
 
-            <TextView
-                android:id="@+id/text_information"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight=".85"
-                android:text="If you continue..."
-                android:textAlignment="center"
-                android:textSize="20sp" />
+                    <TextView
+                        android:id="@+id/text_funds_remaining"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Funds Remaining: ####"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/text_currentBalance"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Current Balance: "
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/text_AvgSpentPerDay"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Average Amount Spent Per Day: "
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/text_information"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="If you continue..."
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/text_initial_funds"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Initial Funds: $####.##)"
+                        android:textAlignment="center"
+                        android:textSize="20sp" />
+                </LinearLayout>
+            </ScrollView>
 
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="60dp"
-                android:layout_weight=".5">
+                android:layout_weight="1">
 
                 <LinearLayout
                     android:id="@+id/linear_databoxes"
@@ -76,7 +100,9 @@
                         android:textSize="20sp" />
 
                     //https://stackoverflow.com/questions/7241145/creating-linearlayout-in-java-elements-are-not-shown
-                    //You might need to add some code to create more of these for better structure/UX - Dylan
+                    //You might need to add some code to create more of these for better
+                    structure/UX - Dylan
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"

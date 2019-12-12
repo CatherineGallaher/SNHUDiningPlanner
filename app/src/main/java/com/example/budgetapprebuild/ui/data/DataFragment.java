@@ -31,6 +31,8 @@ public class DataFragment extends Fragment {
     private TextView predictionText;
     private TextView initialFunds;
     private TextView fundsRemaining;
+    private TextView avgSpentPerDay;
+    private TextView currentBalance;
     String[][] info;
 
     private static DecimalFormat df = new DecimalFormat("0.00");
@@ -46,6 +48,8 @@ public class DataFragment extends Fragment {
         daysUntilEnd = root.findViewById(R.id.text_daysUntilEnd);
         predictionText = root.findViewById(R.id.text_information);
         initialFunds = root.findViewById(R.id.text_initial_funds);
+        avgSpentPerDay = root.findViewById(R.id.text_AvgSpentPerDay);
+        currentBalance = root.findViewById(R.id.text_currentBalance);
 
         try {
             //info = new String[100][2];
@@ -58,9 +62,9 @@ public class DataFragment extends Fragment {
             Prediction.predict.calcSpentPerDay();
             initialFunds.setText("Estimated initial Funds: $" + df.format(Prediction.predict.spentGraph().get(0)));
 
-            //"Current balance: $378.64"
+            currentBalance.setText( currentBalance.getText() + "$378.64");
 
-            //"Average spent per day: $" + Prediction.predict.getSpentPerDay()
+            avgSpentPerDay.setText("Average spent per day: $" + df.format(Prediction.predict.getSpentPerDay()));
 
             Prediction.predict.calcEstAmountLeft();
             fundsRemaining.setText("Funds Remaining (at end of semester): $" + df.format(Prediction.predict.getEstAmountLeft()));
