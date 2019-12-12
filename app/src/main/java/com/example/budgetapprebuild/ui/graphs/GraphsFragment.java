@@ -65,7 +65,6 @@ public class GraphsFragment extends Fragment {
         mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);
 
         try {
-
             Prediction.predict.calcMealTypeAverage();
             Prediction.predict.calcMonthAverage();
             Prediction.predict.calcSpentPerDay();
