@@ -279,7 +279,7 @@ public class Prediction {
 
     public void calcEstAmountLeft()
     {
-        estAmountLeft = 386.63 - spentPerDay*daysLeft;//parseBalance(SNHULogOn.dataScrape.currBalance) - spentPerDay*daysLeft; //CATHERINE FIX THIS 386.63
+        estAmountLeft = 378.64 - spentPerDay*daysLeft;//parseBalance(SNHULogOn.dataScrape.currBalance) - spentPerDay*daysLeft; //CATHERINE FIX THIS 386.63
     }
 
     public double[] getMealTypeAverage()
@@ -315,7 +315,7 @@ public class Prediction {
     public List<Double> spentGraph()
     {
         List<Double> myList = new ArrayList<Double>();
-        double spentSum = 386.63; //CATHERINE FIX THIS
+        double spentSum = 378.64; //CATHERINE FIX THIS
         //List<String> amounts = new ArrayList<String>();
         for(int j = 0; j < this.info.size(); j++)//SNHULogOn.dataScrape.info.size(); j++)
         {

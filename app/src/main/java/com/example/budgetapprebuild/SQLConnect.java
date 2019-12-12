@@ -12,7 +12,7 @@ import java.net.URL;
 public class SQLConnect extends AsyncTask<String, String, String> {
     public SQLConnect(){}
 
-    public static final String IPADDRESS = "192.168.42.208";
+    public static final String IPADDRESS = "10.0.235.73";
 
     HttpURLConnection conn;
     URL url = null;

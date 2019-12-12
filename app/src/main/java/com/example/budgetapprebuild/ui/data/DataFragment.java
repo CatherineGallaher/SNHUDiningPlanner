@@ -58,11 +58,15 @@ public class DataFragment extends Fragment {
             Prediction.predict.calcSpentPerDay();
             initialFunds.setText("Estimated initial Funds: $" + df.format(Prediction.predict.spentGraph().get(0)));
 
+            //"Current balance: $378.64"
+
+            //"Average spent per day: $" + Prediction.predict.getSpentPerDay()
+
             Prediction.predict.calcEstAmountLeft();
             fundsRemaining.setText("Funds Remaining (at end of semester): $" + df.format(Prediction.predict.getEstAmountLeft()));
 
 
-            setPredictionText("25 days", "16", "more than", "You are all set.");
+            setPredictionText("47 days", "39", "more than", "You have enough funds for the rest of the semester.");
             //randomlyGenerate();
 
             for (int k = 0; k < Prediction.predict.info.size(); k++) {

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         try {
             //System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             //System.out.println("Result: " + con.execute("getTableInfo", "ti_catherine_gallaher2").get());
-            Prediction.predict.setInfo(con.execute("getTableInfo", "ti_catherine_gallaher2").get());
+            Prediction.predict.setInfo(con.execute("getTableInfo", "ti_catherine_gallaher3").get());
             System.out.println(Prediction.predict.info);
         } catch (ExecutionException e) {
             e.printStackTrace();
