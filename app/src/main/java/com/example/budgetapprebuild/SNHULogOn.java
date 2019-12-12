@@ -28,6 +28,7 @@ public class SNHULogOn extends AsyncTask<String, String, String> {
     public String email;
     public String password;
     public String dateLastAccessed;
+    public boolean successfulLogOn = false;
 
     public String doInBackground(String... urls) {
         try {
@@ -133,10 +134,11 @@ public class SNHULogOn extends AsyncTask<String, String, String> {
                 //}
 
                 //System.out.println("Val: " + loginActionResponse.parse().getElementsByClass("last-child balance").());
-                return "True";
+                System.out.println("Exit SNHULogOn");
+                successfulLogOn = true;
             }
 
-
+            System.out.println(successfulLogOn);
             System.out.println("Exit SNHULogOn");
 
             return "False";
