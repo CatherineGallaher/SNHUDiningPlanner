@@ -21,7 +21,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 public class SNHULogOn extends AsyncTask<String, String, String> {
-    SNHULogOn(){};
+    public SNHULogOn(){};
     public List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
     public static SNHULogOn dataScrape = new SNHULogOn();
     public String currBalance = "its not working";
@@ -29,6 +29,7 @@ public class SNHULogOn extends AsyncTask<String, String, String> {
     public String password;
     public String dateLastAccessed;
     public boolean successfulLogOn = false;
+    public boolean waiting = true;
 
     public String doInBackground(String... urls) {
         try {
@@ -72,9 +73,11 @@ public class SNHULogOn extends AsyncTask<String, String, String> {
             FormElement loginForm = (FormElement)loginFormResponse.parse().select("#login-form").first();
 
             Element loginField = loginForm.select("#login_username_text").first();
-            loginField.val("catherine.gallaher@snhu.edu");
+            loginField.val(email);
+            //loginField.val("catherine.gallaher@snhu.edu");
             Element passwordField = loginForm.select("#login_password_text").first();
-            passwordField.val("3Mog,3Or,3Mb44");
+            passwordField.val(password);
+            //passwordField.val("3Mog,3Or,3Mb44");
 
 
             Connection.Response loginActionResponse = loginForm.submit().cookies(loginFormResponse.cookies()).timeout(6000).execute();
@@ -111,8 +114,9 @@ public class SNHULogOn extends AsyncTask<String, String, String> {
             Document balancePage = loginActionResponse.parse();
             //System.out.println(balancePage.text());
             String[] thePage = balancePage.text().split(" ");
-            if(thePage[10].compareTo("failed,") != 0)
+            if(thePage[10].equals("failed,") == false)
             {
+                successfulLogOn = true;
                 //System.out.println(balancePage);
                 //Elements balanceElement = balancePage.getElementsByTag("table");
                 //Elements myPage = balancePage.select("*");
@@ -134,10 +138,9 @@ public class SNHULogOn extends AsyncTask<String, String, String> {
                 //}
 
                 //System.out.println("Val: " + loginActionResponse.parse().getElementsByClass("last-child balance").());
-                System.out.println("Exit SNHULogOn");
-                successfulLogOn = true;
+                //System.out.println("Exit SNHULogOn");
             }
-
+            waiting = false;
             System.out.println(successfulLogOn);
             System.out.println("Exit SNHULogOn");
 
