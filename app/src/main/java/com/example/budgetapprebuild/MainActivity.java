@@ -52,6 +52,7 @@ public class MainActivity extends AppCompatActivity {
 
         SNHULogOn a = new SNHULogOn();
         a.execute("Yes");
+        System.out.println(a.successfulLogOn);
 
         //Jack and Catherine stuff
         //SNHULogOn a = new SNHULogOn();

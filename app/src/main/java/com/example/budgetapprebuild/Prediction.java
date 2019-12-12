@@ -37,10 +37,28 @@ public class Prediction {
     public Prediction(int userID)
     {
         this.userID = userID;
+        populateMonths();
     }
 
     public Prediction()
     {
+        populateMonths();
+    }
+
+    private void populateMonths()
+    {
+        months.add("January");
+        months.add("February");
+        months.add("March");
+        months.add("April");
+        months.add("May");
+        months.add("June");
+        months.add("July");
+        months.add("August");
+        months.add("September");
+        months.add("October");
+        months.add("November");
+        months.add("December");
     }
 
 
@@ -193,7 +211,7 @@ public class Prediction {
         }
     }
 
-    public void calcMonthAverage() //Incomplete
+    public void calcMonthAverage()
     {
         double[] monthAverage = {0,0,0,0,0,0,0,0,0,0,0,0};
         int [] monthTransactionCount = {0,0,0,0,0,0,0,0,0,0,0,0};
@@ -261,7 +279,7 @@ public class Prediction {
 
     public void calcEstAmountLeft()
     {
-        estAmountLeft = 417.51 - spentPerDay*daysLeft;//parseBalance(SNHULogOn.dataScrape.currBalance) - spentPerDay*daysLeft; //CATHERINE FIX THIS
+        estAmountLeft = 386.63 - spentPerDay*daysLeft;//parseBalance(SNHULogOn.dataScrape.currBalance) - spentPerDay*daysLeft; //CATHERINE FIX THIS 386.63
     }
 
     public double[] getMealTypeAverage()
@@ -297,7 +315,7 @@ public class Prediction {
     public List<Double> spentGraph()
     {
         List<Double> myList = new ArrayList<Double>();
-        double spentSum = 417.510; //CATHERINE FIX THIS
+        double spentSum = 386.63; //CATHERINE FIX THIS
         //List<String> amounts = new ArrayList<String>();
         for(int j = 0; j < this.info.size(); j++)//SNHULogOn.dataScrape.info.size(); j++)
         {
