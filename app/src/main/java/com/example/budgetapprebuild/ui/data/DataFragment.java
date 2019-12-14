@@ -23,6 +23,9 @@ import com.example.budgetapprebuild.SNHULogOn;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static java.lang.Math.abs;
+import static java.lang.Math.round;
+
 public class DataFragment extends Fragment {
 
     private DataViewModel dataViewModel;
@@ -56,21 +59,28 @@ public class DataFragment extends Fragment {
             Prediction.predict.predictionSettings("October 20, 2019", "2019-12-20", 5, 600, 1000, 1000, 1600, 1600, 2000);
             Prediction.predict.calcDaysLeft();
 
-            daysUntilEnd.setText("Days until end of semester: " + Prediction.predict.getDaysLeft());
+            daysUntilEnd.setText("\nDays until end of semester: " + Prediction.predict.getDaysLeft());
 
 
             Prediction.predict.calcSpentPerDay();
             initialFunds.setText("Estimated initial Funds: $" + df.format(Prediction.predict.spentGraph().get(0)));
 
-            currentBalance.setText( currentBalance.getText() + "$378.64");
+            currentBalance.setText( currentBalance.getText() + df.format(SNHULogOn.dataScrape.currBalance));
 
             avgSpentPerDay.setText("Average spent per day: $" + df.format(Prediction.predict.getSpentPerDay()));
 
             Prediction.predict.calcEstAmountLeft();
-            fundsRemaining.setText("Funds Remaining (at end of semester): $" + df.format(Prediction.predict.getEstAmountLeft()));
+            fundsRemaining.setText("\nFunds Remaining (at end of semester): $" + df.format(Prediction.predict.getEstAmountLeft()));
+            int daysCovered = (int)SNHULogOn.dataScrape.currBalance/Prediction.predict.getDaysLeft();
+            String daysCoveredStr = Integer.toString(daysCovered);
+            int daysExtra = (int)abs(SNHULogOn.dataScrape.currBalance/Prediction.predict.getDaysLeft())-Prediction.predict.getDaysLeft();
+            String daysExtraStr = Integer.toString(daysExtra);
+            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+            System.out.println(daysCoveredStr);
+            System.out.println(daysExtraStr);
 
 
-            setPredictionText("47 days", "39", "more than", "You have enough funds for the rest of the semester.");
+            setPredictionText(daysCoveredStr, daysExtraStr, "more than", "You have enough funds for the rest of the semester.");
             //randomlyGenerate();
 
             for (int k = 0; k < Prediction.predict.info.size(); k++) {

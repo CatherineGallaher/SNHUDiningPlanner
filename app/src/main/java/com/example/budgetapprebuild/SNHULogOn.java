@@ -24,7 +24,8 @@ public class SNHULogOn extends AsyncTask<String, String, String> {
     public SNHULogOn(){};
     public List<ArrayList<String>> info = new ArrayList<ArrayList<String>>();
     public static SNHULogOn dataScrape = new SNHULogOn();
-    public String currBalance = "its not working";
+    //public String currBalance = "its not working";
+    public double currBalance = 378.64;
     public String email;
     public String password;
     public String dateLastAccessed;

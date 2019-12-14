@@ -29,12 +29,12 @@
                     android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/text_daysUntilEnd"
+                        android:id="@+id/text_initial_funds"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="Days Until End of Semester: "
+                        android:text="Initial Funds: $####.##)"
                         android:textAlignment="center"
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
 
                     <View
                         android:id="@+id/divider"
@@ -43,44 +43,43 @@
                         android:background="?android:attr/listDivider" />
 
                     <TextView
-                        android:id="@+id/text_funds_remaining"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Funds Remaining: ####"
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
-
-                    <TextView
                         android:id="@+id/text_currentBalance"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Current Balance: "
                         android:textAlignment="center"
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/text_daysUntilEnd"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Days Until End of Semester: "
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/text_funds_remaining"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="Funds Remaining: ####"
+                        android:textSize="17sp" />
+
 
                     <TextView
                         android:id="@+id/text_AvgSpentPerDay"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Average Amount Spent Per Day: "
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
 
                     <TextView
                         android:id="@+id/text_information"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="If you continue..."
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
 
-                    <TextView
-                        android:id="@+id/text_initial_funds"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="Initial Funds: $####.##)"
-                        android:textAlignment="center"
-                        android:textSize="20sp" />
+
                 </LinearLayout>
             </ScrollView>
 
