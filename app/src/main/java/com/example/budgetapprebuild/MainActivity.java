@@ -39,20 +39,30 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(navView, navController);
 
         SQLConnect con = new SQLConnect();
+
         try {
             //System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             //System.out.println("Result: " + con.execute("getTableInfo", "ti_catherine_gallaher2").get());
             Prediction.predict.setInfo(con.execute("getTableInfo", "ti_catherine_gallaher3").get());
             System.out.println(Prediction.predict.info);
+            con.cancel(true);
+            SQLConnect con2 = new SQLConnect();
+            //System.out.println(con2.execute("inputVal", "updateusers", "catherine_gallaher3", "asdfasdfasdf", "$372.64", SNHULogOn.dataScrape.dateLastAccessed, "3").get());
+
+
         } catch (ExecutionException e) {
             e.printStackTrace();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        SNHULogOn a = new SNHULogOn();
-        a.execute("Yes");
-        System.out.println(a.successfulLogOn);
+
+
+        //SNHULogOn a = new SNHULogOn();
+        //a.execute("Yes");
+        //System.out.println(a.successfulLogOn);
+
+
 
         //Jack and Catherine stuff
         //SNHULogOn a = new SNHULogOn();
