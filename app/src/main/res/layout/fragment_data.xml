@@ -36,6 +36,12 @@
                         android:textAlignment="center"
                         android:textSize="20sp" />
 
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="match_parent"
+                        android:layout_height="5dp"
+                        android:background="?android:attr/listDivider" />
+
                     <TextView
                         android:id="@+id/text_funds_remaining"
                         android:layout_width="match_parent"

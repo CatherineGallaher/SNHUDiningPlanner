@@ -31,7 +31,11 @@ import com.example.budgetapprebuild.MainActivity;
 import com.example.budgetapprebuild.R;
 import com.example.budgetapprebuild.ui.login.LoginViewModel;
 import com.example.budgetapprebuild.ui.login.LoginViewModelFactory;
+import com.example.budgetapprebuild.ui.settings.SettingsFragment;
+import com.example.budgetapprebuild.ui.settings.SettingsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Set;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -80,6 +84,7 @@ public class LoginActivity extends AppCompatActivity {
                     updateUiWithUser(loginResult.getSuccess());
                     setResult(Activity.RESULT_OK);
                     Intent myIntent = new Intent(LoginActivity.this, MainActivity.class);
+                    SettingsViewModel.setUsername(usernameEditText.getText().toString());
                     startActivity(myIntent);
                     finish();
 

@@ -21,7 +21,7 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
 
-
+    private static String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -50,9 +50,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        SNHULogOn a = new SNHULogOn();
-        a.execute("Yes");
-        System.out.println(a.successfulLogOn);
 
         //Jack and Catherine stuff
         //SNHULogOn a = new SNHULogOn();

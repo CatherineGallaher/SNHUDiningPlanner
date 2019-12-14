@@ -4,6 +4,7 @@ import com.example.budgetapprebuild.Prediction;
 import com.example.budgetapprebuild.SNHULogOn;
 import com.example.budgetapprebuild.SQLConnect;
 import com.example.budgetapprebuild.data.model.LoggedInUser;
+import com.example.budgetapprebuild.ui.settings.SettingsFragment;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;
