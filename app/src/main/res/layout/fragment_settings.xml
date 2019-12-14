@@ -65,7 +65,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="17dp"
+                    android:textSize="15dp"
                     android:text="Start of Semester: " />
 
                 <EditText
@@ -73,7 +73,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="date" />
+                    android:inputType="date"
+                    android:textSize="15dp"/>
 
 
             </LinearLayout>
@@ -89,15 +90,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="17dp"
-                    android:text="End of Semester" />
+                    android:textSize="15dp"
+                    android:text="End of Semester: " />
 
                 <EditText
                     android:id="@+id/date_endSemester"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="date" />
+                    android:inputType="date"
+                    android:textSize="15dp"/>
 
             </LinearLayout>
 
@@ -112,7 +114,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textSize="17dp"
+                    android:textSize="15dp"
                     android:text="Days off Campus: " />
 
                 <EditText
@@ -120,7 +122,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="number" />
+                    android:inputType="number"
+                    android:textSize="15dp"/>
 
             </LinearLayout>
 
@@ -128,7 +131,8 @@
                 android:id="@+id/switch_customMealTime"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Customize Meal Times" />
+                android:text="Customize Meal Times"
+                android:textSize="15dp"/>
 
             <LinearLayout
                 android:id="@+id/layout_mealTimes"
@@ -148,7 +152,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight=".09"
                         android:text="Breakfast: "
-                        android:textSize="20dp" />
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/time_breakstart"
@@ -157,7 +161,8 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:hint="Start: 24:00"
-                        android:inputType="time" />
+                        android:inputType="time"
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/time_breakend"
@@ -166,7 +171,8 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:hint="End: 24:00"
-                        android:inputType="time" />
+                        android:inputType="time"
+                        android:textSize="15dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -180,8 +186,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight=".09"
-                        android:text="Lunch: "
-                        android:textSize="20dp" />
+                        android:text="Lunch:       "
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/time_lunchstart"
@@ -190,7 +196,8 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:hint="Start: 24:00"
-                        android:inputType="time" />
+                        android:inputType="time"
+                        android:textSize="15dp"/>
 
                     <EditText
                         android:id="@+id/time_lunchend"
@@ -199,7 +206,8 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:hint="End: 24:00"
-                        android:inputType="time" />
+                        android:inputType="time"
+                        android:textSize="15dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -213,8 +221,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight=".09"
-                        android:text="Dinner: "
-                        android:textSize="20dp" />
+                        android:text="Dinner:       "
+                        android:textSize="15dp" />
 
                     <EditText
                         android:id="@+id/time_dinnerstart"
@@ -223,7 +231,8 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:hint="Start: 24:00"
-                        android:inputType="time" />
+                        android:inputType="time"
+                        android:textSize="15dp"/>
 
                     <EditText
                         android:id="@+id/time_dinnerend"
@@ -232,7 +241,8 @@
                         android:layout_weight="5"
                         android:ems="10"
                         android:hint="End: 24:00"
-                        android:inputType="time" />
+                        android:inputType="time"
+                        android:textSize="15dp"/>
                 </LinearLayout>
 
             </LinearLayout>

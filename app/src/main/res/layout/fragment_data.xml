@@ -33,36 +33,34 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Initial Funds: $####.##)"
-                        android:textAlignment="center"
-                        android:textSize="17sp" />
-
-                    <View
-                        android:id="@+id/divider"
-                        android:layout_width="match_parent"
-                        android:layout_height="5dp"
-                        android:background="?android:attr/listDivider" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/text_currentBalance"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Current Balance: "
-                        android:textAlignment="center"
-                        android:textSize="17sp" />
+                        android:textSize="15sp" />
+
+                    <View
+                        android:id="@+id/divider1"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="?android:attr/listDivider" />
 
                     <TextView
                         android:id="@+id/text_daysUntilEnd"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Days Until End of Semester: "
-                        android:textSize="17sp" />
+                        android:textSize="15sp" />
 
                     <TextView
                         android:id="@+id/text_funds_remaining"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Funds Remaining: ####"
-                        android:textSize="17sp" />
+                        android:textSize="15sp" />
 
 
                     <TextView
@@ -70,14 +68,25 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="Average Amount Spent Per Day: "
-                        android:textSize="17sp" />
+                        android:textSize="15sp" />
+
+                    <View
+                        android:id="@+id/divider2"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="?android:attr/listDivider" />
 
                     <TextView
                         android:id="@+id/text_information"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:text="If you continue..."
-                        android:textSize="17sp" />
+                        android:textSize="15sp" />
+                    <View
+                        android:id="@+id/divider3"
+                        android:layout_width="match_parent"
+                        android:layout_height="3dp"
+                        android:background="?android:attr/listDivider" />
 
 
                 </LinearLayout>
@@ -102,7 +111,7 @@
                         android:layout_weight="1"
                         android:text="Purchases: "
                         android:textAlignment="viewStart"
-                        android:textSize="20sp" />
+                        android:textSize="17sp" />
 
                     //https://stackoverflow.com/questions/7241145/creating-linearlayout-in-java-elements-are-not-shown
                     //You might need to add some code to create more of these for better
