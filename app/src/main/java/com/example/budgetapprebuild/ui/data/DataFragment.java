@@ -70,7 +70,7 @@ public class DataFragment extends Fragment {
             avgSpentPerDay.setText("Average spent per day: $" + df.format(Prediction.predict.getSpentPerDay()));
 
             Prediction.predict.calcEstAmountLeft();
-            fundsRemaining.setText("\nFunds Remaining (at end of semester): $" + df.format(Prediction.predict.getEstAmountLeft()));
+            fundsRemaining.setText("Funds Remaining (at end of semester): $" + df.format(Prediction.predict.getEstAmountLeft()));
             int daysCovered = (int)SNHULogOn.dataScrape.currBalance/Prediction.predict.getDaysLeft();
             String daysCoveredStr = Integer.toString(daysCovered);
             int daysExtra = (int)abs(SNHULogOn.dataScrape.currBalance/Prediction.predict.getDaysLeft())-Prediction.predict.getDaysLeft();
@@ -118,7 +118,7 @@ public class DataFragment extends Fragment {
 
 
     private void setPredictionText(String lastDays, String daysNeeded, String morl, String reinforcement){
-        predictionText.setText("If you continue with your current habits, your funds will last last " + lastDays +
+        predictionText.setText("\nIf you continue with your current habits, your funds will last last " + lastDays +
                                ". This is " + daysNeeded + " days " + morl + " than you need. " + reinforcement);
     }
 
