@@ -34,7 +34,7 @@ public class SettingsFragment extends Fragment {
         settingsViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_settings, container, false);
 
-        if (settingsViewModel.username != null) {
+        if (false == settingsViewModel.objectCreated) {
             settingsViewModel = new SettingsViewModel(root);
         }
 
