@@ -1,13 +1,9 @@
 package com.example.budgetapprebuild.data;
 
-import com.example.budgetapprebuild.Prediction;
 import com.example.budgetapprebuild.SNHULogOn;
-import com.example.budgetapprebuild.SQLConnect;
 import com.example.budgetapprebuild.data.model.LoggedInUser;
-import com.example.budgetapprebuild.ui.settings.SettingsFragment;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Class that handles authentication w/ login credentials and retrieves user information.
@@ -17,17 +13,14 @@ public class LoginDataSource {
     public Result<LoggedInUser> login(String username, String password) {
 
         try {
-            // TODO: handle loggedInUser authentication
-            //Add snhulogin here to test for real account
-            boolean slotest;
             SNHULogOn a = new SNHULogOn();
             a.email = username;
             a.password = password;
-            a.execute("Yes");
+            a.execute("Yes"); //attempts to log on
             while (a.waiting){
-                Thread.sleep(250);
+                Thread.sleep(250); //sleeps to avoid returning true/false too soon
             }
-            if (a.successfulLogOn == false){
+            if (a.successfulLogOn == false){ //if unsuccessful log in, throw exception
                 throw new NullPointerException("Test");
             }
 

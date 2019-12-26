@@ -38,7 +38,7 @@ public class SettingsViewModel extends ViewModel {
     public static String username;
     public boolean objectCreated = false;
     private TextView[] textboxArray = new TextView[6];
-
+    // TODO: set up validation for start/end of semester, number of days off, and initial funds.  Send all data to the settings table on save.
 
     public SettingsViewModel() {
 

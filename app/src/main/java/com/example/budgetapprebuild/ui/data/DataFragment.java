@@ -55,12 +55,10 @@ public class DataFragment extends Fragment {
         currentBalance = root.findViewById(R.id.text_currentBalance);
 
         try {
-            //info = new String[100][2];
-            Prediction.predict.predictionSettings("October 20, 2019", "2019-12-20", 5, 600, 1000, 1000, 1600, 1600, 2000);
+            Prediction.predict.predictionSettings("October 20, 2019", "2019-12-20", 5, 600, 1000, 1000, 1600, 1600, 2000); // TODO: Pull data from settings table in database.  Currently populated with test data
             Prediction.predict.calcDaysLeft();
 
             daysUntilEnd.setText("\nDays until end of semester: " + Prediction.predict.getDaysLeft());
-
 
             Prediction.predict.calcSpentPerDay();
             initialFunds.setText("Estimated initial Funds: $" + df.format(Prediction.predict.spentGraph().get(0)));
@@ -71,29 +69,24 @@ public class DataFragment extends Fragment {
 
             Prediction.predict.calcEstAmountLeft();
             fundsRemaining.setText("Funds Remaining (at end of semester): $" + df.format(Prediction.predict.getEstAmountLeft()));
+
+            //(supposedly, but unsuccessfully) converts the calculated number of days your funds will cover to an integer as well as the number of days more/less than the needed number of days.
             int daysCovered = (int)SNHULogOn.dataScrape.currBalance/Prediction.predict.getDaysLeft();
             String daysCoveredStr = Integer.toString(daysCovered);
             int daysExtra = (int)abs(SNHULogOn.dataScrape.currBalance/Prediction.predict.getDaysLeft())-Prediction.predict.getDaysLeft();
             String daysExtraStr = Integer.toString(daysExtra);
-            System.out.println("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
             System.out.println(daysCoveredStr);
             System.out.println(daysExtraStr);
 
 
-            setPredictionText(daysCoveredStr, daysExtraStr, "more than", "You have enough funds for the rest of the semester.");
-            //randomlyGenerate();
+            setPredictionText(daysCoveredStr, daysExtraStr, "more", "You have enough funds for the rest of the semester."); // TODO: fix daysCoveredStr and daysExtraStr, calculate morl properly, calculate reinforcement
 
             for (int k = 0; k < Prediction.predict.info.size(); k++) {
                 if (Prediction.predict.info.get(k).get(0) == null) {
                     break;
                 }
                 inputData(Prediction.predict.info.get(k).get(0), Prediction.predict.info.get(k).get(2));
-                //inputData(info[k][0], info[k][1]);
             }
-
-        /*dataViewModel.getText().observe(this, new Observer<String>() {
-            @Override public void onChanged(@Nullable String s) { textView.setText(s); }
-        });*/
         }
         catch (Exception e){
             initialFunds.setText("An Error has occured");
@@ -103,7 +96,7 @@ public class DataFragment extends Fragment {
         return root;
     }
 
-    private void randomlyGenerate(){
+    private void randomlyGenerate(){ //originally set up for testing purposes
         Random rand = new Random();
         DecimalFormat df = new DecimalFormat("#.##");
         for (int k = 0; k < 20; k++){

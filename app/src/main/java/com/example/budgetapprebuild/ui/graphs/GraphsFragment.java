@@ -58,8 +58,6 @@ public class GraphsFragment extends Fragment {
         graphsViewModel = ViewModelProviders.of(this).get(GraphsViewModel.class);
         View root = inflater.inflate(R.layout.fragment_graphs, container, false);
 
-        //Prediction.predict.getSpentPerDay();
-        //Prediction.predict.getEstAmountLeft();
         averageLineGraph = root.findViewById(R.id.graph_average);
         moneyLeftLineGraph = root.findViewById(R.id.graph_fundsRemaining);
         mealTimeSpending = root.findViewById(R.id.graph_mealTimeSpending);

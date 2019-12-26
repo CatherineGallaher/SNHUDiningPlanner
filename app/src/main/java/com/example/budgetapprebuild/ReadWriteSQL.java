@@ -17,6 +17,8 @@ public class ReadWriteSQL {
     private List<String> amounts = new ArrayList<String>();
 
     ResultSet rs;
+
+    //UNUSED CLASS, ORIGINALLY MEANT TO CONTACT THE MYSQL DATABASE.  OBSOLETE BUT MAINTAINED JUST IN CASE
     public void createConnection()
     {
         //SQLConnect connect = new SQLConnect();

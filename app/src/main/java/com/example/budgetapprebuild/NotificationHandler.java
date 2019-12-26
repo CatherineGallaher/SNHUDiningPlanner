@@ -18,7 +18,7 @@ import static androidx.core.content.ContextCompat.getSystemService;
 
 
 public class NotificationHandler {
-
+//attempt at setting up notifications.  Abandoned due to time constraints
     public static String CHANNEL_ID = "Some channel name";
 
     private void createNotificationChannel() {
